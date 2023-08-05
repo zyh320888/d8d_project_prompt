@@ -1,0 +1,315 @@
+id: module_XsjzxxT2ex
+name: 商户设备管理后台组件
+type: module
+props: null
+children:
+  - id: config_5KpexCnwYk
+    type: config
+    props: null
+  - id: front_6T8tCfeZ5r
+    name: 前台
+    type: front
+    props: null
+    children:
+      - id: props_27YhQEdtXa
+        type: props
+        children:
+          - id: fPAttr_wp6A2mEt3C
+            type: fPAttr
+            children: []
+          - id: fPMethod_m5cYBTJFHF
+            type: fPMethod
+            children: []
+          - id: fPEvent_hrdBMTDD6S
+            type: fPEvent
+            children: []
+      - id: state_WNwrfz65Sd
+        type: state
+        children: []
+      - id: method_iJ2BKrpFTh
+        type: method
+        children: []
+      - id: dom_Hhw7c6PHCR
+        type: dom
+        children: []
+  - id: backend_bCARt7MMar
+    name: 后台
+    type: backend
+    props: null
+    children:
+      - id: props_Y57iMkawzR
+        type: props
+        children:
+          - id: bPAttr_Xe5kpn3hTA
+            type: bPAttr
+            children: []
+          - id: bPMethod_2wZr3TJjp5
+            type: bPMethod
+            children:
+              - id: service_YNcmY3kpcp
+                name: 新增商户设备服务
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    emitter.on('add', () => {
+
+                      let data = {
+                        商户ID: param.商户ID,
+                        设备序列号: param.设备序列号,
+                        设备名称: param.设备名称,
+                        是否删除: 0
+                      };
+
+                      _F('dbTableTemp_p8iihPjMsh').callMethod('addRow', {
+                        row: data,
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '新增成功'});
+                        }
+                      });
+
+                    });
+
+                    emitter.emit('add');
+                  inParams:
+                    - 商户ID
+                    - 设备序列号
+                    - 设备名称
+                  outParams: []
+              - id: service_wcYEB6YZBk
+                name: 编辑商户设备服务
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    if(param.hasOwnProperty('行ID')) {
+                      emitter.emit('edit');
+                    } else {
+                      emitter.emit('noId');
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请提供行ID'});
+                    });
+
+                    emitter.on('edit', () => {
+
+                      let condition = {_id: param.行ID};
+                      let updateData = {};
+
+                      if(param.hasOwnProperty('商户ID')) {
+                        updateData.商户ID = param.商户ID;
+                      }
+
+                      if(param.hasOwnProperty('设备序列号')) {
+                        updateData.设备序列号 = param.设备序列号;
+                      }
+
+                      if(param.hasOwnProperty('设备名称')) {
+                        updateData.设备名称 = param.设备名称;
+                      }
+
+                      _F('dbTableTemp_p8iihPjMsh').callMethod('editRow', {
+                        condition,
+                        row: updateData,
+                        success: () => {
+                          _funcCb({code: 200, errMsg:'修改成功'});
+                        }
+                      });
+
+                    });
+
+                    emitter.emit('edit');
+                  inParams:
+                    - 行ID
+                    - 商户ID
+                    - 设备序列号
+                    - 设备名称
+                  outParams: []
+              - id: service_swadXcNEpQ
+                name: 获取商户设备列表服务
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    let pageNum = 1;
+                    let pageSize = 10;
+                    let condition = {};
+
+                    if(param.当前页码) {
+                      pageNum = param.当前页码;
+                    }
+
+                    if(param.每页大小) {
+                      pageSize = param.每页大小;
+                    }
+
+                    if(param.搜索条件) {
+
+                      let 搜索条件 = param.搜索条件;
+
+                      if(搜索条件.关键字) {
+                        condition['设备序列号|设备名称'] = ['like', `%${搜索条件.关键字}%`];
+                      }
+
+                      if(搜索条件.商户ID) {
+                        condition['商户ID'] = 搜索条件.商户ID;  
+                      }
+
+                    }
+
+                    let total = 0;
+                    let list = [];
+
+                    emitter.on('output', () => {
+
+                      let result = {
+                        code: 200,
+                        errMsg: 'ok',
+                        result: list,
+                        total: total
+                      };
+
+                      _funcCb(result);
+
+                    });
+
+                    emitter.on('error', (error) => {
+
+                      let result = {
+                        code: 0,
+                        errMsg: '查询失败',
+                        result: error
+                      };
+
+                      _funcCb(result);
+
+                    });
+
+                    emitter.on('getTotal', () => {
+
+                      _F('dbTableTemp_p8iihPjMsh').callMethod('getCount', {
+                        condition,
+                        success: (res) => {
+                          total = res[0].count;
+                          emitter.emit('getList');
+                        },
+                        fail: (error) => {
+
+                          emitter.emit('output',error);
+                        }
+                      });
+
+                    });
+
+                    emitter.on('getList', () => {
+
+                      _F('dbTableTemp_p8iihPjMsh').callMethod('getRows', {
+                        condition,
+                        pageNum,
+                        pageSize,
+                        orderby: '_update',
+                        sort: 'desc',
+                        success: (res) => {
+                          list = res;
+                          emitter.emit('output');
+                        } ,
+                        fail: (error) => {
+
+                          emitter.emit('output',error);
+                        }
+                      });
+
+                    });
+
+                    emitter.emit('getTotal');
+                  inParams:
+                    - 当前页码
+                    - 每页大小
+                    - 搜索条件
+                  outParams: []
+              - id: service_KezdEm68NQ
+                name: 逻辑删除商户设备服务
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    if(param.hasOwnProperty('设备ID')) {
+                      emitter.emit('delete');
+                    } else {
+                      emitter.emit('noId');
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请提供设备ID'});
+                    });
+
+                    emitter.on('delete', () => {
+
+                      let condition = {_id: param.设备ID};
+                      let updateData = {
+                        是否删除: 1
+                      };
+
+                      _F('dbTableTemp_p8iihPjMsh').callMethod('editRow', {
+                        condition,
+                        row: updateData,
+                        success: () => {
+                          _funcCb({code: 200, errMsg:'删除成功'});
+                        }
+                      });
+
+                    });
+
+                    emitter.emit('delete');
+                  inParams:
+                    - 设备ID
+                  outParams: []
+      - id: state_DJW24zGyPE
+        type: state
+        children: []
+      - id: services_Nx7CbxZnpx
+        type: services
+        children:
+          - id: group_mwPa6Kwmex
+            name: 数据表
+            type: group
+            props:
+              devId: group_mwPa6Kwmex
+            children:
+              - id: dbTableTemp_p8iihPjMsh
+                name: 商户设备表
+                type: dbTableTemp
+                props:
+                  devId: dbTableTemp_p8iihPjMsh
+                  fields:
+                    - columnName: _id
+                      columnType: int unsigned
+                    - columnName: 商户ID
+                      columnType: int unsigned
+                    - columnName: 设备序列号
+                      columnType: text
+                    - columnName: 设备名称
+                      columnType: text
+                    - columnName: 是否删除
+                      columnType: int
+                    - columnName: _create
+                      columnType: bigint unsigned
+                    - columnName: _update
+                      columnType: bigint unsigned
+  - id: modules_xdWtsP4Gb7
+    name: 模块
+    type: modules
+    props: {}

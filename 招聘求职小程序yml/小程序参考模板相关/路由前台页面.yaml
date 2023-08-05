@@ -1,0 +1,89 @@
+id: front_Ndn67XeT6f
+type: front
+children:
+  - id: state_yxFPYPfG4w
+    type: state
+    children:
+      - id: variable_DfQwHpAFH3
+        type: variable
+        props: {}
+  - id: method_i8fDktNkzB
+    type: method
+    children:
+      - id: jsFunc_rmdQmBBSMT
+        name: 小程序登录处理
+        type: jsFunc
+        props:
+          jsCode: "const emitter = new events.EventEmitter();\r\n\r\nemitter.on('wxLogin', () => {\r\n  wx.login({\r\n    success(res) {\r\n      console.log('登录res', res)\r\n      if (res.code) {\r\n        emitter.emit('getUserInfo', res.code);\r\n      } else {\r\n        console.log('登录失败！', res.errMsg)\r\n      }\r\n    }\r\n  })\r\n})\r\n\r\nemitter.on('getUserInfo', (code) => {\r\n  const apiHost = _F('global_func').callMethod('getConfig','apiHost');\r\n  //发起网络请求\r\n  wx.request({\r\n    url: apiHost + '/v1/mp/user_session_key/get',\r\n    method: 'POST',\r\n    data: {\r\n      code: code\r\n    },\r\n    success: (res) => {\r\n      if(res.data.code === 200){\r\n        //wx.setStorageSync('USER_INFO', res.data.result);\r\n        _F('store_func').callMethod('set',{key:'USER_INFO',value:res.data.result})\r\n      }else{\r\n        console.log('获取用户信息失败',res.data);\r\n      }\r\n      \r\n    }\r\n  })\r\n})\r\n\r\nif (wx) {\r\n  emitter.emit('wxLogin');\r\n}\r\n\r\n"
+      - id: jsFunc_ecPycE2xYE
+        name: 小程序初始化处理
+        type: jsFunc
+        props:
+          isSync: false
+          jsCode: "try {\r\n  const IS_INIT = _F('store_func').callMethod('get',{key:'IS_INIT'})\r\n  if(!IS_INIT){\r\n    _F('jsFunc_rmdQmBBSMT').call();\r\n\r\n    _F('store_func').callMethod('set',{key:'IS_INIT',value:'1'})\r\n  }\r\n} catch (e) { }\r\n"
+  - id: dom_M3r7278BPT
+    type: dom
+    children:
+      - id: configprovider_pHrwjrAtWM
+        type: configprovider
+        props:
+          themeJs: "({\r\n    nutuiBrandColor: '#ff0000',\r\n    nutuiBrandColorStart: '#ff0000',\r\n    nutuiBrandColorEnd: '#ff0000',\r\n    nutuiButtonBorderRadius: '8px'\r\n})"
+        children:
+          - id: routes_X8H2CKMX4b
+            type: routes
+            props: {}
+            children:
+              - id: route_a2f8xN6yN3
+                name: 首页
+                type: route
+                props:
+                  path: /
+                  element:
+                    - id: fComponent_kea72CkfJ2
+                      name: 首页模块组件
+                      type: fComponent
+                      props:
+                        moduleId: module_2YeACPPABp
+                  pathNav: /
+              - id: route_fyAXdksySr
+                name: 兑换页
+                type: route
+                props:
+                  path: /duihuan
+                  element:
+                    - id: fComponent_NwahcZ3H4X
+                      name: 兑换页模块组件
+                      type: fComponent
+                      props:
+                        moduleId: module_rSh4zN7rmM
+                  pathNav: /duihuan
+              - id: route_Mpa2SsYNyT
+                name: 活动页
+                type: route
+                props:
+                  path: /huodong/detail
+                  element:
+                    - id: fComponent_Ntn7HjeMXj
+                      name: 活动页模块组件
+                      type: fComponent
+                      props:
+                        moduleId: module_7bJMH6eGya
+                  pathNav: /huodong/detail
+              - id: route_BcMKWpain8
+                name: 活动入口页
+                type: route
+                props:
+                  path: /huodong
+                  element:
+                    - id: fComponent_aziaSzbiAw
+                      name: 活动入口页模块组件
+                      type: fComponent
+                      props:
+                        moduleId: module_K3Np8t6ZQX
+                  pathNav: /huodong
+      - id: div_8RJD7Q4Dez
+        name: 小程序初始化
+        type: div
+        props:
+          onLoadJs: "() => {\r\n  _F('jsFunc_ecPycE2xYE').call()\r\n}"
+        children: []

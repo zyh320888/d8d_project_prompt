@@ -1,0 +1,332 @@
+id: module_bktyRNEbfE
+name: 个人认证表单页模块
+type: module
+props: {}
+children:
+
+  - id: front_tPDsHfDsKK
+    type: front
+    props:
+      onLoadJs: |
+        () => {
+          _F('jsFunc_84SQYrnyEt').call() 
+        }
+    children:
+    
+      - id: props_C6JzGnap8y
+        type: props
+        children:
+          - id: fPAttr_F457EJxre5
+            type: fPAttr
+            children: []
+          - id: fPMethod_CHt73JCYhM
+            type: fPMethod
+            children: []
+          - id: fPEvent_FHXr6pNQSd
+            type: fPEvent
+            children: []
+            
+      - id: state_fXY4xfnJwk
+        type: state
+        children:
+          - id: variable_aG8i3YADh2
+            name: 行业分类选择器显示状态  
+            type: variable
+            props:
+              valueJs: 'false'
+              valueType: js
+          - id: variable_5zGNPzmmR7
+            name: 认证ID
+            type: variable
+            props: {}
+            
+      - id: method_KK5jKD8fEd
+        type: method
+        children:
+        
+          - id: jsFunc_84SQYrnyEt
+            name: 获取个人认证详情
+            type: jsFunc
+            props:
+              jsCode: |
+              
+                const formData = {};  
+              
+                const apiReq = _F('store_func').callMethod('get', {key: 'LOGINED_API_REQ'});
+              
+                
+                apiReq({
+                  url: '/v1/mini/user/personal/my', 
+                  method: 'POST',
+                  data: formData,
+                  success: (res) => {
+                    console.log('个人认证详情', res.data)
+                    
+                    const result = res.data.result;
+                    if(result?.length > 0){
+                      const 表单数据 = result[0];
+                      
+                      _F('form_jzmQx3Zfcd').callMethod('getInstance').setFieldsValue(表单数据);
+
+                      //设置认证ID
+                      _F('variable_5zGNPzmmR7').callMethod('set',表单数据._id);
+                      
+                    }
+                  },
+                  fail: (err) => {
+                    wx.showToast({
+                      title: err,
+                      icon: 'error',
+                      duration: 2000
+                    })
+                  }
+                })
+                
+              inParams: []
+              
+          - id: jsFunc_QSiTE6hYhW
+            name: 提交个人认证
+            type: jsFunc
+            props:
+              jsCode: |
+              
+                const originalFormData = param.表单数据;
+
+                const formData = {...originalFormData};
+                
+                const apiReq = _F('store_func').callMethod('get', {key: 'LOGINED_API_REQ'});
+
+                const 认证ID = _F('variable_5zGNPzmmR7').callMethod('get');
+
+                let url = '/v1/mini/user/personal/add';
+
+                if (认证ID) {
+                  url = '/v1/mini/user/personal/edit';
+                  formData.认证ID = 认证ID;
+                }
+
+                apiReq({
+                  url,
+                  method: 'POST',
+                  data: formData,
+                  success: (res) => {
+                    wx.showToast({
+                      title: '操作成功',
+                      icon: 'success',
+                      duration: 2000
+                    })
+                  },
+                  fail: (err) => {
+                    wx.showToast({
+                      title: err,
+                      icon: 'error',
+                      duration: 2000
+                    })
+                  }
+                })
+                
+              inParams:
+                - 表单数据
+                
+      - id: dom_iC8DDTyDBw
+        type: dom
+        children:
+        
+          - id: navbar_j36WCZzTrj
+            type: navbar
+            props:
+              back: <
+              onBackClickJs: |
+                (event) => {
+                  _F('page_func').callMethod('navigateBack',-2)
+                }
+              
+            children:
+              - id: span_Md4FEt3AXk
+                type: span
+                props:
+                  children: 个人认证
+                  
+          - id: row_X2ePAejwsp
+            type: row
+            props:
+              type: flex
+              align: flex-start
+              style:
+                height: calc(100vh - 135px)
+                overflow: hidden auto
+              justify: start
+              hideScroll: true
+              
+            children:
+            
+              - id: col_ZYbfw6BdCn
+                type: col
+                props: null
+                children:
+                
+                  - id: form_jzmQx3Zfcd
+                    type: form
+                    props:
+                      onFinishJs: |
+                        (values) => {
+                          console.log('表单提交',values)
+                          _F('jsFunc_QSiTE6hYhW').call({表单数据:values});
+                        }
+                      onFinishFailedJs: |  
+                        (error) => {
+                          console.log('表单错误',error)
+                        }
+                        
+                    children:
+                    
+                      - id: form.item_tyZfGTceEJ
+                        name: 姓名
+                        type: form.item
+                        props:
+                          name: 姓名
+                          label: 姓名
+                          rulesJs: '[{ required: true, message: "请输入姓名" }]'
+                          required: true
+                          
+                        children:
+                          - id: input_iwtiSbXszY
+                            type: input
+                            props:
+                              placeholder: 请输入姓名
+                              
+                      - id: form.item_fHbzmApdN4
+                        name: 性别
+                        type: form.item
+                        props:
+                          name: 性别
+                          label: 性别
+                          rulesJs: '[{ required: true, message: "请选择性别" }]'
+                          required: true
+                          
+                        children:
+                          - id: radio.group_MJCFs85N3Z
+                            type: radio.group
+                            props:
+                              direction: horizontal
+                              
+                            children:
+                              - id: radio_xiQCxQ2bFQ
+                                type: radio
+                                props:
+                                  value: 男
+                                  
+                                children:
+                                  - id: span_3abZhmSCn7
+                                    type: span
+                                    props:
+                                      children: 男
+                                      
+                              - id: radio_As86kJbdnZ
+                                type: radio
+                                props:
+                                  value: 女  
+                                  
+                                children:
+                                  - id: span_CHwarFYMpp
+                                    type: span
+                                    props:
+                                      children: 女
+                                      
+                      - id: form.item_BF2Y8fs5hC
+                        name: 联系电话
+                        type: form.item
+                        props:
+                          name: 手机号
+                          label: 联系电话
+                          rulesJs: '[{ required: true, message: "请输入手机号码" }]'
+                          required: true
+                          
+                        children:
+                          - id: input_aE7C84AjWf
+                            type: input
+                            props:
+                              type: tel
+                              placeholder: 请输入手机号码
+                              
+                      - id: form.item_B4S2JeM5hd 
+                        name: 身份证正面照
+                        type: form.item
+                        props:
+                          name: 身份证正面照
+                          label: 身份证正面照
+                          rulesJs: '[{ required: true, message: "请上传身份证正面照" }]'
+                          required: true
+                          
+                        children:
+                          - id: upload_p3NspyEANZ
+                            type: upload
+                            props:
+                              uploadType: image
+                              maxCount: 1
+                              
+                      - id: form.item_PAEJfHjrs5
+                        name: 身份证反面照
+                        type: form.item
+                        props:
+                          name: 身份证反面照
+                          label: 身份证反面照
+                          rulesJs: '[{ required: true, message: "请上传身份证反面照" }]'
+                          required: true
+                          
+                        children:
+                          - id: upload_nyNFAJP2Xx
+                            type: upload
+                            props:
+                              uploadType: image
+                              maxCount: 1
+                              
+                      - id: form.item_SaneRiJ4hc
+                        name: 个人简介
+                        type: form.item
+                        props:
+                          name: 个人简介
+                          label: 个人简介
+                          
+                        children:
+                          - id: textarea_ZXb4Wd4JeJ
+                            type: textarea
+                            props: {}
+                            
+                      - id: form.item_ti82Sihmm5
+                        type: form.item
+                        props: {}
+                        children:
+                          - id: button_dwMJ5S6h2E
+                            type: button
+                            props:
+                              type: primary
+                              block: true
+                              value: 提交
+                              nativeType: submit
+                              
+  - id: backend_88crBz8xAe
+    type: backend
+    children:
+    
+      - id: props_QNKSNkPNsf
+        type: props
+        children:
+          - id: bPAttr_xscxBK8Wm2
+            type: bPAttr
+            children: []
+          - id: bPMethod_74tAwja8JP
+            type: bPMethod
+            children: []
+            
+      - id: state_2EZhkktQH2
+        type: state
+        children: []
+        
+      - id: services_Tz3xeN2fis
+        type: services
+        children: []
+        
+  - id: modules_XBSfWxKG48
+    type: modules
+    children: []

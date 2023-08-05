@@ -1,0 +1,145 @@
+id: module_K3Np8t6ZQX
+name: 活动入口页模块
+type: module
+props: {}
+children:
+  - id: front_Dkr5NN5A5h
+    type: front
+    children:
+      - id: props_QFJARiDRXf
+        type: props
+        children:
+          - id: fPAttr_iR2YDRDHeB
+            type: fPAttr
+            children: []
+          - id: fPMethod_ZdQfTrC7c2
+            type: fPMethod
+            children: []
+          - id: fPEvent_ESshrj8mKZ
+            type: fPEvent
+            children: []
+      - id: state_zDXtscfNnz
+        type: state
+        children:
+          - id: variable_p6DGEYBXGe
+            name: 参加资格
+            type: variable
+            props:
+              valueJs: 'false'
+              valueType: js
+          - id: variable_3zADAZDQ2t
+            name: 用户信息对象
+            type: variable
+            props: {}
+      - id: method_CcjecntSDS
+        type: method
+        children:
+          - id: jsFunc_5CNpWxwm8i
+            name: 获取手机号
+            type: jsFunc
+            props:
+              isSync: false
+              jsCode: "console.log('获取手机号.code', param.code)\r\n\r\nconst emitter = new events.EventEmitter();\r\n\r\nemitter.on('checkWhiteList', async () => {\r\n  const checkRes = await _F('jsFunc_BMzaMcWfZC').call({});\r\n})\r\n\r\nemitter.on('getMobile', () => {\r\n  const apiHost = _F('global_func').callMethod('getConfig', 'apiHost');\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (USER_INFO.token) {\r\n\r\n\r\n    //发起网络请求\r\n    wx.request({\r\n      url: apiHost + '/v1/mini/user/mobile/get',\r\n      method: 'POST',\r\n      data: {\r\n        code: param.code,\r\n        token: USER_INFO.token,\r\n\r\n      },\r\n      success: (res) => {\r\n        if (res.data.code === 200) {\r\n\r\n          _F('store_func').callMethod('set', { key: 'USER_INFO', value: res.data.result });\r\n\r\n          emitter.emit('checkWhiteList');\r\n\r\n        } else {\r\n          console.log('获取手机号失败', res.data);\r\n        }\r\n\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nif (wx) {\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (!USER_INFO.token) {\r\n    _F('store_func').callMethod(\"subscribe\", {\r\n      callback: () => {\r\n        emitter.emit('getMobile');\r\n      }\r\n    });\r\n  } else {\r\n    emitter.emit('getMobile');\r\n  }\r\n\r\n}\r\n\r\n"
+              inParams:
+                - code
+          - id: jsFunc_jSCnAjPjkH
+            name: 页面初始化处理
+            type: jsFunc
+            props:
+              jsCode: "const emitter = new events.EventEmitter();\r\n\r\nemitter.on('setUserInfoState', () => {\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  _F('variable_3zADAZDQ2t').callMethod('set', USER_INFO)\r\n});\r\n\r\nif (wx) {\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (!USER_INFO.token) {\r\n    _F('store_func').callMethod(\"subscribe\", {\r\n      callback: () => {\r\n        emitter.emit('setUserInfoState');\r\n      }\r\n    });\r\n  } else {\r\n    emitter.emit('setUserInfoState');\r\n  }\r\n\r\n}"
+          - id: jsFunc_BMzaMcWfZC
+            name: 核验活动资格
+            type: jsFunc
+            props:
+              jsCode: "console.log('核验活动资格')\r\n\r\nconst emitter = new events.EventEmitter();\r\n\r\nemitter.on('getMobile', (code) => {\r\n  const apiHost = _F('global_func').callMethod('getConfig', 'apiHost');\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (USER_INFO.token) {\r\n\r\n    const PAGE_URL_PARAMS = _F('page_func').callMethod('getUrlParams') || {};\r\n    const sc_id = PAGE_URL_PARAMS.sc_id;\r\n\r\n    //发起网络请求\r\n    wx.request({\r\n      url: apiHost + '/v1/mini/user/stock_cate/whitelist',\r\n      method: 'POST',\r\n      data: {\r\n        批次分类ID: sc_id,\r\n        token: USER_INFO.token,\r\n      },\r\n      success: (res) => {\r\n        if (res.data.code === 200) {\r\n          _F('variable_p6DGEYBXGe').callMethod('set', true);\r\n\r\n          _F('page_func').callMethod('navigate', { path: '/huodong/detail', query: { sc_id } })\r\n\r\n          _funcCb(true);\r\n        } else {\r\n          console.log('核验活动资格失败', res.data);\r\n\r\n\r\n          wx.showToast({\r\n            title: res.data.errMsg,\r\n            icon: 'none',\r\n            mask: true,\r\n            duration: 2000\r\n          })\r\n\r\n          _funcCb(false);\r\n        }\r\n\r\n      },\r\n      fail: (error) => {\r\n        console.log('核验活动资格失败', error);\r\n\r\n\r\n        wx.showToast({\r\n          title: '活动资格获取失败，请稍后再试',\r\n          icon: 'none',\r\n          mask: true,\r\n          duration: 2000\r\n        })\r\n\r\n        _funcCb(false);\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nif (wx) {\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (!USER_INFO.token) {\r\n    _F('store_func').callMethod(\"subscribe\", {\r\n      callback: () => {\r\n        emitter.emit('getMobile');\r\n      }\r\n    });\r\n  } else {\r\n    emitter.emit('getMobile');\r\n  }\r\n\r\n}\r\n\r\n"
+              inParams: []
+      - id: dom_pNDe7PHsa5
+        type: dom
+        children:
+          - id: navbar_ymeQRRkKR2
+            type: navbar
+            props:
+              back: ''
+              onClickBackJs: "(event) => {\r\n  //_F('page_func').callMethod('navigate', { path: '/' })\r\n}"
+            children:
+              - id: span_Pez2JkyXPb
+                name: ''
+                type: span
+                props:
+                  children: 参加活动页
+                children: []
+          - id: div_cPTwdP7CEb
+            name: 初始化
+            type: div
+            props:
+              style:
+                paddingLeft: 16px
+                paddingRight: 16px
+              onLoadJs: "() => {\r\n  _F('jsFunc_jSCnAjPjkH').call();\r\n}"
+            children:
+              - id: row_DNFrSQRkCD
+                type: row
+                props: {}
+                children:
+                  - id: image_B7z8xHnAbZ
+                    type: image
+                    props:
+                      src: https://cos.ubills.cn/pic/gh02_20230610ndiskfjodfw.jpg
+                      height: 220px
+                    children: []
+          - id: div_FDhYGPGKCB
+            type: div
+            props:
+              style:
+                marginTop: 30px
+                textAlign: center
+            children:
+              - id: if_5RBrzR5Jc2
+                name: 没有手机号
+                type: if
+                props:
+                  conditionJs: "!(_F('variable_3zADAZDQ2t').callMethod('get') || {}).手机号\r\n"
+                children:
+                  - id: button_XKyn7TdYjB
+                    name: 立即参加-获取手机号
+                    type: button
+                    props:
+                      type: primary
+                      value: 立即参加
+                      openType: getPhoneNumber
+                      onGetPhoneNumberJs: "(event)=>{\r\n  _F('jsFunc_5CNpWxwm8i').call({code:event.detail.code})\r\n}"
+              - id: if_AAkr3D3RTA
+                name: 有手机号
+                type: if
+                props:
+                  conditionJs: "(_F('variable_3zADAZDQ2t').callMethod('get') || {}).手机号\r\n"
+                children:
+                  - id: button_RmKpfSS6ft
+                    name: 立即参加
+                    type: button
+                    props:
+                      type: primary
+                      value: 立即参加
+                      onClickJs: "(event)=>{\r\n  _F('jsFunc_BMzaMcWfZC').call()\r\n}"
+                      onGetPhoneNumberJs: (event)=>{}
+  - id: backend_FQTr6QM4pP
+    type: backend
+    children:
+      - id: props_BScrtQSTJJ
+        type: props
+        children:
+          - id: bPAttr_DxFRcZKByi
+            type: bPAttr
+            children: []
+          - id: bPMethod_WEapE85QpB
+            type: bPMethod
+            children: []
+      - id: state_ByANxNdw3Q
+        type: state
+        children: []
+      - id: services_NjxmWKKRB3
+        type: services
+        children: []
+  - id: modules_K3kAhFFQ2R
+    type: modules
+    children: []

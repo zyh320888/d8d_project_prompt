@@ -1,0 +1,152 @@
+id: group_8ixSPANfj5
+name: 广告中台相关
+type: group
+props:
+  devId: group_8ixSPANfj5
+children:
+  - id: bComponent_pkybMbk7Zh
+    name: 广告管理后台组件
+    type: bComponent
+    props:
+      devId: bComponent_pkybMbk7Zh
+      moduleId: module_SitFWxQxY3
+      dbConnect:
+        - tempId: dbTableTemp_7R63wea74w
+          tableId: dbTable_hyYcRaRhRP
+  - id: group_cdMYZD6RQG
+    name: 小程序api相关
+    type: group
+    props: {}
+    children:
+      - id: service_fZbTJsjKR5
+        name: 广告关键字搜索服务
+        type: service
+        props:
+          devId: service_fZbTJsjKR5
+          isOpen: true
+          jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nlet inParam = param;\r\n\r\nemitter.on('getList', ()=>{\r\n  _F('bComponent_pkybMbk7Zh').callMethod('service_nwS5JzCrxZ',{\r\n      inParam,\r\n      callback:(data)=>{\r\n        _funcCb(data);\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.emit('getList');"
+          inParams:
+            - 搜索条件
+            - 当前页码
+            - 每页大小
+          outParams: []
+          openApiPath: v1/mini/ad/search
+          inParamsDebug:
+            批次号: ''
+            当前页码: '1'
+            批次名称: ''
+            是否删除: ''
+            每页大小: '20'
+  - id: group_24MDz7zYa4
+    name: 管理后台api相关
+    type: group
+    props:
+      devId: group_24MDz7zYa4
+    children:
+      - id: service_e8G8JRbaHX
+        name: 广告关键字搜索服务
+        type: service
+        props:
+          devId: service_e8G8JRbaHX
+          isOpen: true
+          jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nlet inParam = param;\r\n\r\nemitter.on('getList', ()=>{\r\n  _F('bComponent_pkybMbk7Zh').callMethod('service_nwS5JzCrxZ',{\r\n      inParam,\r\n      callback:(data)=>{\r\n        _funcCb(data);\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.emit('getList');"
+          inParams:
+            - 搜索条件对象
+            - 当前页码
+            - 每页大小
+          outParams: []
+          openApiPath: v1/admin/ad/search
+          inParamsDebug:
+            批次号: ''
+            当前页码: ''
+            批次名称: ''
+            是否删除: ''
+            每页大小: ''
+      - id: service_imBmiEywnh
+        name: 广告删除服务
+        type: service
+        props:
+          devId: service_imBmiEywnh
+          isOpen: true
+          jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nlet inParam = {};\r\ninParam['行ID'] = param.行ID;\r\nif(param.hasOwnProperty('是否删除'))inParam['是否删除'] = param.是否删除 == 1?1:0;\r\n\r\nemitter.on('delDept', ()=>{\r\n  _F('bComponent_pkybMbk7Zh').callMethod('service_FHxSD7RYtT',{\r\n      inParam,\r\n      callback:(data)=>{\r\n        _funcCb(data);\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.emit('delDept');"
+          inParams:
+            - 行ID
+            - 是否删除
+          outParams: []
+          openApiPath: v1/admin/ad/del
+          inParamsDebug:
+            部门ID: '1'
+            是否删除: '0'
+            是否禁用: '0'
+            部门名称: 多八多总部2
+            上级部门ID: '0'
+      - id: service_TRmQJRFah4
+        name: 广告编辑服务
+        type: service
+        props:
+          devId: service_TRmQJRFah4
+          isOpen: true
+          jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nlet inParam = param;\r\n\r\nemitter.on('editDept', ()=>{\r\n  _F('bComponent_pkybMbk7Zh').callMethod('service_MjCiFc8xna',{\r\n      inParam,\r\n      callback:(data)=>{\r\n        _funcCb(data);\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.emit('editDept');"
+          inParams:
+            - 行ID
+            - 广告位ID
+            - 标题
+            - 图片地址
+            - 链接地址
+            - 排序
+          outParams: []
+          openApiPath: v1/admin/ad/edit
+          inParamsDebug:
+            标题: ''
+            广告ID: ''
+            广告位ID: ''
+            图片地址: ''
+            链接地址: ''
+      - id: service_GCYacRWXGR
+        name: 广告新增服务
+        type: service
+        props:
+          devId: service_GCYacRWXGR
+          isOpen: true
+          jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nemitter.on('appDept', ()=>{\r\n  _F('bComponent_pkybMbk7Zh').callMethod('service_PeFDMcznnm',{\r\n      inParam:param,\r\n      callback:(data)=>{\r\n        _funcCb(data);\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.emit('appDept');\r\n"
+          inParams:
+            - 广告位ID
+            - 标题
+            - 图片地址
+            - 链接地址
+            - 排序
+          outParams: []
+          openApiPath: v1/admin/ad/add
+          inParamsDebug:
+            标题: ''
+            广告位ID: ''
+            图片地址: ''
+            链接地址: ''
+  - id: group_k7bEJFJhaf
+    name: 数据表相关
+    type: group
+    props: {}
+    children:
+      - id: dbTable_hyYcRaRhRP
+        name: 广告表
+        type: dbTable
+        props:
+          fields:
+            - columnName: _id
+              columnType: int unsigned
+            - columnName: 广告位ID
+              columnType: int
+            - columnName: 标题
+              columnType: text
+            - columnName: 链接地址
+              columnType: text
+            - columnName: 图片地址
+              columnType: text
+            - columnName: 排序
+              columnType: int
+            - columnName: 是否删除
+              columnType: int
+            - columnName: _create
+              columnType: bigint unsigned
+            - columnName: _update
+              columnType: bigint unsigned

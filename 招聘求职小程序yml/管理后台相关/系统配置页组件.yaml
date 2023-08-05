@@ -1,0 +1,48 @@
+id: route_RysCTpjMpa
+name: 系统配置管理
+type: route
+props:
+  path: system_config/manage
+  devId: route_RysCTpjMpa
+  style: {}
+  element:
+    - id: fComponent_5jQKZGsntP
+      name: ''
+      type: fComponent
+      props:
+        attr:
+          - attrId: variable_xprakCZSMp
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    label:'关键字',\r\n    type:'input'\r\n  },\r\n]"
+          - attrId: variable_iBsTwHceQA
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    title: '序号',\r\n    dataIndex: '_index',\r\n    key: '_index',\r\n  },\r\n  {\r\n    title: '配置名称',\r\n    dataIndex: '配置名称',\r\n    key: '配置名称',\r\n  },\r\n  {\r\n    title: '配置标识',\r\n    dataIndex: '配置标识',\r\n    key: '配置标识',\r\n  },\r\n  {\r\n    title: '配置值',\r\n    dataIndex: '配置值',\r\n    key: '配置值',\r\n    width: 300,\r\n    ellipsis: true,\r\n  },\r\n  {\r\n    title: '更新时间',\r\n    dataIndex: '_update',\r\n    key: '_update',\r\n    render: (text, record) => {\r\n      //获取dayjs对象\r\n      const dayjs = _F('date_func').callMethod('dayjs');\r\n      // 获取当前日期\r\n      const now = dayjs(text * 1000);\r\n      // console.log(now.format('YYYY-MM-DD'));\r\n      return now.format('YYYY-MM-DD');\r\n    }\r\n  },\r\n  {\r\n    title: '操作',\r\n    dataIndex: '操作',\r\n    key: 'operate',\r\n  },\r\n\r\n]"
+          - attrId: variable_YNDnsMCrnc
+            attrType: js
+            attrValue: ''
+            attrJsCode: "({\r\n  搜索:'/v1/admin/config/search',\r\n  新增:'/v1/admin/config/add',\r\n  编辑:'/v1/admin/config/edit',\r\n  删除:'/v1/admin/config/del',\r\n})"
+          - attrId: variable_MJHtQRsnsR
+            attrType: js
+            attrValue: ''
+            attrJsCode: 'true'
+          - attrId: variable_SbaMQEMnjM
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    label:'配置名称',\r\n    name:'配置名称',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'配置标识',\r\n    name:'配置标识',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'配置值',\r\n    name:'配置值',\r\n    type:'textarea'\r\n  },\r\n]"
+          - attrId: variable_GPmKRdbzpm
+            attrType: js
+            attrValue: ''
+            attrJsCode: 'true'
+          - attrId: variable_sSSxjAwSnQ
+            attrType: js
+            attrValue: ''
+            attrJsCode: 'false'
+          - attrId: variable_s8TWaBnH7S
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    title: '序号',\r\n    dataIndex: '_index',\r\n  },\r\n  {\r\n    title: '配置ID',\r\n    dataIndex: '_id',\r\n  },\r\n  {\r\n    title: '配置名称',\r\n    dataIndex: '配置名称',\r\n  },\r\n  {\r\n    title: '配置标识',\r\n    dataIndex: '配置标识',\r\n  },\r\n  {\r\n    title: '配置值',\r\n    dataIndex: '配置值',\r\n    span: 2,\r\n  },\r\n  {\r\n    title: '创建时间',\r\n    dataIndex: '_create',\r\n    render: (text, record) => {\r\n      //获取dayjs对象\r\n      const dayjs = _F('date_func').callMethod('dayjs');\r\n      // 获取当前日期\r\n      const now = dayjs(text * 1000);\r\n      // console.log(now.format('YYYY-MM-DD'));\r\n      return now.format('YYYY-MM-DD hh:mm:ss');\r\n    }\r\n  },\r\n  {\r\n    title: '更新时间',\r\n    dataIndex: '_update',\r\n    render: (text, record) => {\r\n      //获取dayjs对象\r\n      const dayjs = _F('date_func').callMethod('dayjs');\r\n      // 获取当前日期\r\n      const now = dayjs(text * 1000);\r\n      // console.log(now.format('YYYY-MM-DD'));\r\n      return now.format('YYYY-MM-DD hh:mm:ss');\r\n    }\r\n  },\r\n\r\n]"
+        devId: fComponent_5jQKZGsntP
+        moduleId: module_KXT548Mji5
+  pathNav: /admin/system_config/manage

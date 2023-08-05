@@ -1,0 +1,20 @@
+
+
+- id: span_mno123456789
+  type: span
+  name: 文字
+  props:
+    children: 内容文字
+
+- id: for_yz123456789
+  type: for
+  name: 循环容器
+  props:
+    dataSourceJs: 循环数据源
+
+- id: if_abc123456789
+  type: if
+  name: 条件渲染
+  props:
+    conditionJs: 条件表达式
+

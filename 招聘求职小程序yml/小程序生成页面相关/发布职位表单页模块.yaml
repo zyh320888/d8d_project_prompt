@@ -1,0 +1,244 @@
+id: module_J6cNasTtwK
+name: 发布职位表单页模块
+type: module
+props: {}
+children:
+  - id: front_TKPZX2a3ry
+    type: front
+    children:
+      - id: props_eFCFPkyk8x
+        type: props
+        children:
+          - id: fPAttr_ds4z6SSkhY
+            type: fPAttr
+            children: []
+          - id: fPMethod_rF5TECwJsB
+            type: fPMethod
+            children: []
+          - id: fPEvent_kKFEtHKJPz
+            type: fPEvent
+            children: []
+      - id: state_KfjfsTBzM7
+        type: state
+        children:
+          - id: variable_bSpsn58Qci
+            name: 行业分类选择器显示状态
+            type: variable
+            props:
+              valueJs: 'false'
+              valueType: js
+      - id: method_as4RWFcr3t
+        type: method
+        children: []
+      - id: dom_SpZMNpXFb6
+        type: dom
+        children:
+          - id: navbar_wYyTJ6cBQF
+            type: navbar
+            props:
+              back: <
+              onBackClickJs: "(event) => {\r\n  _F('page_func').callMethod('navigateBack',-2)\r\n}"
+            children:
+              - id: span_2pysM4kwZM
+                type: span
+                props:
+                  children: 发布零工兼职
+                children: []
+          - id: row_WGHxekjsaJ
+            type: row
+            props:
+              type: flex
+              align: flex-start
+              style:
+                height: calc(100vh - 135px)
+              justify: start
+            children:
+              - id: col_4YbHa6ebGh
+                type: col
+                props: {}
+                children:
+                  - id: form_yJxG3jJ3ZD
+                    type: form
+                    props:
+                      onFinishJs: "(values) => {\r\n  console.log('表单提交',values)\r\n}"
+                      onFinishFailedJs: "(error) => {  \r\n  console.log('表单错误',error)\r\n}"
+                    children:
+                      - id: form.item_4PzcE8fD5r
+                        name: 职位名称
+                        type: form.item
+                        props:
+                          name: 职位名称
+                          label: 职位名称
+                          rulesJs: '[{ required: true, message: "请输入" }]'
+                          required: true
+                        children:
+                          - id: input_4C83CQiB5G
+                            type: input
+                            props:
+                              placeholder: 请输入职位名称
+                            children: []
+                      - id: form.item_yeYack5krN
+                        name: 行业分类
+                        type: form.item
+                        props:
+                          name: 行业分类
+                          label: 行业分类
+                          rulesJs: '[{ required: true, message: "请选择" }]'
+                          trigger: onConfirm
+                          required: true
+                          onClickJs: "(event, componentRef) => {\r\n  componentRef.open()\r\n}"
+                          getValueFromEventJs: "(...args) => {\r\n  console.log('选择值',args[1])\r\n  return args[1]\r\n}"
+                        children:
+                          - id: picker_JmNzjsDAc5
+                            type: picker
+                            props:
+                              optionsJs: "[\r\n  { \"value\": \"零工兼职\", \"text\": \"零工兼职\" },\r\n  { \"value\": \"专业人才\", \"text\": \"专业人才\" },\r\n  { \"value\": \"季节用工\", \"text\": \"季节用工\" },\r\n  { \"value\": \"家政服务\", \"text\": \"家政服务\" },\r\n  { \"value\": \"搬家服务\", \"text\": \"搬家服务\" },\r\n  { \"value\": \"政策咨询\", \"text\": \"政策咨询\" },\r\n  { \"value\": \"代驾司机\", \"text\": \"代驾司机\" },\r\n  { \"value\": \"劳动维权\", \"text\": \"劳动维权\" },\r\n  { \"value\": \"技能培训\", \"text\": \"技能培训\" },\r\n  { \"value\": \"水电工\", \"text\": \"水电工\" },\r\n  { \"value\": \"整理成\", \"text\": \"整理成\" }  \r\n]"
+                            children: []
+                      - id: form.item_zpxhzsP5Zr
+                        name: 薪资范围
+                        type: form.item
+                        props:
+                          name: 薪资范围
+                          label: 薪资范围
+                          rulesJs: '[{ required: true, message: "请输入" }]'
+                          required: true
+                        children:
+                          - id: input_2hCKSPWyTf
+                            type: input
+                            props:
+                              placeholder: 请输入职位名称
+                            children: []
+                      - id: form.item_PRpstYB35e
+                        name: 结算方式
+                        type: form.item
+                        props:
+                          name: 结算方式
+                          label: 结算方式
+                          rulesJs: '[{ required: true, message: "请选择" }]'
+                          trigger: onConfirm
+                          required: true
+                          onClickJs: "(event, componentRef) => {\r\n  componentRef.open()\r\n}"
+                          getValueFromEventJs: "(...args) => {\r\n  console.log('选择值',args[1])\r\n  return args[1]\r\n}"
+                        children:
+                          - id: picker_PZkAsJGdb6
+                            type: picker
+                            props:
+                              optionsJs: "[\r\n  { \"value\": \"月结\", \"text\": \"月结\" },\r\n  { \"value\": \"周结\", \"text\": \"周结\" },\r\n  { \"value\": \"小时结\", \"text\": \"小时结\" },\r\n]"
+                            children: []
+                      - id: form.item_h6hJANETGc
+                        name: 招聘人数
+                        type: form.item
+                        props:
+                          name: 招聘人数
+                          label: 招聘人数
+                          required: false
+                        children:
+                          - id: input_SSk48c8jXD
+                            type: input
+                            props:
+                              placeholder: 请输入职位名称
+                            children: []
+                      - id: form.item_yjwrd2yMRQ
+                        name: 工作描述
+                        type: form.item
+                        props:
+                          name: 职位描述
+                          label: 工作描述
+                          required: false
+                        children:
+                          - id: textarea_cQbCmannZJ
+                            type: textarea
+                            props: {}
+                            children: []
+                      - id: form.item_h46FP46JZ5
+                        name: 联系人
+                        type: form.item
+                        props:
+                          name: 联系人
+                          label: 联系人
+                          rulesJs: '[{ required: true, message: "请输入" }]'
+                          required: true
+                        children:
+                          - id: input_TNrhFGzeyS
+                            type: input
+                            props:
+                              placeholder: 请输入职位名称
+                            children: []
+                      - id: form.item_XAWSX7GK4j
+                        name: 联系电话
+                        type: form.item
+                        props:
+                          name: 联系电话
+                          label: 联系电话
+                          rulesJs: '[{ required: true, message: "请输入" }]'
+                          required: true
+                        children:
+                          - id: input_B7JERbNzNS
+                            type: input
+                            props:
+                              placeholder: 请输入职位名称
+                            children: []
+                      - id: form.item_25E43yPZ3i
+                        name: 工作区域
+                        type: form.item
+                        props:
+                          name: 工作地点
+                          label: 工作区域
+                          rulesJs: '[{ required: true, message: "请选择" }]'
+                          trigger: onConfirm
+                          required: true
+                          onClickJs: "(event, componentRef) => {\r\n  componentRef.open()\r\n}"
+                          getValueFromEventJs: "(...args) => {\r\n  console.log('选择值',args[1])\r\n  return args[1]\r\n}"
+                        children:
+                          - id: picker_T7M5bMN2ND
+                            type: picker
+                            props:
+                              optionsJs: "[\r\n  {\r\n    \"value\": \"铜仁市\",\r\n    \"text\": \"铜仁市\",\r\n    \"children\": [\r\n      { \"value\": \"碧江区\", \"text\": \"碧江区\" },\r\n      { \"value\": \"万山区\", \"text\": \"万山区\" },\r\n      { \"value\": \"江口县\", \"text\": \"江口县\" },\r\n      { \"value\": \"其他县区\", \"text\": \"其他县区\" }\r\n    ]\r\n  },\r\n  {\r\n    \"value\": \"其他城市\",\r\n    \"text\": \"其他城市\", \r\n    \"children\": [\r\n      { \"value\": \"其他县区\", \"text\": \"其他县区\" }\r\n    ]\r\n  }\r\n]"
+                            children: []
+                      - id: form.item_y4zWGifBMf
+                        name: 工作地址
+                        type: form.item
+                        props:
+                          name: 详细地址
+                          label: 工作地址
+                          rulesJs: '[{ required: true, message: "请输入" }]'
+                          required: true
+                        children:
+                          - id: input_G6WCHPxbyJ
+                            type: input
+                            props:
+                              placeholder: 请输入职位名称
+                            children: []
+                      - id: form.item_TQKyf4fkcr
+                        type: form.item
+                        props: {}
+                        children:
+                          - id: button_3QdEFJd3cS
+                            type: button
+                            props:
+                              type: primary
+                              block: true
+                              value: 发布
+                              onClickJs: (event)=>{}
+                              nativeType: submit
+  - id: backend_cXXxFEkQbe
+    type: backend
+    children:
+      - id: props_aJH4CyZxt3
+        type: props
+        children:
+          - id: bPAttr_8bh8wTMWZx
+            type: bPAttr
+            children: []
+          - id: bPMethod_rZs6ETp5QD
+            type: bPMethod
+            children: []
+      - id: state_Jdkww5szbN
+        type: state
+        children: []
+      - id: services_GjCWtWi3GA
+        type: services
+        children: []
+  - id: modules_x3XGwbCCya
+    type: modules
+    children: []

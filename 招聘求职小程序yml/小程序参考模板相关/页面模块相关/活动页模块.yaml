@@ -1,0 +1,215 @@
+id: module_7bJMH6eGya
+name: 活动页模块
+type: module
+props: {}
+children:
+  - id: front_SKxafF7FhS
+    type: front
+    children:
+      - id: props_2XdN85kh5c
+        type: props
+        children:
+          - id: fPAttr_pEPfApnyM6
+            type: fPAttr
+            children: []
+          - id: fPMethod_2fhybWbzRP
+            type: fPMethod
+            children: []
+          - id: fPEvent_2w6FDZ3ZiM
+            type: fPEvent
+            children: []
+      - id: state_fiGCAXcaEC
+        type: state
+        children:
+          - id: variable_bkCphhiBwx
+            name: 批次分类对象
+            type: variable
+            props:
+              valueJs: '{}'
+              valueType: js
+          - id: variable_Wwh6pQmhYF
+            name: 批次分类图片列表对象数组
+            type: variable
+            props:
+              valueJs: '[]'
+              valueType: js
+          - id: variable_3eTWE6zMGK
+            name: 批次列表对象数组
+            type: variable
+            props:
+              valueJs: '[]'
+              valueType: js
+          - id: variable_78wSxxHhZr
+            name: 领券按钮禁用
+            type: variable
+            props:
+              valueJs: 'false'
+              valueType: js
+      - id: method_t7KYiNT38a
+        type: method
+        children:
+          - id: jsFunc_WQN7DyYfS6
+            name: 加载批次分类图片地址列表
+            type: jsFunc
+            props:
+              jsCode: "const emitter = new events.EventEmitter();\r\n\r\nemitter.on('getStockList', (code) => {\r\n  const apiHost = _F('global_func').callMethod('getConfig', 'apiHost');\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (USER_INFO.token) {\r\n\r\n    const PAGE_URL_PARAMS = _F('page_func').callMethod('getUrlParams') || {};\r\n    const sc_id = PAGE_URL_PARAMS.sc_id;\r\n\r\n    //批次分类ID不存在则不请求批次接口\r\n    if (!sc_id) {\r\n      wx.showToast({\r\n        title: '请传入批次分类ID',\r\n        icon: 'error',\r\n        duration: 2000\r\n      })\r\n      return;\r\n    }\r\n\r\n    //发起网络请求\r\n    wx.request({\r\n      url: apiHost + '/v1/mini/user/stock_cate/search',\r\n      method: 'POST',\r\n      data: {\r\n        //code: code\r\n        token: USER_INFO.token,\r\n        搜索条件对象: {\r\n          批次分类ID: sc_id,\r\n          是否删除: 0\r\n        }\r\n      },\r\n      success: (res) => {\r\n        if (res.data.code === 200) {\r\n          if (Array.isArray(res.data.result) && res.data.result.length > 0) {\r\n            //设置批次分类对象\r\n            _F('variable_bkCphhiBwx').callMethod('set', res.data.result[0]);\r\n\r\n            try {\r\n              let 图片地址 = JSON.parse(res.data.result[0].图片地址) || [];\r\n              _F('variable_Wwh6pQmhYF').callMethod('set', 图片地址);\r\n            } catch (err) {\r\n              _F('variable_Wwh6pQmhYF').callMethod('set', []);\r\n            }\r\n\r\n          }\r\n\r\n\r\n        } else {\r\n          console.log('加载批次列表失败', res.data);\r\n        }\r\n\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nif (wx) {\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (!USER_INFO.token) {\r\n    _F('store_func').callMethod(\"subscribe\", {\r\n      callback: () => {\r\n        emitter.emit('getStockList');\r\n      }\r\n    });\r\n  } else {\r\n    emitter.emit('getStockList');\r\n  }\r\n\r\n}\r\n\r\n"
+          - id: jsFunc_krb8JR5rGw
+            name: 加载批次列表
+            type: jsFunc
+            props:
+              jsCode: "const emitter = new events.EventEmitter();\r\n\r\nemitter.on('getStockList', (code) => {\r\n  const apiHost = _F('global_func').callMethod('getConfig', 'apiHost');\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (USER_INFO.token) {\r\n\r\n    const PAGE_URL_PARAMS = _F('page_func').callMethod('getUrlParams') || {};\r\n    const sc_id = PAGE_URL_PARAMS.sc_id;\r\n\r\n    //批次分类ID不存在则不请求批次接口\r\n    if (!sc_id) {\r\n      wx.showToast({\r\n        title: '请传入批次分类ID',\r\n        icon: 'error',\r\n        duration: 2000\r\n      })\r\n      return;\r\n    }\r\n\r\n    //发起网络请求\r\n    wx.request({\r\n      url: apiHost + '/v1/mini/user/stock/search',\r\n      method: 'POST',\r\n      data: {\r\n        //code: code\r\n        token: USER_INFO.token,\r\n        搜索条件对象: {\r\n          批次分类ID: sc_id,\r\n          是否上架: 1,\r\n          是否删除: 0\r\n        }\r\n      },\r\n      success: (res) => {\r\n        if (res.data.code === 200) {\r\n          _F('variable_3eTWE6zMGK').callMethod('set', res.data.result)\r\n        } else {\r\n          console.log('加载批次列表失败', res.data);\r\n        }\r\n\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nif (wx) {\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (!USER_INFO.token) {\r\n    _F('store_func').callMethod(\"subscribe\", {\r\n      callback: () => {\r\n        emitter.emit('getStockList');\r\n      }\r\n    });\r\n  } else {\r\n    emitter.emit('getStockList');\r\n  }\r\n\r\n}\r\n\r\n"
+          - id: jsFunc_dtw7rBzwMi
+            name: 领券
+            type: jsFunc
+            props:
+              jsCode: "const emitter = new events.EventEmitter();\r\n\r\nemitter.on('getCoupon', () => {\r\n  const apiHost = _F('global_func').callMethod('getConfig', 'apiHost');\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (USER_INFO.token) {\r\n\r\n    const 批次分类对象 = _F('variable_bkCphhiBwx').callMethod('get') || {};\r\n\r\n    //设置按钮loading\r\n    _F('variable_78wSxxHhZr').callMethod('set', true);\r\n\r\n    //发起网络请求\r\n    wx.request({\r\n      url: apiHost + '/v1/mini/user/stock_log/add',\r\n      method: 'POST',\r\n      data: {\r\n        token: USER_INFO.token,\r\n        批次号: param.批次号,\r\n        制券商户号: param.制券商户号,\r\n        批次分类ID: 批次分类对象._id,\r\n        最大领取次数: 批次分类对象.最大领取次数,\r\n      },\r\n      success: (res) => {\r\n        if (res.data.code === 200) {\r\n          wx.showToast({\r\n            title: '领券成功',\r\n            icon: 'success',\r\n            mask: true,\r\n            duration: 2000\r\n          })\r\n        } else {\r\n          console.log('领券失败', res.data);\r\n\r\n          // if (res.data.errMsg === '已达到最大领取次数') {\r\n          //   wx.showToast({\r\n          //     title: '已领取',\r\n          //     icon: 'error',\r\n          //     mask: true,\r\n          //     duration: 2000\r\n          //   })\r\n          // } else {\r\n          //   wx.showToast({\r\n          //     title: '领券失败',\r\n          //     icon: 'error',\r\n          //     mask: true,\r\n          //     duration: 2000\r\n          //   })\r\n          // }\r\n          wx.showToast({\r\n            title: res.data.errMsg,\r\n            icon: 'none',\r\n            mask: true,\r\n            duration: 2000\r\n          })\r\n\r\n        }\r\n        //取消按钮loading\r\n        _F('variable_78wSxxHhZr').callMethod('set', false);\r\n      },\r\n      fail: (res) => {\r\n\r\n        console.log('领券失败', res.data);\r\n\r\n        wx.showToast({\r\n          title: '领券失败',\r\n          icon: 'error',\r\n          mask: true,\r\n          duration: 2000\r\n        })\r\n        //取消按钮loading\r\n        _F('variable_78wSxxHhZr').callMethod('set', false);\r\n      },\r\n    })\r\n  }\r\n})\r\n\r\nif (wx) {\r\n  emitter.emit('getCoupon');\r\n}\r\n\r\n"
+              inParams:
+                - 批次号
+                - 批次分类ID
+                - 制券商户号
+          - id: jsFunc_rKsZaXXjYb
+            name: 页面初始化处理
+            type: jsFunc
+            props:
+              jsCode: "//加载批次列表\r\n_F('jsFunc_krb8JR5rGw').call();\r\n\r\n//加载批次分类图片列表\r\n_F('jsFunc_WQN7DyYfS6').call();"
+      - id: dom_7JMSrWWwkz
+        type: dom
+        children:
+          - id: navbar_ZP5iCceC75
+            type: navbar
+            props:
+              back: ''
+              onClickBackJs: "(event) => {\r\n  //_F('page_func').callMethod('navigate', { path: '/' })\r\n}"
+            children:
+              - id: span_68xFAk2JaX
+                name: ''
+                type: span
+                props:
+                  children: 活动页
+                children: []
+          - id: swiper_ZwZPjPDEZe
+            type: swiper
+            props:
+              height: 220
+              autoPlay: true
+            children:
+              - id: for_XCwsXQCRW3
+                type: for
+                props:
+                  dataSourceJs: _F('variable_Wwh6pQmhYF').callMethod('get')
+                children:
+                  - id: swiperitem_ASRrpHK3Et
+                    type: swiperitem
+                    props: {}
+                    children:
+                      - id: image_dxiYb7HhMZ
+                        type: image
+                        props:
+                          src: https://dummyimage.com/375x220/ff0000/fff
+                          srcJs: >-
+                            (_F('for_XCwsXQCRW3').callMethod('getItem') ||
+                            {}).图片地址
+                          height: 220px
+                          srcType: js
+                          onClickJs: "(e) => {\r\n  _F('page_func').callMethod('navigate', { path: '/huodong' })\r\n}"
+                        children: []
+          - id: div_Qt5bTbha2X
+            type: div
+            props:
+              style:
+                paddingLeft: 16px
+                paddingRight: 16px
+              onLoadJs: "() => {\r\n  _F('jsFunc_rKsZaXXjYb').call();\r\n}"
+            children:
+              - id: for_4MpWeJA3WC
+                type: for
+                props:
+                  dataSourceJs: _F('variable_3eTWE6zMGK').callMethod('get')
+                children:
+                  - id: row_HNwrbCrd27
+                    name: 领券行
+                    type: row
+                    props:
+                      type: flex
+                      align: center
+                      style:
+                        height: 80px
+                        marginTop: 12px
+                        borderColor: '#4a4a4a'
+                        borderStyle: solid
+                        borderWidth: 1px
+                        borderRadius: 8px
+                    children:
+                      - id: col_RfQESrEtMh
+                        type: col
+                        props:
+                          span: '4'
+                        children:
+                          - id: div_kzcSft8ex4
+                            type: div
+                            props:
+                              style:
+                                textAlign: center
+                            children:
+                              - id: span_QZ5KASJrPH
+                                type: span
+                                props:
+                                  children: 5元
+                                  childrenJs: >-
+                                    (_F('for_4MpWeJA3WC').callMethod('getItem')
+                                    || {}).批次名称
+                                  childrenType: js
+                                children: []
+                      - id: col_Txyf5sPHph
+                        type: col
+                        props:
+                          span: '12'
+                        children:
+                          - id: span_Ps44pNxRW5
+                            type: span
+                            props:
+                              children: 满10减5，限华联超市使用
+                              childrenJs: >-
+                                (_F('for_4MpWeJA3WC').callMethod('getItem') ||
+                                {}).批次简介
+                              childrenType: js
+                            children: []
+                      - id: col_ctMyC3GeYf
+                        type: col
+                        props:
+                          span: '8'
+                        children:
+                          - id: button_b3JhcEHhDp
+                            type: button
+                            props:
+                              type: primary
+                              block: false
+                              style:
+                                width: 100px
+                              value: 领券
+                              loadingJs: _F('variable_78wSxxHhZr').callMethod('get')
+                              onClickJs: "(event)=>{\r\n  _F('jsFunc_dtw7rBzwMi').call({\r\n    批次号: (_F('for_4MpWeJA3WC').callMethod('getItem') || {}).批次号,\r\n    批次分类ID: (_F('for_4MpWeJA3WC').callMethod('getItem') || {}).批次分类ID,\r\n    制券商户号: (_F('for_4MpWeJA3WC').callMethod('getItem') || {}).制券商户号\r\n  })\r\n}"
+                              disabledJs: ''
+                              loadingType: js
+                              disabledType: str
+  - id: backend_DsGMGGxQmE
+    type: backend
+    children:
+      - id: props_wzwmdymQZS
+        type: props
+        children:
+          - id: bPAttr_XJ6jFsikd6
+            type: bPAttr
+            children: []
+          - id: bPMethod_Q5Z3spztWK
+            type: bPMethod
+            children: []
+      - id: state_XJQ7RQhJDi
+        type: state
+        children: []
+      - id: services_EbpSG2NMch
+        type: services
+        children: []
+  - id: modules_cdsHeMNJ4z
+    type: modules
+    children: []

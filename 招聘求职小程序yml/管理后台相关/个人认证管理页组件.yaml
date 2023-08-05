@@ -1,0 +1,40 @@
+id: route_fPbZZTYF7Z
+name: 个人认证管理
+type: route
+props:
+  path: personal/manage
+  devId: route_fPbZZTYF7Z
+  style: {}
+  element:
+    - id: fComponent_2BjmyH6hX2
+      name: 个人认证管理页组件
+      type: fComponent
+      props:
+        attr:
+          - attrId: variable_xprakCZSMp
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\n  {\n    label:'关键字',\n    type:'input'\n  },\n  {\n    label:'用户ID',\n    type:'input'\n  },\n  {\n    label:'是否认证',\n    type:'input'\n  },\n]"
+          - attrId: variable_iBsTwHceQA
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\n  {\n    title: '序号',\n    dataIndex: '_index',\n    key: '_index',\n    fixed: 'left',\n  },\n  {\n    title: '用户ID',\n    dataIndex: '用户ID',\n    key: 'userId',\n    fixed: 'left',\n  },\n  {\n    title: '姓名',\n    dataIndex: '姓名',\n    key: 'name',\n    fixed: 'left',\n  },\n  {\n    title: '联系电话',\n    dataIndex: '联系电话',\n    key: 'phone',\n  },\n  {\n    title: '是否认证',\n    dataIndex: '是否认证',\n    key: '是否认证',\n    render: (text) => {\n      if(text === 1) return '已认证';\n      else return '未认证';\n    }\n  },\n  {\n    title: '认证时间',\n    dataIndex: '_create',\n    key: '_create',\n    render: (text) => {\n      const dayjs = _F('date_func').callMethod('dayjs');\n      const now = dayjs(text * 1000);\n      return now.format('YYYY-MM-DD');\n    }\n  },\n  {\n    title: '操作',\n    dataIndex: '操作',\n    key: 'operate',\n  },\n]"
+          - attrId: variable_YNDnsMCrnc
+            attrType: js
+            attrValue: '' 
+            attrJsCode: "{\n  搜索: '/v1/admin/personal/search',\n  编辑: '/v1/admin/personal/edit'\n}"
+          - attrId: variable_GPmKRdbzpm
+            attrType: js
+            attrValue: ''
+            attrJsCode: 'true' 
+          - attrId: variable_SbaMQEMnjM
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\n  {\n    label:'是否认证',\n    name:'是否认证',\n    type:'input'\n  },\n]"
+          - attrId: variable_s8TWaBnH7S
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\n  {\n    title: '序号',\n    dataIndex: '_index',\n  },\n  {\n    title: '用户ID',\n    dataIndex: '用户ID',\n  },\n  {\n    title: '姓名',\n    dataIndex: '姓名',\n  },\n  {\n    title: '联系电话',\n    dataIndex: '联系电话',\n  },\n  {\n    title: '身份证正面照',\n    dataIndex: '身份证正面照',\n    span: 2,\n  },\n  {\n    title: '身份证反面照',\n    dataIndex: '身份证反面照',\n    span: 2,\n  },\n  {\n    title: '个人简介',\n    dataIndex: '个人简介',\n    span: 2,\n  },\n  {\n    title: '是否认证',\n    dataIndex: '是否认证',\n    render: (text) => {\n      if(text === 1) return '已认证';\n      else return '未认证';\n    }\n  },\n  {\n    title: '认证时间',\n    dataIndex: '_create',\n    render: (text) => {\n      const dayjs = _F('date_func').callMethod('dayjs');\n      const now = dayjs(text * 1000);\n      return now.format('YYYY-MM-DD');\n    }\n  },\n  {\n    title: '更新时间',\n    dataIndex: '_update',\n    render: (text) => {\n      const dayjs = _F('date_func').callMethod('dayjs');\n      const now = dayjs(text * 1000);\n      return now.format('YYYY-MM-DD');\n    }\n  },\n]"
+        devId: fComponent_2BjmyH6hX2
+        moduleId: module_ypEXN7mixz
+  pathNav: /admin/personal/manage

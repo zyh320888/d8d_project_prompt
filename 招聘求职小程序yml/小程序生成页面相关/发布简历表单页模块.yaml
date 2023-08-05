@@ -1,0 +1,233 @@
+id: module_J6cNasTtwK  
+name: 发布简历表单页模块
+type: module
+props: {}
+children:
+  - id: front_TKPZX2a3ry    
+    type: front
+    children:
+      - id: props_eFCFPkyk8x
+        type: props
+        children: []
+        
+      - id: state_KfjfsTBzM7
+        type: state
+        children:
+          - id: variable_bSpsn58Qci
+            name: 行业分类选择器显示状态
+            type: variable
+            props:
+              valueJs: 'false'
+              valueType: js
+              
+      - id: method_as4RWFcr3t
+        type: method
+        children: []
+        
+      - id: dom_SpZMNpXFb6
+        type: dom 
+        children:
+          
+          - id: navbar_wYyTJ6cBQF
+            type: navbar
+            props:
+              back: <
+              onBackClickJs: |
+                (event) => {
+                  _F('page_func').callMethod('navigateBack',-2)
+                }
+            children:
+              - id: span_2pysM4kwZM
+                type: span
+                props:
+                  children: 发布简历
+                  
+          - id: row_WGHxekjsaJ
+            type: row
+            props:
+              type: flex
+              align: flex-start
+              style:
+                height: calc(100vh - 135px)
+              justify: start
+            children:
+            
+              - id: col_4YbHa6ebGh
+                type: col
+                props: {}
+                children:
+                  
+                  - id: form_yJxG3jJ3ZD
+                    type: form
+                    props:
+                      onFinishJs: |
+                        (values) => {
+                          console.log('表单提交',values)
+                        }
+                      onFinishFailedJs: |
+                        (error) => {  
+                          console.log('表单错误',error)
+                        }
+                    children:
+                      
+                      - id: form.item_4PzcE8fD5r
+                        name: 姓名
+                        type: form.item
+                        props:
+                          name: 姓名
+                          label: 姓名
+                          rulesJs: '[{ required: true, message: "请输入姓名" }]'
+                          required: true
+                        children:
+                          - id: input_4C83CQiB5G
+                            type: input
+                            props:
+                              placeholder: 请输入姓名
+                              
+                      - id: form.item_yeYack5krN
+                        name: 性别
+                        type: form.item
+                        props:
+                          name: 性别
+                          label: 性别
+                          rulesJs: '[{ required: true, message: "请选择性别" }]'
+                          required: true
+                        children:
+                          - id: radio_JmNzjsDAc5 
+                            type: radio
+                            props:
+                              options: 
+                                - label: 男
+                                  value: 男
+                                - label: 女 
+                                  value: 女
+                              
+                      - id: form.item_zpxhzsP5Zr
+                        name: 联系电话
+                        type: form.item                        
+                        props:
+                          name: 手机号
+                          label: 联系电话
+                          rulesJs: '[{ required: true, message: "请输入手机号码" }]'
+                          required: true
+                        children:
+                          - id: input_2hCKSPWyTf
+                            type: input
+                            props:
+                              type: tel
+                              placeholder: 请输入手机号码
+                              
+                      - id: form.item_PRpstYB35e
+                        name: 出生日期
+                        type: form.item
+                        props:
+                          name: 出生日期
+                          label: 出生日期
+                          rulesJs: '[{ required: true, message: "请选择出生日期" }]'
+                          required: true
+                        children:
+                          - id: datetime_PZkAsJGdb6
+                            type: datetime  
+                            props:
+                              type: date
+                              
+                      - id: form.item_h6hJANETGc
+                        name: 现居住地
+                        type: form.item
+                        props:
+                          name: 现居住地
+                          label: 现居住地                          
+                          required: false
+                        children:
+                          - id: input_SSk48c8jXD
+                            type: input
+                            props:
+                              placeholder: 请输入现居住地
+                              
+                      - id: form.item_yjwrd2yMRQ
+                        name: 工作经验
+                        type: form.item
+                        props:
+                          name: 工作经验
+                          label: 工作经验
+                          required: false
+                        children:
+                          - id: input_cQbCmannZJ
+                            type: input
+                            props:
+                              placeholder: 请输入工作经验年限
+                              
+                      - id: form.item_h46FP46JZ5
+                        name: 意向职位
+                        type: form.item
+                        props:
+                          name: 意向职位
+                          label: 意向岗位
+                          rulesJs: '[{ required: true, message: "请输入意向岗位" }]'
+                          required: true
+                        children:
+                          - id: input_TNrhFGzeyS
+                            type: input
+                            props:
+                              placeholder: 请输入意向岗位
+                              
+                      - id: form.item_XAWSX7GK4j
+                        name: 意向地区
+                        type: form.item
+                        props:
+                          name: 意向地区
+                          label: 意向地区                          
+                          rulesJs: '[{ required: true, message: "请选择意向地区" }]'
+                          required: true
+                        children:
+                          - id: picker_B7JERbNzNS
+                            type: picker
+                            props:
+                              optionsJs: "[\r\n  {\r\n    \"value\": \"铜仁市\",\r\n    \"text\": \"铜仁市\",\r\n    \"children\": [\r\n      { \"value\": \"碧江区\", \"text\": \"碧江区\" },\r\n      { \"value\": \"万山区\", \"text\": \"万山区\" },\r\n      { \"value\": \"江口县\", \"text\": \"江口县\" },\r\n      { \"value\": \"其他县区\", \"text\": \"其他县区\" }\r\n    ]\r\n  },\r\n  {\r\n    \"value\": \"其他城市\",\r\n    \"text\": \"其他城市\", \r\n    \"children\": [\r\n      { \"value\": \"其他县区\", \"text\": \"其他县区\" }\r\n    ]\r\n  }\r\n]"
+
+                              
+                      - id: form.item_25E43yPZ3i
+                        name: 期望薪资
+                        type: form.item
+                        props:
+                          name: 期望薪资
+                          label: 期望薪资
+                          rulesJs: '[{ required: true, message: "请选择期望薪资" }]'
+                          required: true
+                        children:
+                          - id: input_G6WCHPxbyJ
+                            type: input
+                            props:
+                              placeholder: 请输入期望薪资
+                              
+                      - id: form.item_TQKyf4fkcr
+                        type: form.item
+                        props: {}
+                        children:
+                          - id: button_3QdEFJd3cS
+                            type: button
+                            props:
+                              type: primary
+                              block: true
+                              value: 发布
+                              nativeType: submit
+                              
+  - id: backend_cXXxFEkQbe
+    type: backend
+    children:
+      - id: props_aJH4CyZxt3
+        type: props
+        children: []
+        
+      - id: state_Jdkww5szbN
+        type: state
+        children: []
+        
+      - id: services_GjCWtWi3GA
+        type: services
+        children: []
+        
+  - id: modules_x3XGwbCCya
+    type: modules
+    children: []
+

@@ -1,0 +1,61 @@
+id: route_7C2YXrWdmY
+name: 广告管理
+type: route
+props:
+  path: home_ad/manage
+  devId: route_7C2YXrWdmY
+  style: {}
+  element:
+    - id: fComponent_s8Rsd3ndF8
+      name: ''
+      type: fComponent
+      props:
+        attr:
+          - attrId: variable_xprakCZSMp
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    label:'关键字',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'广告位ID',\r\n    type:'input'\r\n  },\r\n]"
+          - attrId: variable_iBsTwHceQA
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    title: '序号',\r\n    dataIndex: '_index',\r\n    key: '_index',\r\n  },\r\n  {\r\n    title: '广告位ID',\r\n    dataIndex: '广告位ID',\r\n    key: '广告位ID',\r\n    fixed: 'left',\r\n  },\r\n  {\r\n    title: '标题',\r\n    dataIndex: '标题',\r\n    key: '标题',\r\n    fixed: 'left',\r\n  },\r\n  {\r\n    title: '排序',\r\n    dataIndex: '排序',\r\n    key: '排序',\r\n    fixed: 'left',\r\n  },\r\n  {\r\n    title: '链接地址',\r\n    dataIndex: '链接地址',\r\n    key: '链接地址',\r\n    width: 100,\r\n    ellipsis: true,\r\n  },\r\n  {\r\n    title: '图片地址',\r\n    dataIndex: '图片地址',\r\n    key: '图片地址',\r\n    width: 100,\r\n    ellipsis: true,\r\n  },\r\n  {\r\n    title: '更新时间',\r\n    dataIndex: '_update',\r\n    key: '_update',\r\n    render: (text, record) => {\r\n      //获取dayjs对象\r\n      const dayjs = _F('date_func').callMethod('dayjs');\r\n      // 获取当前日期\r\n      const now = dayjs(text * 1000);\r\n      // console.log(now.format('YYYY-MM-DD'));\r\n      return now.format('YYYY-MM-DD');\r\n    }\r\n  },\r\n  {\r\n    title: '操作',\r\n    dataIndex: '操作',\r\n    key: 'operate',\r\n  },\r\n\r\n]"
+          - attrId: variable_YNDnsMCrnc
+            attrType: js
+            attrValue: ''
+            attrJsCode: "({\r\n  搜索:'/v1/admin/ad/search',\r\n  新增:'/v1/admin/ad/add',\r\n  编辑:'/v1/admin/ad/edit',\r\n  删除:'/v1/admin/ad/del',\r\n})"
+          - attrId: variable_MJHtQRsnsR
+            attrType: js
+            attrValue: ''
+            attrJsCode: 'true'
+          - attrId: variable_SbaMQEMnjM
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    label:'广告位ID',\r\n    name:'广告位ID',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'标题',\r\n    name:'标题',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'链接地址',\r\n    name:'链接地址',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'图片地址',\r\n    name:'图片地址',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'排序',\r\n    name:'排序',\r\n    type:'input'\r\n  },\r\n]"
+          - attrId: variable_GPmKRdbzpm
+            attrType: js
+            attrValue: ''
+            attrJsCode: 'true'
+          - attrId: variable_sSSxjAwSnQ
+            attrType: js
+            attrValue: ''
+            attrJsCode: 'false'
+          - attrId: variable_s8TWaBnH7S
+            attrType: js
+            attrValue: ''
+            attrJsCode: "(\r\n  function () {\r\n    const imgNode = _F('fNode_Zx3iMsT5Rf').call;\r\n\r\n    return [\r\n      {\r\n        title: '序号',\r\n        dataIndex: '_index',\r\n      },\r\n      {\r\n        title: '广告位ID',\r\n        dataIndex: '广告位ID',\r\n      },\r\n      {\r\n        title: '标题',\r\n        dataIndex: '标题',\r\n      },\r\n      {\r\n        title: '排序',\r\n        dataIndex: '排序',\r\n      },\r\n      {\r\n        title: '链接地址',\r\n        dataIndex: '链接地址',\r\n        span: 2,\r\n      },\r\n      {\r\n        title: '图片地址',\r\n        dataIndex: '图片地址',\r\n        span: 2,\r\n        render: (text, record) => {\r\n          return imgNode(({图片地址:text}));\r\n        }\r\n      },\r\n      {\r\n        title: '创建时间',\r\n        dataIndex: '_create',\r\n        render: (text, record) => {\r\n          //获取dayjs对象\r\n          const dayjs = _F('date_func').callMethod('dayjs');\r\n          // 获取当前日期\r\n          const now = dayjs(text * 1000);\r\n          // console.log(now.format('YYYY-MM-DD'));\r\n          return now.format('YYYY-MM-DD hh:mm:ss');\r\n        }\r\n      },\r\n      {\r\n        title: '更新时间',\r\n        dataIndex: '_update',\r\n        render: (text, record) => {\r\n          //获取dayjs对象\r\n          const dayjs = _F('date_func').callMethod('dayjs');\r\n          // 获取当前日期\r\n          const now = dayjs(text * 1000);\r\n          // console.log(now.format('YYYY-MM-DD'));\r\n          return now.format('YYYY-MM-DD hh:mm:ss');\r\n        }\r\n      },\r\n\r\n    ];\r\n  }()\r\n)"
+        devId: fComponent_s8Rsd3ndF8
+        moduleId: module_KXT548Mji5
+    - id: fNode_Zx3iMsT5Rf
+      type: fNode
+      props: {}
+      children:
+        - id: image_j5CeZYaSi4
+          type: image
+          props:
+            srcJs: _F('fNode_Zx3iMsT5Rf').callMethod('getItem')?.图片地址
+            width: 200px
+            srcType: js
+            previewType: js
+            previewJs: 'true'
+          children: []
+  pathNav: /admin/home_ad/manage

@@ -1,0 +1,401 @@
+id: group_SjTTx7Ymdi
+name: 招聘职位中台相关
+type: group
+props: null
+children:
+  - id: bComponent_QPh7NtTCfp
+    name: 招聘职位管理后台组件
+    type: bComponent
+    props:
+      moduleId: module_EtBCjFe8Xy
+      dbConnect:
+        - tempId: dbTableTemp_Gf83SMhtNs
+          tableId: dbTable_8m58JZaY7m
+  - id: group_QsP4fbc5CZ
+    name: 小程序api相关
+    type: group
+    props: {}
+    children:
+      - id: service_yh72fbPxZD
+        name: 新增招聘职位服务
+        type: service
+        props:
+          devId: service_新增招聘职位
+          isOpen: true
+          jsCode: |
+            // 调用组件中的新增服务
+            const emitter = new events.EventEmitter();
+            const USER_INFO = _F('middle_func').callMethod('last');
+
+            param.用户ID = USER_INFO._id;
+
+            emitter.on('add', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_N23fNtTcyp', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('add');
+          inParams:
+            - 用户ID
+            - 职位名称
+            - 职位部门
+            - 职位要求
+            - 职位待遇
+            - 职位描述
+            - 工作地点
+            - 学历要求
+            - 工作年限要求
+            - 职位类别
+            - 招聘人数
+            - 截止日期
+            - 所属项目
+            - 联系人
+            - 联系电话
+            - 电子邮箱
+            - 投递邮箱
+            - 是否置顶
+            - 结算方式
+            - 行业分类
+            - 所在地区
+            - 详细地址
+            - 薪资范围
+            - 企业性质
+          outParams: []
+          openApiPath: v1/mini/user/position/add
+          inParamsDebug:
+            用户ID: 1
+            联系人: 张三
+            学历要求: 本科及以上
+            工作地点: 北京
+            截止日期: '2022-12-31 00:00:00'
+            所属项目: A项目
+            投递邮箱: abc@163.com
+            招聘人数: 5
+            是否置顶: 1
+            电子邮箱: abc@163.com
+            结算方式: 月结
+            职位名称: Java开发工程师
+            职位待遇: 15k-25k
+            职位描述: 参与公司产品开发
+            职位类别: 开发
+            职位要求: 熟练Java,Spring等
+            职位部门: 技术部
+            联系电话: 13888888888
+            行业分类: 普工
+            工作年限要求: 3年以上
+      - id: service_ZKj25krYik
+        name: 编辑招聘职位服务
+        type: service
+        props:
+          devId: service_编辑招聘职位
+          isOpen: true
+          jsCode: |
+            // 调用组件中的编辑服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('edit', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_A5asWi7rSF', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('edit');
+          inParams:
+            - 职位ID
+            - 职位名称
+            - 职位部门
+            - 职位要求
+            - 职位待遇
+            - 职位描述
+            - 工作地点
+            - 学历要求
+            - 工作年限要求
+            - 职位类别
+            - 招聘人数
+            - 截止日期
+            - 所属项目
+            - 联系人
+            - 联系电话
+            - 电子邮箱
+            - 投递邮箱
+            - 是否置顶
+            - 结算方式
+            - 行业分类
+            - 所在地区
+            - 详细地址
+            - 薪资范围
+            - 企业性质
+          outParams: []
+          openApiPath: v1/mini/user/position/edit
+          inParamsDebug:
+            职位ID: 1
+            联系人: 李四
+            学历要求: 本科及以上
+            工作地点: 北京
+            截止日期: '2023-01-31 00:00:00'
+            所属项目: B项目
+            投递邮箱: abc@163.com
+            招聘人数: 3
+            是否置顶: 0
+            电子邮箱: abc@163.com
+            结算方式: 周结
+            职位名称: Java高级开发工程师
+            职位待遇: 20k-30k
+            职位描述: 参与公司核心产品开发
+            职位类别: 开发
+            职位要求: 熟练Spring Boot、MySQL
+            职位部门: 技术部
+            联系电话: 13888888888
+            行业分类: 服装
+            工作年限要求: 5年以上
+      - id: service_xDmBWR6fmM
+        name: 搜索招聘职位服务
+        type: service
+        props:
+          devId: service_搜索招聘职位
+          isOpen: true
+          jsCode: |
+            // 调用组件中的搜索服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('search', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_H6W3m38ttW', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('search');
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/mini/position/search
+          inParamsDebug:
+            当前页码: ''
+            搜索条件:
+              关键字: ''
+              是否置顶: ''
+              职位部门: ''
+            每页大小: ''
+      - id: service_WyaH36hF28
+        name: 获取我的招聘职位列表服务
+        type: service
+        props:
+          devId: service_获取招聘职位列表
+          isOpen: true
+          jsCode: |
+            // 调用组件中的获取列表服务
+            const emitter = new events.EventEmitter();
+            const USER_INFO = _F('middle_func').callMethod('last');
+
+            param.搜索条件 = {
+              ...param.搜索条件,
+              用户ID: USER_INFO._id
+            }
+
+            emitter.on('list', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_H6W3m38ttW', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('list');
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/mini/user/position/list
+          inParamsDebug:
+            当前页码: 1
+            搜索条件:
+              关键字: Java
+              是否置顶: ''
+              职位部门: 技术部
+            每页大小: 10
+  - id: group_x7xrBtQJwj
+    name: 管理后台api相关
+    type: group
+    props: null
+    children:
+      - id: service_6eCe6eRr8k
+        name: 编辑招聘职位服务
+        type: service
+        props:
+          devId: service_编辑招聘职位
+          isOpen: true
+          jsCode: |
+            // 调用组件中的编辑服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('edit', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_A5asWi7rSF', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('edit');
+          inParams:
+            - 职位ID
+            - 职位名称
+            - 职位部门
+            - 职位要求
+            - 职位待遇
+            - 职位描述
+            - 工作地点
+            - 学历要求
+            - 工作年限要求
+            - 职位类别
+            - 招聘人数
+            - 截止日期
+            - 所属项目
+            - 联系人
+            - 联系电话
+            - 电子邮箱
+            - 投递邮箱
+            - 是否置顶
+            - 结算方式
+            - 行业分类
+            - 所在地区
+            - 详细地址
+            - 薪资范围
+            - 企业性质
+            - 审核状态
+          outParams: []
+          openApiPath: v1/admin/position/edit
+          inParamsDebug:
+            职位ID: 1
+            联系人: 李四
+            学历要求: 本科及以上
+            工作地点: 北京
+            截止日期: '2023-01-31 00:00:00'
+            所属项目: B项目
+            投递邮箱: abc@163.com
+            招聘人数: 3
+            是否置顶: 0
+            电子邮箱: abc@163.com
+            结算方式: 周结
+            职位名称: Java高级开发工程师
+            职位待遇: 20k-30k
+            职位描述: 参与公司核心产品开发
+            职位类别: 开发
+            职位要求: 熟练Spring Boot、MySQL
+            职位部门: 技术部
+            联系电话: 13888888888
+            行业分类: 服装
+            工作年限要求: 5年以上
+      - id: service_mBDEP3XzkA
+        name: 获取招聘职位列表服务
+        type: service
+        props:
+          devId: service_获取招聘职位列表
+          isOpen: true
+          jsCode: |
+            // 调用组件中的获取列表服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('list', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_H6W3m38ttW', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('list');
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/admin/position/list
+          inParamsDebug:
+            当前页码: 1
+            搜索条件:
+              关键字: Java
+              是否置顶: ''
+              职位部门: 技术部
+            每页大小: 10
+  - id: dbTable_8m58JZaY7m
+    name: 招聘职位表
+    type: dbTable
+    props:
+      fields:
+        - columnName: _id
+          columnType: int unsigned
+        - columnName: 用户ID
+          columnType: int unsigned
+        - columnName: 职位名称
+          columnType: text
+        - columnName: 职位部门
+          columnType: text
+        - columnName: 职位要求
+          columnType: text
+        - columnName: 职位待遇
+          columnType: text
+        - columnName: 职位描述
+          columnType: text
+        - columnName: 工作地点
+          columnType: text
+        - columnName: 学历要求
+          columnType: text
+        - columnName: 工作年限要求
+          columnType: text
+        - columnName: 职位类别
+          columnType: text
+        - columnName: 招聘人数
+          columnType: int
+        - columnName: 截止日期
+          columnType: text
+        - columnName: 所属项目
+          columnType: text
+        - columnName: 联系人
+          columnType: text
+        - columnName: 联系电话
+          columnType: text
+        - columnName: 电子邮箱
+          columnType: text
+        - columnName: 投递邮箱
+          columnType: text
+        - columnName: 浏览次数
+          columnType: int
+        - columnName: 是否置顶
+          columnType: tinyint
+        - columnName: 结算方式
+          columnType: text
+        - columnName: 行业分类
+          columnType: text
+        - columnName: 是否删除
+          columnType: int
+        - columnName: 所在地区
+          columnType: text
+        - columnName: 详细地址
+          columnType: text
+        - columnName: 薪资范围
+          columnType: text
+        - columnName: 企业性质
+          columnType: text
+        - columnName: 审核状态
+          columnType: int
+        - columnName: _create
+          columnType: bigint unsigned
+        - columnName: _update
+          columnType: bigint unsigned

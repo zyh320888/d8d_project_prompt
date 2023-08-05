@@ -1,0 +1,442 @@
+id: module_4DCZRzaJRi
+name: 个人简历管理后台组件
+type: module
+props:
+  appModuleId: ''
+  appModuleVersion: 1
+children:
+  - id: config_HATA5HZ4hR
+    type: config
+    props:
+      style: {}
+  - id: front_W2ySyRTnWh
+    name: 前台
+    type: front
+    props:
+      style:
+        width: 100%
+        height: 100%
+        display: flex
+        overflow: hidden auto
+        alignItems: flex-start
+        flexDirection: column
+        backgroundColor: '#ffffff'
+    children:
+      - id: props_Sa5bwDxiEr
+        type: props
+        children:
+          - id: fPAttr_FtPMXQhmEC
+            type: fPAttr
+            children: []
+          - id: fPMethod_D7ecESePHn
+            type: fPMethod
+            children: []
+          - id: fPEvent_KkydNbxWpS
+            type: fPEvent
+            children: []
+      - id: state_MbtDPKmRhd
+        type: state
+        children: []
+      - id: method_nJQMcxnYpe
+        type: method
+        children: []
+      - id: dom_c6zsWWzCst
+        type: dom
+        children: []
+  - id: backend_TTnZ42BNyZ
+    name: 后台
+    type: backend
+    props:
+      style:
+        height: 200px
+        backgroundColor: red
+    children:
+      - id: props_zFibBrkCiR
+        type: props
+        children:
+          - id: bPAttr_FcdCBkWnMh
+            type: bPAttr
+            children: []
+          - id: bPMethod_QcJRYMAJZ5
+            type: bPMethod
+            children:
+              - id: service_2NpPHQtkfN
+                name: 新增简历
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    emitter.on('add', () => {
+
+                      let data = {
+                        用户ID: param.用户ID, 
+                        姓名: param.姓名, 
+                        年龄: param.年龄,
+                        性别: param.性别,
+                        手机号: param.手机号,
+                        邮箱: param.邮箱,
+                        籍贯: param.籍贯,
+                        现居住地: param.现居住地,
+                        最高学历: param.最高学历,
+                        毕业院校: param.毕业院校,
+                        专业: param.专业,  
+                        工作年限: param.工作年限,
+                        期望职位: param.期望职位,
+                        期望地点: param.期望地点,
+                        期望薪资: param.期望薪资,
+                        自我评价: param.自我评价
+                      };
+                      
+                      _F('dbTableTemp_EbTD6ZMHQK').callMethod('addRow', {
+                        row: data,
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '新增简历成功'});
+                        }
+                      });
+                      
+                    });
+
+                    emitter.emit('add');
+                  inParams:
+                    - 用户ID
+                    - 姓名
+                    - 年龄
+                    - 性别
+                    - 手机号
+                    - 邮箱
+                    - 籍贯
+                    - 现居住地
+                    - 最高学历
+                    - 毕业院校
+                    - 专业
+                    - 工作年限
+                    - 期望职位
+                    - 期望地点
+                    - 期望薪资
+                    - 自我评价
+                  outParams: []
+                  openApiPath: ''
+              - id: service_R7R5Yk6tSn
+                name: 编辑简历
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    if(param.hasOwnProperty('简历ID')) {
+                      emitter.emit('edit');
+                    } else {
+                      emitter.emit('noId');
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请提供简历ID'});
+                    });
+                      
+                    emitter.on('edit', () => {
+
+                      let condition = {_id: param.简历ID};
+                      let updateData = {};
+                      
+                      if(param.hasOwnProperty('姓名')) {
+                        updateData.姓名 = param.姓名;
+                      }
+                      
+                      if(param.hasOwnProperty('年龄')) {
+                        updateData.年龄 = param.年龄; 
+                      }
+                      
+                      if(param.hasOwnProperty('性别')) {
+                        updateData.性别 = param.性别;
+                      }
+                      
+                      if(param.hasOwnProperty('手机号')) {
+                        updateData.手机号 = param.手机号;  
+                      }
+                      
+                      if(param.hasOwnProperty('邮箱')) {
+                        updateData.邮箱 = param.邮箱;
+                      }
+                      
+                      if(param.hasOwnProperty('籍贯')) {
+                        updateData.籍贯 = param.籍贯;
+                      }
+                      
+                      if(param.hasOwnProperty('现居住地')) {
+                        updateData.现居住地 = param.现居住地;
+                      }
+                      
+                      if(param.hasOwnProperty('最高学历')) {
+                        updateData.最高学历 = param.最高学历;
+                      }
+                      
+                      if(param.hasOwnProperty('毕业院校')) {
+                        updateData.毕业院校 = param.毕业院校; 
+                      }
+                      
+                      if(param.hasOwnProperty('专业')) {
+                        updateData.专业 = param.专业;
+                      }
+                      
+                      if(param.hasOwnProperty('工作年限')) {
+                        updateData.工作年限 = param.工作年限;
+                      }
+                      
+                      if(param.hasOwnProperty('期望职位')) {
+                        updateData.期望职位 = param.期望职位;
+                      }
+                      
+                      if(param.hasOwnProperty('期望地点')) {
+                        updateData.期望地点 = param.期望地点;
+                      }
+                      
+                      if(param.hasOwnProperty('期望薪资')) {
+                        updateData.期望薪资 = param.期望薪资;
+                      }
+                      
+                      if(param.hasOwnProperty('自我评价')) {
+                        updateData.自我评价 = param.自我评价;
+                      }
+
+                      _F('dbTableTemp_EbTD6ZMHQK').callMethod('editRow', {
+                        condition,
+                        row: updateData,
+                        success: () => {
+                          _funcCb({code: 200, errMsg:'修改简历成功'});
+                        }
+                      });
+                      
+                    });
+
+                    emitter.emit('edit');
+                  inParams:
+                    - 简历ID
+                    - 姓名
+                    - 年龄
+                    - 性别
+                    - 手机号
+                    - 邮箱
+                    - 籍贯
+                    - 现居住地
+                    - 最高学历
+                    - 毕业院校
+                    - 专业
+                    - 工作年限
+                    - 期望职位
+                    - 期望地点
+                    - 期望薪资
+                    - 自我评价
+                  outParams: []
+                  openApiPath: ''
+              - id: service_BpJ4d8mY8z
+                name: 获取简历列表
+                type: service
+                props:
+                  isOpen: false
+                  openApiPath: ''
+                  inParams:
+                    - 当前页码
+                    - 每页数量
+                    - 搜索条件
+                    - 排序字段
+                    - 排序方式
+                  outParams: []
+                  jsCode: |-
+                    const emitter = new events.EventEmitter();
+
+                    let pageNum = param.当前页码;
+                    let pageSize = param.每页数量;
+
+                    let condition = {};
+
+                    if (param.搜索条件) {
+
+                      if (param.搜索条件.关键词) {
+                        condition['姓名|邮箱|手机号'] = ['like', `%${param.搜索条件.关键词}%`];
+                      }
+
+                      if (param.搜索条件.最小年龄) {
+                        condition['年龄'] = ['>=', param.搜索条件.最小年龄];
+                      }
+
+                      if (param.搜索条件.最大年龄) {
+                        condition['年龄'] = ['<=', param.搜索条件.最大年龄];
+                      }
+
+                      if (param.搜索条件.用户ID) {
+                        condition['用户ID'] = param.搜索条件.用户ID;
+                      }
+
+
+                    }
+
+                    let orderBy = param.排序字段 || '_id';
+                    let isAsc = param.排序方式 === 'asc';
+
+                    let total = 0;
+                    let list = [];
+
+                    emitter.on('output', () => {
+
+                      let result = {
+                        code: 200,
+                        errMsg: 'ok',
+                        data: list,
+                        total: total
+                      };
+
+                      _funcCb(result);
+
+                    });
+
+                    emitter.on('error', (err) => {
+
+                      let result = {
+                        code: 0,
+                        errMsg: '查询简历失败',
+                        data: err,
+                      };
+
+                      _funcCb(result);
+
+                    });
+
+                    emitter.on('getTotal', () => {
+
+                      _F('dbTableTemp_EbTD6ZMHQK').callMethod('getCount', {
+                        condition,
+                        success: (res) => {
+                          total = res[0].count;
+                          emitter.emit('getList');
+                        },
+                        fail: (err) => {
+                          emitter.emit('error', err);
+                        }
+                      });
+
+                    });
+
+                    emitter.on('getList', () => {
+
+                      _F('dbTableTemp_EbTD6ZMHQK').callMethod('getRows', {
+                        condition,
+                        pageNum,
+                        pageSize,
+                        orderby: orderBy,
+                        sort: isAsc ? 'asc' : 'desc',
+                        success: (res) => {
+                          list = res;
+                          emitter.emit('output');
+                        },
+                        fail: (err) => {
+                          emitter.emit('error', err);
+                        }
+                      });
+
+                    });
+
+                    emitter.emit('getTotal');
+              - id: service_Qxn7E4nTS7
+                name: 删除简历
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    if(param.hasOwnProperty('简历ID')) {
+                      emitter.emit('delete');
+                    } else {
+                      emitter.emit('noId');
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请提供简历ID'});
+                    });
+
+                    emitter.on('delete', () => {
+
+                      let condition = {
+                        _id: param.简历ID
+                      };
+                      
+                      _F('dbTableTemp_EbTD6ZMHQK').callMethod('deleteRow', {
+                        condition,
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '删除简历成功'});  
+                        }
+                      });
+                      
+                    });
+
+                    emitter.emit('delete');
+                  inParams:
+                    - 简历ID
+                  outParams: []
+                  openApiPath: ''
+      - id: state_NpsBFda5Ra
+        type: state
+        children: []
+      - id: services_NrPa537JmE
+        type: services
+        children:
+          - id: group_246xNtPWmA
+            name: 数据表
+            type: group
+            props:
+              devId: group_数据表
+            children:
+              - id: dbTableTemp_EbTD6ZMHQK
+                name: 简历信息表
+                type: dbTableTemp
+                props:
+                  devId: dbTableTemp_简历信息表
+                  fields:
+                    - columnName: _id
+                      columnType: int unsigned
+                    - columnName: 用户ID
+                      columnType: int unsigned
+                    - columnName: 姓名
+                      columnType: varchar(50)
+                    - columnName: 年龄
+                      columnType: tinyint
+                    - columnName: 性别
+                      columnType: enum('男','女')
+                    - columnName: 手机号
+                      columnType: char(11)
+                    - columnName: 邮箱
+                      columnType: varchar(100)
+                    - columnName: 籍贯
+                      columnType: varchar(50)
+                    - columnName: 现居住地
+                      columnType: varchar(100)
+                    - columnName: 最高学历
+                      columnType: varchar(20)
+                    - columnName: 毕业院校
+                      columnType: varchar(100)
+                    - columnName: 专业
+                      columnType: varchar(100)
+                    - columnName: 工作年限
+                      columnType: tinyint
+                    - columnName: 期望职位
+                      columnType: varchar(50)
+                    - columnName: 期望地点
+                      columnType: varchar(100)
+                    - columnName: 期望薪资
+                      columnType: varchar(20)
+                    - columnName: 自我评价
+                      columnType: text
+                    - columnName: _create
+                      columnType: bigint unsigned
+                    - columnName: _update
+                      columnType: bigint unsigned
+  - id: modules_6MenHYAbkJ
+    name: 模块
+    type: modules
+    props: {}

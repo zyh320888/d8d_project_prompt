@@ -1,0 +1,351 @@
+id: module_ypEXN7mixz
+name: 个人认证后台组件 
+type: module
+props: {}
+children:
+  - id: front_C2pAMhcpds 
+    type: front
+    children:
+      - id: props_fEH4ExMXnR
+        type: props
+        children: 
+          - id: fPAttr_s73npQYYKZ
+            type: fPAttr
+            children: []
+          - id: fPMethod_AfyshYSnjh
+            type: fPMethod
+            children: []
+          - id: fPEvent_sW48Y3pZNQ
+            type: fPEvent
+            children: []
+      - id: state_zhPwfpTGwS
+        type: state
+        children: []    
+      - id: method_WEnAE4F3HM
+        type: method
+        children: []
+      - id: dom_BeR25MnDQd
+        type: dom
+        children: []
+          
+  - id: backend_Ydkd2JiX5m  
+    name: 后台
+    type: backend
+    props:
+      style: 
+        height: 200px
+        backgroundColor: red
+    children:
+      - id: props_FNME3k8CTE
+        type: props
+        children:
+          - id: bPAttr_HZB3jz2BCS
+            type: bPAttr
+            children: []
+          - id: bPMethod_H8i6ab35P4
+            type: bPMethod
+            children:
+              - id: service_J24XDK7Hsb
+                name: 个人认证搜索服务
+                type: service  
+                props:
+                  devId: service_J24XDK7Hsb
+                  isOpen: false
+                  jsCode: |
+                    // 搜索服务
+                  
+                    const emitter = new events.EventEmitter();
+
+
+                    let condition = {};
+
+
+                    let pageNum = param.hasOwnProperty('当前页码') && param.当前页码 > 0
+                    ? parseInt(param.当前页码) : 1;
+
+                    let pageSize = param.hasOwnProperty('每页大小') && param.每页大小
+                    >   0 ? parseInt(param.每页大小) : 10;
+
+                    let list = [];
+
+                    let total = 0;
+
+
+                    emitter.on('output', () => {
+                      
+                      list = list.map(item => {
+                        return item;
+                      })
+                      
+                      _funcCb({
+                        code: 200, 
+                        errMsg: 'ok',
+                        result: list,   
+                        total: total
+                      });
+                    })
+
+
+                    emitter.on('setCondition', () => {
+                      let 搜索条件 = param.搜索条件 || {};
+                      
+                      if(搜索条件.关键字) {
+                        condition['姓名'] = ['like', `%${搜索条件.关键字}%`]; 
+                      }
+                      
+                      if (搜索条件.hasOwnProperty('用户ID') && 搜索条件.用户ID) {
+                        condition['用户ID'] = 搜索条件.用户ID;
+                      }
+                      
+                      if (搜索条件.hasOwnProperty('是否认证')) {
+                        condition['是否认证'] = 搜索条件.是否认证;
+                      }
+                      
+                    });
+
+
+                    emitter.on('getTotal', () => {
+                      
+                      _F('dbTableTemp_JmyYd2Gm4S').callMethod('getCount', {
+                        condition,
+                        success: (res) => {
+                          emitter.emit('getList', res[0].count);    
+                        },
+                        fail: (err) => {
+                          _funcCb({
+                            code: 0,
+                            errMsg: '获取总数失败',
+                            result: err,
+                            total: 0
+                          });
+                        }
+                      });
+                      
+                    });
+
+
+                    emitter.on('getList', (total) => {
+                      
+                      _F('dbTableTemp_JmyYd2Gm4S').callMethod('getRows', {
+                        condition,
+                        pageNum,
+                        pageSize,
+                        orderby: '_update',
+                        sort: 'desc',
+                        success: (res) => {
+                          list = res;
+                          total = total;
+                          emitter.emit('output');
+                        },
+                        fail: (err) => {
+                          _funcCb({
+                            code: 0,
+                            errMsg: '获取列表失败',
+                            result: err,
+                            total: 0
+                          });
+                        }
+                      });
+                      
+                    });
+
+
+                    emitter.emit('setCondition');
+
+                    emitter.emit('getTotal');
+                    
+                  inParams:
+                    - 搜索条件
+                    - 当前页码
+                    - 每页大小
+                  outParams: []
+                  openApiPath: '' 
+                  inParamsDebug: {}
+
+              - id: service_sWRf4FZ3bK
+                name: 个人认证编辑服务
+                type: service
+                props:
+                  devId: service_sWRf4FZ3bK
+                  isOpen: false
+                  jsCode: |                  
+                    // 编辑服务
+                    const emitter = new events.EventEmitter();
+
+                    if (param.hasOwnProperty('行ID') && param['行ID'] > 0) {
+                      emitter.emit('edit');
+                    } else {
+                      emitter.emit('noId');   
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请传入行ID', result: {}});
+                    });
+
+                    emitter.on('edit', () => {
+                      
+                      let condition = {};
+                      condition['_id'] = param.行ID;
+                      
+                      let updateObj = {};
+                      
+                      if(param.hasOwnProperty('用户ID')) {
+                        updateObj['用户ID'] = param.用户ID;  
+                      }
+                      
+                      if(param.hasOwnProperty('姓名')) {
+                        updateObj['姓名'] = param.姓名;
+                      }
+                      
+                      if(param.hasOwnProperty('联系电话')) {
+                        updateObj['联系电话'] = param.联系电话; 
+                      }
+                      
+                      if(param.hasOwnProperty('身份证正面照')) {
+                        updateObj['身份证正面照'] = param.身份证正面照;
+                      }
+                      
+                      if(param.hasOwnProperty('身份证反面照')) {
+                        updateObj['身份证反面照'] = param.身份证反面照;
+                      }
+                      
+                      if(param.hasOwnProperty('个人简介')) {
+                        updateObj['个人简介'] = param.个人简介;
+                      }
+                      
+                      if(param.hasOwnProperty('是否认证')) {
+                        updateObj['是否认证'] = param.是否认证;  
+                      }
+                              
+                      _F('dbTableTemp_JmyYd2Gm4S').callMethod('editRow', {
+                        row: updateObj,
+                        condition,
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '编辑成功', result: {}});
+                        },
+                        fail: (err) => {
+                          // 编辑失败
+                          _funcCb({code: 0, errMsg: '编辑失败', result: err});
+                        }
+                      });
+                      
+                    });
+
+                    emitter.emit('edit');
+                    
+                  inParams:
+                    - 行ID
+                    - 用户ID
+                    - 姓名
+                    - 联系电话
+                    - 身份证正面照
+                    - 身份证反面照  
+                    - 个人简介
+                    - 是否认证
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug:
+                    是否认证: ''
+                    个人简介: ''
+                    身份证反面照: ''
+                    身份证正面照: ''
+                    联系电话: ''
+                    姓名: ''
+                    用户ID: ''
+
+              - id: service_enBtPn22Pk
+                name: 个人认证新增服务
+                type: service
+                props:
+                  devId: service_enBtPn22Pk
+                  isOpen: false
+                  jsCode: |
+                    // 新增服务
+                    const emitter = new events.EventEmitter();
+
+                    emitter.on('add', () => {
+                      
+                      let insertObj = {
+                        ...param,   
+                        是否认证: 0
+                      };
+                      
+                      _F('dbTableTemp_JmyYd2Gm4S').callMethod('addRow', {
+                        row: insertObj,
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '新增成功', result: {}});
+                        },
+                        fail: (err) => {
+                          // 新增失败
+                          _funcCb({code: 0, errMsg: '新增失败', result: err});
+                        }
+                      });
+                      
+                    });
+
+                    emitter.emit('add');
+                    
+                  inParams:
+                    - 姓名
+                    - 联系电话
+                    - 身份证正面照
+                    - 身份证反面照
+                    - 个人简介
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug:
+                    个人简介: ''
+                    身份证反面照: ''
+                    身份证正面照: ''
+                    联系电话: ''
+                    姓名: ''
+
+      - id: state_wCedjDQxwm  
+        type: state
+        children: []
+        
+      - id: services_z3wMKiFXQd
+        type: services
+        children:
+          - id: group_wQzYnyj3JP
+            name: 数据表
+            type: group
+            props:
+              devId: group_wQzYnyj3JP
+            children:
+              - id: dbTableTemp_JmyYd2Gm4S
+                name: 个人认证表
+                type: dbTableTemp
+                props:
+                  devId: dbTableTemp_JmyYd2Gm4S
+                  fields:
+                    - columnName: _id
+                      columnType: int unsigned
+                    - columnName: 用户ID
+                      columnType: int  
+                    - columnName: 姓名
+                      columnType: varchar(100) 
+                    - columnName: 联系电话
+                      columnType: varchar(20)
+                    - columnName: 身份证正面照
+                      columnType: varchar(500)
+                    - columnName: 身份证反面照
+                      columnType: varchar(500)
+                    - columnName: 个人简介
+                      columnType: text
+                    - columnName: 是否认证
+                      columnType: int
+                    - columnName: _create
+                      columnType: bigint unsigned
+                    - columnName: _update
+                      columnType: bigint unsigned
+                        
+          - id: group_iynxM3QBhX 
+            name: 中台服务
+            type: group
+            props:
+              devId: group_iynxM3QBhX
+                
+  - id: modules_bjS4CFrsZc
+    type: modules
+    children: []

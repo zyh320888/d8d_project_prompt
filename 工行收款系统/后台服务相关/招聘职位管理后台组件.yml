@@ -1,0 +1,539 @@
+id: module_3GdzS7iAEJ
+name: 招聘职位管理后台组件
+type: module
+props:
+children:
+  - id: config_tZnAKbdXQQ
+    type: config
+    props:
+  - id: front_EDwBCQXGay
+    name: 前台
+    type: front
+    props:
+    children:
+      - id: props_5FFQ88SCwi
+        type: props
+        children:
+          - id: fPAttr_AzSnXW2ZMG
+            type: fPAttr
+            children: []
+          - id: fPMethod_PRfeh2f4TE
+            type: fPMethod
+            children: []
+          - id: fPEvent_J2AArbjZ63
+            type: fPEvent
+            children: []
+      - id: state_wjFmzkmXJ4
+        type: state
+        children: []
+      - id: method_6DP5hXDJEH
+        type: method
+        children: []
+      - id: dom_BZ4AdFFCFJ
+        type: dom
+        children: []
+  - id: backend_nk8YMFyiba
+    name: 后台
+    type: backend
+    props:
+    children:
+      - id: props_sAZihzGFS6
+        type: props
+        children:
+          - id: bPAttr_7ra575ttC8
+            type: bPAttr
+            children: []
+          - id: bPMethod_cazTnGfGsG
+            type: bPMethod
+            children:
+              - id: service_N23fNtTcyp
+                name: 新增招聘职位服务
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+                    const emitter = new events.EventEmitter();
+
+                    emitter.on('add', () => {
+
+                      let data = {
+                        用户ID: param.用户ID,
+                        职位名称: param.职位名称,
+                        职位部门: param.职位部门,
+                        职位要求: param.职位要求,
+                        职位待遇: param.职位待遇,
+                        职位描述: param.职位描述,
+                        工作地点: param.工作地点,
+                        学历要求: param.学历要求,
+                        工作年限要求: param.工作年限要求,
+                        职位类别: param.职位类别,
+                        招聘人数: param.招聘人数,
+                        截止日期: param.截止日期,
+                        所属项目: param.所属项目,
+                        联系人: param.联系人,
+                        联系电话: param.联系电话,
+                        电子邮箱: param.电子邮箱,
+                        投递邮箱: param.投递邮箱,
+                        是否置顶: param.是否置顶,
+                        结算方式: param.结算方式,
+                        行业分类: param.行业分类,
+                        是否删除: 0,
+                        所在地区: param.所在地区,
+                        详细地址: param.详细地址,
+                        薪资范围: param.薪资范围,
+                        企业性质: param.企业性质
+                      };
+                      
+                      _F('dbTableTemp_Gf83SMhtNs').callMethod('addRow', {
+                        row: data,
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '新增成功'});
+                        }  
+                      });
+                      
+                    });
+
+                    emitter.emit('add');
+                  inParams:
+                    - 用户ID
+                    - 职位名称
+                    - 职位部门
+                    - 职位要求
+                    - 职位待遇
+                    - 职位描述
+                    - 工作地点
+                    - 学历要求
+                    - 工作年限要求
+                    - 职位类别
+                    - 招聘人数
+                    - 截止日期
+                    - 所属项目
+                    - 联系人
+                    - 联系电话
+                    - 电子邮箱
+                    - 投递邮箱
+                    - 是否置顶
+                    - 结算方式
+                    - 行业分类
+                    - 所在地区
+                    - 详细地址
+                    - 薪资范围
+                    - 企业性质
+                  outParams: []
+                  openApiPath: ''
+              - id: service_A5asWi7rSF
+                name: 编辑招聘职位服务
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |-
+                    const emitter = new events.EventEmitter();
+
+                    if(param.hasOwnProperty('行ID')) {
+                      emitter.emit('edit');
+                    } else {
+                      emitter.emit('noId');
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请提供行ID'});
+                    });
+
+                    emitter.on('edit', () => {
+
+                      let condition = {_id: param.行ID};
+                      let updateData = {};
+                      
+                      if(param.hasOwnProperty('职位名称')) {
+                        updateData.职位名称 = param.职位名称;
+                      }
+                      
+                      if(param.hasOwnProperty('职位部门')) {
+                        updateData.职位部门 = param.职位部门;  
+                      }
+                      
+                      if(param.hasOwnProperty('职位要求')) {
+                        updateData.职位要求 = param.职位要求;
+                      }
+                      
+                      if(param.hasOwnProperty('职位待遇')) {
+                        updateData.职位待遇 = param.职位待遇;
+                      }
+                      
+                      if(param.hasOwnProperty('职位描述')) {
+                        updateData.职位描述 = param.职位描述;
+                      }
+                      
+                      if(param.hasOwnProperty('工作地点')) {
+                        updateData.工作地点 = param.工作地点;
+                      }
+                      
+                      if(param.hasOwnProperty('学历要求')) {
+                        updateData.学历要求 = param.学历要求;
+                      }
+                      
+                      if(param.hasOwnProperty('工作年限要求')) {
+                        updateData.工作年限要求 = param.工作年限要求;
+                      }
+                      
+                      if(param.hasOwnProperty('职位类别')) {
+                        updateData.职位类别 = param.职位类别;
+                      }
+                      
+                      if(param.hasOwnProperty('招聘人数')) {
+                        updateData.招聘人数 = param.招聘人数;
+                      }
+                      
+                      if(param.hasOwnProperty('截止日期')) {
+                        updateData.截止日期 = param.截止日期;
+                      }
+                      
+                      if(param.hasOwnProperty('所属项目')) {
+                        updateData.所属项目 = param.所属项目;
+                      }
+                      
+                      if(param.hasOwnProperty('联系人')) {
+                        updateData.联系人 = param.联系人;
+                      }
+                      
+                      if(param.hasOwnProperty('联系电话')) {
+                        updateData.联系电话 = param.联系电话;
+                      }
+                      
+                      if(param.hasOwnProperty('电子邮箱')) {
+                        updateData.电子邮箱 = param.电子邮箱;
+                      }
+                      
+                      if(param.hasOwnProperty('投递邮箱')) {
+                        updateData.投递邮箱 = param.投递邮箱;
+                      }
+                      
+                      if(param.hasOwnProperty('是否置顶')) {
+                        updateData.是否置顶 = param.是否置顶;
+                      }
+                      
+                      if(param.hasOwnProperty('结算方式')) {
+                        updateData.结算方式 = param.结算方式;
+                      }
+                      
+                      if(param.hasOwnProperty('行业分类')) {
+                        updateData.行业分类 = param.行业分类;
+                      }
+                      
+                      if(param.hasOwnProperty('所在地区')) {
+                        updateData.所在地区 = param.所在地区;
+                      }
+                      
+                      if(param.hasOwnProperty('详细地址')) {
+                        updateData.详细地址 = param.详细地址;
+                      }
+                      
+                      if(param.hasOwnProperty('薪资范围')) {
+                        updateData.薪资范围 = param.薪资范围;
+                      }
+                      
+                      if(param.hasOwnProperty('企业性质')) {
+                        updateData.企业性质 = param.企业性质;
+                      }
+
+                      if(param.hasOwnProperty('审核状态')) {
+                        updateData.审核状态 = param.审核状态;
+                      }
+
+                      _F('dbTableTemp_Gf83SMhtNs').callMethod('editRow', {
+                        condition,
+                        row: updateData,
+                        success: () => {
+                          _funcCb({code: 200, errMsg:'修改成功'});
+                        }
+                      });
+                      
+                    });
+
+                    emitter.emit('edit');
+                  inParams:
+                    - 行ID
+                    - 职位名称
+                    - 职位部门
+                    - 职位要求
+                    - 职位待遇
+                    - 职位描述
+                    - 工作地点
+                    - 学历要求
+                    - 工作年限要求
+                    - 职位类别
+                    - 招聘人数
+                    - 截止日期
+                    - 所属项目
+                    - 联系人
+                    - 联系电话
+                    - 电子邮箱
+                    - 投递邮箱
+                    - 是否置顶
+                    - 结算方式
+                    - 行业分类
+                    - 所在地区
+                    - 详细地址
+                    - 薪资范围
+                    - 企业性质
+                    - 审核状态
+                  outParams: []
+                  openApiPath: ''
+              - id: service_H6W3m38ttW
+                name: 获取招聘职位列表服务
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    let pageNum = 1;
+                    let pageSize = 10;
+                    let condition = {};
+
+                    if(param.当前页码) {
+                      pageNum = param.当前页码;
+                    }
+
+                    if(param.每页大小) {
+                      pageSize = param.每页大小;
+                    }
+
+                    if(param.搜索条件) {
+                      
+                      let 搜索条件 = param.搜索条件;
+                      
+                      if(搜索条件.关键字) {
+                        condition['职位名称'] = ['like', `%${搜索条件.关键字}%`];
+                      }  
+                      
+                      if(搜索条件.职位部门) {
+                        condition['职位部门'] = ['like', `%${搜索条件.职位部门}%`];
+                      }
+                      
+                      if(搜索条件.是否置顶) {
+                        condition['是否置顶'] = 搜索条件.是否置顶;
+                      }
+                      
+                      if(搜索条件.结算方式) {
+                        condition['结算方式'] = 搜索条件.结算方式;
+                      }
+                      
+                      if(搜索条件.行业分类) {
+                        condition['行业分类'] = 搜索条件.行业分类;
+                      }
+                      
+                      if(搜索条件.审核状态) {
+                        condition['审核状态'] = 搜索条件.审核状态;
+                      }
+
+                      if(搜索条件.用户ID) {
+                        condition['用户ID'] = 搜索条件.用户ID;
+                      }
+                      
+                    }
+
+                    let total = 0;
+                    let list = [];
+
+                    emitter.on('output', () => {
+
+                      let result = {
+                        code: 200,
+                        errMsg: 'ok',
+                        result: list,
+                        total: total
+                      };
+                      
+                      _funcCb(result);
+                      
+                    });
+
+                    emitter.on('error', (error) => {
+
+                      let result = {
+                        code: 0,
+                        errMsg: '查询失败',
+                        result: error
+                      };
+                      
+                      _funcCb(result);
+                      
+                    });
+
+                    emitter.on('getTotal', () => {
+                              
+                      _F('dbTableTemp_Gf83SMhtNs').callMethod('getCount', {
+                        condition,
+                        success: (res) => {   
+                          total = res[0].count;
+                          emitter.emit('getList');
+                        },
+                        fail: (error) => {
+                          
+                          emitter.emit('output',error);
+                        } 
+                      });
+                              
+                    });
+
+                    emitter.on('getList', () => {
+                      
+                      _F('dbTableTemp_Gf83SMhtNs').callMethod('getRows', {
+                        condition,  
+                        pageNum,
+                        pageSize,
+                        orderby: '_update',
+                        sort: 'desc',
+                        success: (res) => {
+                          list = res;  
+                          emitter.emit('output');
+                        } ,
+                        fail: (error) => {
+                          
+                          emitter.emit('output',error);
+                        } 
+                      });
+                      
+                    });
+
+                    emitter.emit('getTotal');
+                  inParams:
+                    - 当前页码
+                    - 每页大小
+                    - 搜索条件
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug:
+                    当前页码: 1
+                    搜索条件:
+                      关键字: ''
+                      是否置顶: ''
+                      职位部门: ''
+                    每页大小: 10
+              - id: service_XWPNc6Seie
+                name: 删除招聘职位服务
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+                    const emitter = new events.EventEmitter();
+
+                    if(param.hasOwnProperty('职位ID')) {
+                      emitter.emit('delete');
+                    } else {
+                      emitter.emit('noId');  
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请提供职位ID'});
+                    });
+
+                    emitter.on('delete', () => {
+
+                      let condition = {_id: param.职位ID};
+                      
+                      _F('dbTableTemp_Gf83SMhtNs').callMethod('deleteRow', {
+                        condition,
+                        success: () => {
+                          _funcCb({code: 200, errMsg:'删除成功'}); 
+                        }
+                      });
+                      
+                    });
+
+                    emitter.emit('delete');
+                  inParams:
+                    - 职位ID
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug:
+                    职位ID: ''
+      - id: state_NYRHDyMSGi
+        type: state
+        children: []
+      - id: services_PBX2CiEpTT
+        type: services
+        children:
+          - id: group_TPp8aS7e5i
+            name: 数据表
+            type: group
+            props:
+              devId: group_TPp8aS7e5i
+            children:
+              - id: dbTableTemp_Gf83SMhtNs
+                name: 招聘职位表
+                type: dbTableTemp
+                props:
+                  devId: dbTableTemp_Gf83SMhtNs
+                  fields:
+                    - columnName: _id
+                      columnType: int unsigned
+                    - columnName: 用户ID
+                      columnType: int unsigned
+                    - columnName: 职位名称
+                      columnType: text
+                    - columnName: 职位部门
+                      columnType: text
+                    - columnName: 职位要求
+                      columnType: text
+                    - columnName: 职位待遇
+                      columnType: text
+                    - columnName: 职位描述
+                      columnType: text
+                    - columnName: 工作地点
+                      columnType: text
+                    - columnName: 学历要求
+                      columnType: text
+                    - columnName: 工作年限要求
+                      columnType: text
+                    - columnName: 职位类别
+                      columnType: text
+                    - columnName: 招聘人数
+                      columnType: int
+                    - columnName: 截止日期
+                      columnType: date
+                    - columnName: 所属项目
+                      columnType: text
+                    - columnName: 联系人
+                      columnType: text
+                    - columnName: 联系电话
+                      columnType: text
+                    - columnName: 电子邮箱
+                      columnType: text
+                    - columnName: 投递邮箱
+                      columnType: text
+                    - columnName: 浏览次数
+                      columnType: int
+                    - columnName: 是否置顶
+                      columnType: tinyint
+                    - columnName: 结算方式
+                      columnType: text
+                    - columnName: 行业分类
+                      columnType: text
+                    - columnName: 是否删除
+                      columnType: int
+                    - columnName: 所在地区
+                      columnType: text
+                    - columnName: 详细地址
+                      columnType: text
+                    - columnName: 薪资范围
+                      columnType: text
+                    - columnName: 企业性质
+                      columnType: text
+                    - columnName: 审核状态
+                      columnType: int
+                    - columnName: _create
+                      columnType: bigint unsigned
+                    - columnName: _update
+                      columnType: bigint unsigned
+          - id: group_dHSeAbZkDa
+            name: 中台服务
+            type: group
+            props:
+              devId: group_dHSeAbZkDa
+  - id: modules_CPmWnMHXfB
+    name: 模块
+    type: modules
+    props: {}

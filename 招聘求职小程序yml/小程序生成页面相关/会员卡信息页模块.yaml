@@ -1,0 +1,150 @@
+type: module
+props: {}
+id: module_ezK7ifty4b
+name: 会员信息页模块
+children:
+  - type: front
+    props:
+        onLoadJs: >
+          () => {
+            // 加载会员信息
+            loadMemberInfo()  
+          }
+    children:
+      - type: props
+        children:
+          - type: fPAttr
+            children: []
+            id: fPAttr_cN6mZSe3fE
+          - type: fPMethod
+            children: []
+            id: fPMethod_4R743n5xT8
+          - type: fPEvent
+            children: []
+            id: fPEvent_DZRKkyyjGi
+        id: props_QiTcWzF76W
+      - type: state
+        children: 
+          # 会员信息  
+          - id: memberInfo
+            name: 会员信息
+            type: variable
+            props:
+              valueJs: {}
+        id: state_chJ3Z4Qhdi
+      - type: method
+        children: 
+          # 加载会员信息方法
+          - id: loadMemberInfo
+            name: 加载会员信息
+            type: jsFunc
+            props:
+              jsCode: |
+                // 调用服务端接口获取会员信息
+                getMemberInfo().then(data => {
+                  // 设置会员信息状态变量的值
+                  setMemberInfo(data) 
+                })
+        id: method_BcXr7Hjkww
+      - type: dom
+        children: 
+          
+        
+          # 会员卡卡面
+          - id: memberCard
+            type: row
+            props: 
+              style: 
+                width: 300px
+                height: 200px
+                background: #fff
+                borderRadius: 8px
+                padding: 20px
+                boxShadow: 0 4px 8px rgba(0,0,0,.05)
+            
+            children:
+            
+              # 手机号 
+              - id: phoneNumber
+                type: text
+                props:
+                  text: 138****8757
+                  
+              # 会员卡号  
+              - id: memberId
+                type: text
+                props:
+                  textJs: _F('memberInfo').memberId
+                  
+              # 会员等级
+              - id: level
+                type: text 
+                props:
+                  textJs: _F('memberInfo').level
+              
+              # 余额
+              - id: balance
+                type: text
+                props:
+                  textJs: _F('memberInfo').balance  
+              
+          # 刷脸支付按钮 
+          - id: payBtn
+            type: button
+            props: 
+              type: primary
+              text: 刷脸支付
+              onClick: handlePay
+              
+        id: dom_Ze8xszE4rj
+    id: front_DK3xHPGi48
+  - type: backend
+    children:
+      - type: props
+        children:
+          - type: bPAttr
+            children: []
+            id: bPAttr_Jpcw3nK26S
+          - type: bPMethod
+            children: []
+            id: bPMethod_BxHHJWeHEM
+        id: props_6whSW8CQsT
+      - type: state
+        children:
+          - type: variable
+            props:
+              value: |
+                会员卡页面所需要的功能:
+
+                会员卡
+
+                - 卡面设计:展示会员卡的基本样式和布局
+
+                用户信息区
+
+                - 手机号:显示138****8757这样部分遮蔽的手机号格式
+                - 会员卡号:显示会员卡号1001131361
+
+                会员信息区
+
+                - 会员等级:显示具体的会员等级 V1
+                - 余额:显示当前余额¥15.00
+                - 积分:无积分信息,显示积分相关部分的界面
+
+                其他功能
+
+                - 刷脸支付:提供刷脸支付的入口
+            id: variable_ff66HZxfHY
+            name: 会员信息页提示词
+        id: state_r6CKpM4wKd
+      - type: services
+        children: []
+        id: services_EJraE28W5K
+    id: backend_2FPfSjwkfw
+  - type: modules
+    children: []
+    id: modules_5jpyeth2FM
+
+
+
+

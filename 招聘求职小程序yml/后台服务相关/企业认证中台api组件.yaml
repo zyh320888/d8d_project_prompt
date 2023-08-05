@@ -1,0 +1,330 @@
+id: group_wiZkwnhhee
+name: 企业认证中台相关
+type: group
+props: null
+children:
+  - id: bComponent_PTixBsyrD8
+    name: 企业认证管理后台组件
+    type: bComponent
+    props:
+      moduleId: module_H5YM7cFG5z
+      dbConnect:
+        - tempId: dbTableTemp_5FGiD3hp6E
+          tableId: dbTable_p2nnDd7GBJ
+  - id: group_NP3TQm2sda
+    name: 小程序api相关
+    type: group
+    props: {}
+    children:
+      - id: service_DGAEwMYewk
+        name: 新增企业认证服务
+        type: service
+        props:
+          devId: service_新增企业认证
+          isOpen: true
+          jsCode: |
+            // 调用组件中的新增服务
+            const emitter = new events.EventEmitter();
+            const USER_INFO = _F('middle_func').callMethod('last');
+
+            param.用户ID = USER_INFO._id;
+
+            emitter.on('add', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_NZwQyWzf43', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('add');
+          inParams:
+            - 用户ID
+            - 企业名称
+            - 企业性质
+            - 所属行业
+            - 企业规模
+            - 联系人
+            - 联系电话
+            - 公司电话
+            - 公司地址
+            - 企业介绍
+            - 企业logo
+            - 营业执照
+            - 企业图片
+          outParams: []
+          openApiPath: v1/mini/user/enterprise/add
+          inParamsDebug:
+            用户ID: 1
+            联系人: 张三
+            公司地址: 北京市海淀区
+            企业图片: https://test.jpg
+            营业执照: https://test.jpg
+            企业logo: https://test.jpg
+            企业介绍: 这是一家很不错的公司
+            公司电话: 010-88888888
+            联系电话: 13888888888
+            企业规模: 2000人
+            所属行业: IT
+            企业性质: 股份有限公司
+            企业名称: 智能小程序公司
+      - id: service_K3yARpDEPa
+        name: 编辑企业认证服务
+        type: service
+        props:
+          devId: service_编辑企业认证
+          isOpen: true
+          jsCode: |
+
+            // 调用组件中的编辑服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('edit', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_hcFrAteKA7', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('edit');
+          inParams:
+            - 行ID
+            - 用户ID
+            - 企业名称
+            - 企业性质
+            - 所属行业
+            - 企业规模
+            - 联系人
+            - 联系电话
+            - 公司电话
+            - 公司地址
+            - 企业介绍
+            - 企业logo
+            - 营业执照
+            - 企业图片
+            - 是否认证
+          outParams: []
+          openApiPath: v1/mini/user/enterprise/edit
+          inParamsDebug:
+            用户ID: ''
+            企业图片: ''
+            营业执照: ''
+            企业logo: ''
+            企业介绍: ''
+            公司地址: ''
+            公司电话: ''
+            联系电话: ''
+            联系人: ''
+            企业规模: ''
+            所属行业: ''
+            企业性质: ''
+            企业名称: ''
+            是否认证: ''
+      - id: service_Wbn3DDGZRy
+        name: 搜索企业认证服务
+        type: service
+        props:
+          devId: service_搜索企业认证
+          isOpen: true
+          jsCode: |
+
+            // 调用组件中的搜索服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('search', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_Bpd5x5rpeJ', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('search');
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/mini/enterprise/search
+          inParamsDebug:
+            当前页码: ''
+            搜索条件:
+              关键字: ''
+              是否认证: ''
+            每页大小: ''
+      - id: service_SkXbc5cpwe
+        name: 获取我的企业认证列表服务
+        type: service
+        props:
+          devId: service_获取企业认证列表
+          isOpen: true
+          jsCode: |
+
+            // 调用组件中的获取列表服务
+            const emitter = new events.EventEmitter();
+            const USER_INFO = _F('middle_func').callMethod('last');
+
+            param.搜索条件 = {
+              ...param.搜索条件,
+              用户ID: USER_INFO._id
+            }
+
+            emitter.on('list', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_Bpd5x5rpeJ', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('list');
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/mini/user/enterprise/list
+          inParamsDebug:
+            当前页码: 1
+            搜索条件:
+              关键字: 小程序
+              是否认证: ''
+            每页大小: 10
+  - id: group_Kda5YBr5n5
+    name: 管理后台api相关
+    type: group
+    props: null
+    children:
+      - id: service_rYATPZ4WET
+        name: 编辑企业认证服务
+        type: service
+        props:
+          devId: service_编辑企业认证
+          isOpen: true
+          jsCode: |
+
+            // 调用组件中的编辑服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('edit', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_hcFrAteKA7', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('edit');
+          inParams:
+            - 行ID
+            - 用户ID
+            - 企业名称
+            - 企业性质
+            - 所属行业
+            - 企业规模
+            - 联系人
+            - 联系电话
+            - 公司电话
+            - 公司地址
+            - 企业介绍
+            - 企业logo
+            - 营业执照
+            - 企业图片
+            - 是否认证
+          outParams: []
+          openApiPath: v1/admin/enterprise/edit
+          inParamsDebug:
+            用户ID: ''
+            企业图片: ''
+            营业执照: ''
+            企业logo: ''
+            企业介绍: ''
+            公司地址: ''
+            公司电话: ''
+            联系电话: ''
+            联系人: ''
+            企业规模: ''
+            所属行业: ''
+            企业性质: ''
+            企业名称: ''
+            是否认证: ''
+      - id: service_AYhZWzh3DD
+        name: 获取企业认证列表服务
+        type: service
+        props:
+          devId: service_获取企业认证列表
+          isOpen: true
+          jsCode: |
+
+            // 调用组件中的获取列表服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('list', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_Bpd5x5rpeJ', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('list');
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/admin/enterprise/list
+          inParamsDebug:
+            当前页码: 1
+            搜索条件:
+              关键字: 小程序
+              是否认证: ''
+            每页大小: 10
+  - id: dbTable_p2nnDd7GBJ
+    name: 企业认证表
+    type: dbTable
+    props:
+      fields:
+        - columnName: _id
+          columnType: int unsigned
+        - columnName: 用户ID
+          columnType: int unsigned
+        - columnName: 企业名称
+          columnType: text
+        - columnName: 企业性质
+          columnType: text
+        - columnName: 所属行业
+          columnType: text
+        - columnName: 企业规模
+          columnType: text
+        - columnName: 联系人
+          columnType: text
+        - columnName: 联系电话
+          columnType: text
+        - columnName: 公司电话
+          columnType: text
+        - columnName: 公司地址
+          columnType: text
+        - columnName: 企业介绍
+          columnType: text
+        - columnName: 企业logo
+          columnType: text
+        - columnName: 营业执照
+          columnType: text
+        - columnName: 企业图片
+          columnType: text
+        - columnName: 是否认证
+          columnType: int
+        - columnName: 是否删除
+          columnType: int
+        - columnName: _create
+          columnType: bigint unsigned
+        - columnName: _update
+          columnType: bigint unsigned

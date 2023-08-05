@@ -1,0 +1,207 @@
+id: group_8ixSPANfj5
+name: 系统配置中台相关
+type: group
+props:
+  devId: group_8ixSPANfj5
+children:
+  - id: bComponent_5cGcTwRTWe
+    name: 系统配置管理后台组件
+    type: bComponent
+    props:
+      devId: bComponent_5cGcTwRTWe
+      moduleId: module_SitFWxQxY3
+      dbConnect:
+        - tempId: dbTableTemp_7R63wea74w
+          tableId: dbTable_xkcRxhfY2n
+  - id: group_fNFjNd4iYj
+    name: 小程序API相关
+    type: group
+    props: {}
+    children:
+      - id: service_768d2mmJ6s
+        name: 小程序系统配置搜索服务
+        type: service
+        props:
+          isOpen: true
+          jsCode: |
+            // 调用管理后台搜索服务
+            const emitter = new events.EventEmitter();
+
+            let inParam = param;
+
+            emitter.on('search', () => {
+              _F('bComponent_5cGcTwRTWe').callMethod('service_zGiaiYNnWt', {
+                inParam,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('search');
+          inParams:
+            - 搜索条件
+            - 当前页码
+            - 每页大小
+          outParams: []
+          openApiPath: v1/mini/config/search
+          inParamsDebug:
+            关键字: ''
+            当前页码: 1
+            每页大小: 10
+  - id: group_SjpQcHBjhf
+    name: 管理后台API相关
+    type: group
+    props: {}
+    children:
+      - id: service_fZbTJsjKR5
+        name: 系统配置搜索服务
+        type: service
+        props:
+          devId: service_fZbTJsjKR5
+          isOpen: true
+          jsCode: |
+            const emitter = new events.EventEmitter();
+
+            let inParam = param;
+
+            emitter.on('getList', ()=>{
+              _F('bComponent_5cGcTwRTWe').callMethod('service_zGiaiYNnWt',{
+                  inParam,
+                  callback:(data)=>{
+                    _funcCb(data);
+                  }
+                }
+              );
+            });
+
+            emitter.emit('getList');
+          inParams:
+            - 搜索条件
+            - 当前页码
+            - 每页大小
+          outParams: []
+          openApiPath: v1/admin/config/search
+          inParamsDebug:
+            关键字: ''
+            当前页码: 1
+            每页大小: 10
+      - id: service_whKJyrSkDC
+        name: 系统配置删除服务
+        type: service
+        props:
+          devId: service_del
+          isOpen: true
+          jsCode: |
+            const emitter = new events.EventEmitter();
+
+            let inParam = {};
+            inParam['行ID'] = param.行ID;
+            if(param.hasOwnProperty('是否删除')){
+              inParam['是否删除'] = param.是否删除;
+            }
+
+            emitter.on('delete', ()=>{
+              _F('bComponent_5cGcTwRTWe').callMethod('service_eHcr4rTA4i',{
+                inParam,
+                callback:(data)=>{
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('delete');
+          inParams:
+            - 行ID
+            - 是否删除
+          outParams: []
+          openApiPath: v1/admin/config/del
+          inParamsDebug:
+            行ID: 1
+            是否删除: 0
+      - id: service_pzPKRbQw8F
+        name: 系统配置编辑服务
+        type: service
+        props:
+          devId: service_edit
+          isOpen: true
+          jsCode: |
+            const emitter = new events.EventEmitter();
+
+            let inParam = param;
+
+            emitter.on('edit', ()=>{
+              _F('bComponent_5cGcTwRTWe').callMethod('service_AraANKWnwH',{
+                inParam,
+                callback:(data)=>{
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('edit');
+          inParams:
+            - 行ID
+            - 配置名称
+            - 配置标识
+            - 配置值
+          outParams: []
+          openApiPath: v1/admin/config/edit
+          inParamsDebug:
+            行ID: 1
+            配置名称: ''
+            配置标识: ''
+            配置值: ''
+      - id: service_e28B2dxBZ6
+        name: 系统配置新增服务
+        type: service
+        props:
+          devId: service_add
+          isOpen: true
+          jsCode: |
+            const emitter = new events.EventEmitter();
+
+            emitter.on('add', ()=>{
+              _F('bComponent_5cGcTwRTWe').callMethod('service_zGrT3Pt8sN',{
+                param,
+                callback:(data)=>{
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('add');
+          inParams:
+            - 配置名称
+            - 配置标识
+            - 配置值
+          outParams: []
+          openApiPath: v1/admin/config/add
+          inParamsDebug:
+            配置名称: ''
+            配置标识: ''
+            配置值: ''
+  - id: group_Z6bTrT3hwW
+    name: 数据表相关
+    type: group
+    props: {}
+    children:
+      - id: dbTable_xkcRxhfY2n
+        name: 系统配置表
+        type: dbTable
+        props:
+          fields:
+            - columnName: _id
+              columnType: int unsigned
+            - columnName: 配置名称
+              columnType: varchar(100)
+            - columnName: 配置标识
+              columnType: varchar(100)
+            - columnName: 配置值
+              columnType: text
+            - columnName: 是否删除
+              columnType: int
+            - columnName: _create
+              columnType: bigint unsigned
+            - columnName: _update
+              columnType: bigint unsigned

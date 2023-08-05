@@ -1,0 +1,29 @@
+yaml组件定义的提示词格式:
+
+type - 组件类型
+格式:type: 组件类型名(小写)
+例如:type: row
+
+id - 组件id
+格式:id: 组件类型名_随机10位数字字母
+例如:id: row_abc123456789
+
+props - 组件属性
+格式:props: {属性1: 值1, 属性2: 值2...}
+例如:props: {type: flex, align: center...}
+
+children - 子组件列表
+格式:- 子组件id1(参考2的格式)
+空格 类型:子组件类型
+空格 props: {...}
+空格 children: [...]
+
+例如:
+
+id: col_def123456789
+type: col 
+props: 
+    span: 4 
+children:
+    id: image_ghi123456789 
+    type: image

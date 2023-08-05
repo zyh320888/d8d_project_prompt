@@ -1,0 +1,356 @@
+id: module_H5YM7cFG5z
+name: 系统配置后台组件
+type: module
+props: {}
+children:
+  - id: front_6DCQakr3pN
+    type: front
+    children:
+      - id: props_RHYGTX2N35
+        type: props
+        children:
+          - id: fPAttr_jPcmryHRMw
+            type: fPAttr
+            children: []
+          - id: fPMethod_KDdYHaEm5j
+            type: fPMethod
+            children: []
+          - id: fPEvent_aMk4YBDeDY
+            type: fPEvent
+            children: []
+      - id: state_G57yKN7dtJ
+        type: state
+        children: []
+      - id: method_yhNta3mcNm
+        type: method
+        children: []
+      - id: dom_r6YD62Gnk3
+        type: dom
+        children: []
+  - id: backend_bJsXmHHxb6
+    name: 后台
+    type: backend
+    props:
+      style:
+        height: 200px
+        backgroundColor: red
+    children:
+      - id: props_BYkzZjNm7b
+        type: props
+        children:
+          - id: bPAttr_hYdWf8Fnsw
+            type: bPAttr
+            children: []
+          - id: bPMethod_PsXBYBhTha
+            type: bPMethod
+            children:
+              - id: service_Bpd5x5rpeJ
+                name: 系统配置搜索服务
+                type: service
+                props:
+                  devId: service_Bpd5x5rpeJ
+                  isOpen: false
+                  jsCode: >
+                    // 搜索服务
+
+                    const emitter = new events.EventEmitter();
+
+
+                    let condition = {};
+
+
+                    let pageNum = param.hasOwnProperty('当前页码') && param.当前页码 > 0
+                    ? parseInt(param.当前页码) : 1;
+
+                    let pageSize = param.hasOwnProperty('每页大小') && param.每页大小 >
+                    0 ? parseInt(param.每页大小) : 10;
+
+                    let list = [];
+
+                    let total = 0;
+
+
+                    emitter.on('output', () => {
+
+                      list = list.map(item => {
+                        return item;
+                      })
+
+                      _funcCb({
+                        code: 200,
+                        errMsg: 'ok',
+                        result: list, 
+                        total: total
+                      });
+                    })
+
+
+                    emitter.on('setCondition', () => {
+                      let 搜索条件 = param.搜索条件 || {};
+
+                      if(搜索条件.关键字) {
+                        condition['配置名称'] = ['like', `%${搜索条件.关键字}%`];
+                      }
+
+                      if (搜索条件.hasOwnProperty('配置标识') && 搜索条件.配置标识) {
+                        condition['配置标识'] = 搜索条件.配置标识;
+                      }
+
+                      if (搜索条件.hasOwnProperty('是否删除')) {
+                        condition['是否删除'] = 搜索条件.是否删除;
+                      }
+
+                    });
+
+
+                    emitter.on('getTotal', () => {
+
+                      _F('dbTableTemp_5FGiD3hp6E').callMethod('getCount', {
+                        condition,
+                        success: (res) => {
+                          emitter.emit('getList', res[0].count); 
+                        },
+                        fail: (err) => {
+                          _funcCb({
+                            code: 0,
+                            errMsg: '获取总数失败',
+                            result: err,
+                            total: 0
+                          });
+                        }
+                      });
+
+                    });
+
+
+                    emitter.on('getList', (total) => {
+
+                      _F('dbTableTemp_5FGiD3hp6E').callMethod('getRows', {
+                        condition,
+                        pageNum,
+                        pageSize,
+                        orderby: '_update',
+                        sort: 'desc',
+                        success: (res) => {
+                          list = res;
+                          total = total;
+                          emitter.emit('output');
+                        },
+                        fail: (err) => {
+                          _funcCb({
+                            code: 0,
+                            errMsg: '获取列表失败',
+                            result: err,
+                            total: 0
+                          });
+                        }
+                      });
+
+                    });
+
+
+                    emitter.emit('setCondition');
+
+                    emitter.emit('getTotal');
+                  inParams:
+                    - 搜索条件
+                    - 当前页码
+                    - 每页大小
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_wc7YKxriGj
+                name: 系统配置删除服务
+                type: service
+                props:
+                  devId: service_wc7YKxriGj
+                  isOpen: false
+                  jsCode: |
+                    // 删除服务  
+                    const emitter = new events.EventEmitter();
+
+                    if (param.hasOwnProperty('行ID') && param['行ID'] > 0) {
+                      emitter.emit('delete');
+                    } else {
+                      emitter.emit('noId');
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请传入行ID', result: {}}); 
+                    });
+
+                    emitter.on('delete', () => {
+
+                      let condition = {};
+                      condition['_id'] = param.行ID;
+
+                      let updateObj = {};
+                      updateObj['是否删除'] = param.是否删除;
+
+                      _F('dbTableTemp_5FGiD3hp6E').callMethod('editRow', {
+                        row: updateObj, 
+                        condition,
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '删除成功', result: {}});
+                        }, 
+                        fail: (err) => {
+                          // 删除失败
+                          _funcCb({code: 0, errMsg: '删除失败', result: err});
+                        }
+                      });
+
+                    });
+
+                    emitter.emit('delete');
+                  inParams:
+                    - 行ID
+                    - 是否删除
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_hcFrAteKA7
+                name: 系统配置编辑服务
+                type: service
+                props:
+                  devId: service_hcFrAteKA7
+                  isOpen: false
+                  jsCode: |
+                    // 编辑服务
+                    const emitter = new events.EventEmitter();
+
+                    if (param.hasOwnProperty('行ID') && param['行ID'] > 0) {
+                      emitter.emit('edit');
+                    } else {
+                      emitter.emit('noId'); 
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请传入行ID', result: {}});
+                    });
+
+                    emitter.on('edit', () => {
+
+                      let condition = {};
+                      condition['_id'] = param.行ID;
+
+                      let updateObj = {};
+
+                      if(param.hasOwnProperty('配置名称')) {
+                        updateObj['配置名称'] = param.配置名称;
+                      }
+
+                      if(param.hasOwnProperty('配置标识')) {
+                        updateObj['配置标识'] = param.配置标识;
+                      }
+
+                      if(param.hasOwnProperty('配置值')) {
+                        updateObj['配置值'] = param.配置值;
+                      }
+
+                      _F('dbTableTemp_5FGiD3hp6E').callMethod('editRow', {
+                        row: updateObj,
+                        condition, 
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '编辑成功', result: {}});
+                        },
+                        fail: (err) => {
+                          // 编辑失败
+                          _funcCb({code: 0, errMsg: '编辑失败', result: err});
+                        }
+                      });
+
+                    });
+
+                    emitter.emit('edit');
+                  inParams:
+                    - 行ID
+                    - 配置名称
+                    - 配置标识
+                    - 配置值
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug:
+                    配置值: ''
+                    配置名称: ''
+                    配置标识: ''
+              - id: service_NZwQyWzf43
+                name: 系统配置新增服务
+                type: service
+                props:
+                  devId: service_NZwQyWzf43
+                  isOpen: false
+                  jsCode: |
+                    // 新增服务
+                    const emitter = new events.EventEmitter();
+
+                    emitter.on('add', () => {
+
+                      let insertObj = {
+                        ...param,
+                        是否删除: 0
+                      };
+
+                      _F('dbTableTemp_5FGiD3hp6E').callMethod('addRow', {
+                        row: insertObj,
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '新增成功', result: {}});
+                        },
+                        fail: (err) => {
+                          // 新增失败
+                          _funcCb({code: 0, errMsg: '新增失败', result: err});
+                        }
+                      });
+
+                    });
+
+                    emitter.emit('add');
+                  inParams:
+                    - 配置名称
+                    - 配置标识
+                    - 配置值
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug:
+                    配置值: ''
+                    配置名称: ''
+                    配置标识: ''
+      - id: state_r22kNWWwKp
+        type: state
+        children: []
+      - id: services_CPXF3RpeTz
+        type: services
+        children:
+          - id: group_8emFCW2C32
+            name: 数据表
+            type: group
+            props:
+              devId: group_8emFCW2C32
+            children:
+              - id: dbTableTemp_5FGiD3hp6E
+                name: 系统配置表
+                type: dbTableTemp
+                props:
+                  devId: dbTableTemp_5FGiD3hp6E
+                  fields:
+                    - columnName: _id
+                      columnType: int unsigned
+                    - columnName: 配置名称
+                      columnType: varchar(100)
+                    - columnName: 配置标识
+                      columnType: varchar(100)
+                    - columnName: 配置值
+                      columnType: text
+                    - columnName: 是否删除
+                      columnType: int
+                    - columnName: _create
+                      columnType: bigint unsigned
+                    - columnName: _update
+                      columnType: bigint unsigned
+          - id: group_Ykj2eHn8XF
+            name: 中台服务
+            type: group
+            props:
+              devId: group_Ykj2eHn8XF
+  - id: modules_wsJndpjeX7
+    type: modules
+    children: []

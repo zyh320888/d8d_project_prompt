@@ -1,0 +1,262 @@
+# 个人简历管理后台组件相关
+id: group_pFc3GjwW2a
+name: 个人简历管理后台组件相关
+type: group
+props: null
+children:
+
+  - id: bComponent_QPh7abcTCaa
+    name: 个人简历管理后台组件
+    type: bComponent
+    props:
+      devId: bComponent_个人简历管理后台组件
+      moduleId: module_4DCZRzaJRi
+      dbConnect:
+        - tempId: dbTableTemp_EbTD6ZMHQK
+          tableId: dbTable_简历表
+
+  # 小程序端服务调用
+  - id: group_fcC4DefW2b
+    name: 小程序api相关
+    type: group
+    props: {}
+    children:
+
+      - id: service_bZa8m67jWA
+        name: 新增简历服务
+        type: service
+        props:
+          devId: service_新增简历
+          isOpen: true
+          jsCode: |
+          
+            const emitter = new events.EventEmitter();
+
+            emitter.on('add', () => {
+              _F('bComponent_QPh7abcTCaa').callMethod('service_2NpPHQtkfN', {
+                inParam: {
+                  用户ID: param.用户ID,
+                  姓名: param.姓名,
+                  年龄: param.年龄,
+                  性别: param.性别,
+                  手机号: param.手机号,
+                  邮箱: param.邮箱,
+                  籍贯: param.籍贯,
+                  现居住地: param.现居住地,
+                  最高学历: param.最高学历,
+                  毕业院校: param.毕业院校,
+                  专业: param.专业,
+                  工作年限: param.工作年限,
+                  期望职位: param.期望职位,
+                  期望地点: param.期望地点,
+                  期望薪资: param.期望薪资,
+                  自我评价: param.自我评价
+                },
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+          
+            emitter.emit('add');
+
+          inParams:
+            - 用户ID
+            - 姓名
+            - 年龄
+            - 性别
+            - 手机号
+            - 邮箱
+            - 籍贯
+            - 现居住地
+            - 最高学历
+            - 毕业院校
+            - 专业
+            - 工作年限
+            - 期望职位
+            - 期望地点
+            - 期望薪资
+            - 自我评价
+            
+          outParams: []
+          openApiPath: v1/mini/resume/add
+
+      - id: service_MYGxatwHyW
+        name: 获取简历列表服务
+        type: service
+        props:
+          devId: service_获取简历列表
+          isOpen: true
+          jsCode: |
+          
+            const emitter = new events.EventEmitter();
+
+            emitter.on('list', () => {
+              _F('bComponent_QPh7abcTCaa').callMethod('service_BpJ4d8mY8z', {
+                inParam: {
+                  用户ID: param.用户ID,
+                  当前页码: param.当前页码,
+                  每页数量: param.每页数量,
+                  搜索条件: param.搜索条件
+                },
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+          
+            emitter.emit('list');
+
+          inParams:
+            - 用户ID
+            - 当前页码
+            - 每页数量
+            - 搜索条件
+            
+          outParams: []
+          openApiPath: v1/mini/resume/list
+
+  # 管理后台服务调用
+  - id: group_nzrcQefRXF
+    name: 管理后台api相关
+    type: group
+    props:
+      devId: group_管理后台api相关
+    children:
+    
+      - id: service_7EwExFQb4J
+        name: 编辑简历服务
+        type: service
+        props:
+          devId: service_编辑简历
+          isOpen: true
+          jsCode: |
+          
+            const emitter = new events.EventEmitter();
+
+            emitter.on('edit', () => {
+              _F('bComponent_QPh7abcTCaa').callMethod('service_R7R5Yk6tSn', {
+                inParam: {
+                  简历ID: param.简历ID,
+                  姓名: param.姓名,
+                  年龄: param.年龄,
+                  性别: param.性别,
+                  手机号: param.手机号,
+                  邮箱: param.邮箱,
+                  籍贯: param.籍贯,
+                  现居住地: param.现居住地,
+                  最高学历: param.最高学历,
+                  毕业院校: param.毕业院校,
+                  专业: param.专业,
+                  工作年限: param.工作年限,
+                  期望职位: param.期望职位,
+                  期望地点: param.期望地点,
+                  期望薪资: param.期望薪资,
+                  自我评价: param.自我评价
+                },
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+          
+            emitter.emit('edit');
+
+          inParams:
+            - 简历ID
+            - 姓名
+            - 年龄
+            - 性别
+            - 手机号
+            - 邮箱
+            - 籍贯
+            - 现居住地
+            - 最高学历
+            - 毕业院校
+            - 专业  
+            - 工作年限
+            - 期望职位
+            - 期望地点
+            - 期望薪资
+            - 自我评价
+            
+          outParams: []
+          openApiPath: v1/admin/resume/edit
+          
+      - id: service_RdyJJMmyQZ
+        name: 获取简历列表服务
+        type: service
+        props:
+          devId: service_获取简历列表
+          isOpen: true
+          jsCode: |
+          
+            const emitter = new events.EventEmitter();
+
+            emitter.on('list', () => {
+              _F('bComponent_QPh7abcTCaa').callMethod('service_BpJ4d8mY8z', {
+                inParam: {
+                  当前页码: param.当前页码,
+                  每页数量: param.每页数量,
+                  搜索条件: param.搜索条件
+                },
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+          
+            emitter.emit('list');
+
+          inParams:
+            - 当前页码
+            - 每页数量
+            - 搜索条件
+            
+          outParams: []
+          openApiPath: v1/admin/resume/list
+          
+  - id: dbTable_简历表
+    name: 简历表
+    type: dbTable
+    props:
+      fields:
+        - columnName: _id
+          columnType: int unsigned
+        - columnName: 用户ID
+          columnType: int unsigned  
+        - columnName: 姓名
+          columnType: varchar(50)
+        - columnName: 年龄
+          columnType: tinyint
+        - columnName: 性别
+          columnType: enum('男','女')
+        - columnName: 手机号
+          columnType: char(11)
+        - columnName: 邮箱
+          columnType: varchar(100)
+        - columnName: 籍贯
+          columnType: varchar(50)
+        - columnName: 现居住地
+          columnType: varchar(100)
+        - columnName: 最高学历
+          columnType: varchar(20)
+        - columnName: 毕业院校  
+          columnType: varchar(100)
+        - columnName: 专业
+          columnType: varchar(100)
+        - columnName: 工作年限
+          columnType: tinyint 
+        - columnName: 期望职位
+          columnType: varchar(50)
+        - columnName: 期望地点
+          columnType: varchar(100)
+        - columnName: 期望薪资
+          columnType: varchar(20)
+        - columnName: 自我评价
+          columnType: text
+        - columnName: _create
+          columnType: bigint unsigned
+        - columnName: _update
+          columnType: bigint unsigned
+

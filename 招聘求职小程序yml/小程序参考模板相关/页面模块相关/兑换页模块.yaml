@@ -1,0 +1,164 @@
+id: module_rSh4zN7rmM
+name: 兑换页模块
+type: module
+props: {}
+children:
+  - id: front_DzPZAanhjN
+    type: front
+    children:
+      - id: props_ZWjTJZjt8B
+        type: props
+        children:
+          - id: fPAttr_6D2X7KrfWs
+            type: fPAttr
+            children: []
+          - id: fPMethod_HhzMhh6cm5
+            type: fPMethod
+            children: []
+          - id: fPEvent_mpJyGKh4nn
+            type: fPEvent
+            children: []
+      - id: state_cs3MZ2YdMk
+        type: state
+        children: []
+      - id: method_yhxpfCHPWa
+        type: method
+        children: []
+      - id: dom_Tz5e8MkRkx
+        type: dom
+        children:
+          - id: navbar_iecEw2arci
+            type: navbar
+            props:
+              back: 返回
+              onClickBackJs: "(event) => {\r\n    _F('page_func').callMethod('navigateBack',1)\r\n}"
+            children:
+              - id: span_ERiBRZ6JEh
+                name: ''
+                type: span
+                props:
+                  children: 兑换页
+                children: []
+          - id: swiper_TERPZTbiSF
+            type: swiper
+            props:
+              height: 220
+              autoPlay: true
+            children:
+              - id: swiperitem_fFXxEae6h5
+                type: swiperitem
+                props: {}
+                children:
+                  - id: image_2PNAbmnpMQ
+                    type: image
+                    props:
+                      src: https://dummyimage.com/375x220/ff0000/fff
+                      height: 220px
+                    children: []
+              - id: swiperitem_dAWnWyrPKP
+                type: swiperitem
+                props: {}
+                children:
+                  - id: image_MSkFDary6Q
+                    type: image
+                    props:
+                      src: https://dummyimage.com/375x220/0000ff/fff
+                      height: 220px
+                    children: []
+          - id: div_yrZwjTdEAR
+            type: div
+            props:
+              style:
+                paddingLeft: 16px
+                paddingRight: 16px
+            children:
+              - id: for_pPMcjQHmaH
+                type: for
+                props:
+                  dataSourceJs: "[\r\n  {_id:1},\r\n  {_id:2},\r\n  {_id:3},\r\n]"
+                children:
+                  - id: row_A6fNAfHdMk
+                    name: 券行
+                    type: row
+                    props:
+                      type: flex
+                      align: center
+                      style:
+                        height: 80px
+                        marginTop: 12px
+                        borderColor: '#4a4a4a'
+                        borderStyle: solid
+                        borderWidth: 1px
+                        borderRadius: 8px
+                    children:
+                      - id: col_fKSceDHFxD
+                        type: col
+                        props:
+                          span: '6'
+                        children:
+                          - id: div_S2TcjPDkQQ
+                            type: div
+                            props:
+                              style:
+                                textAlign: center
+                            children:
+                              - id: span_6yCETWTtsY
+                                type: span
+                                props:
+                                  children: 5元
+                                children: []
+                      - id: col_2rctSYZdi2
+                        type: col
+                        props:
+                          span: '18'
+                        children:
+                          - id: span_GANziKjanZ
+                            type: span
+                            props:
+                              children: 满10减5，限华联超市使用
+                            children: []
+              - id: row_byniyDBjdE
+                name: 领券按钮行
+                type: row
+                props:
+                  type: flex
+                  align: center
+                  style:
+                    marginTop: 12px
+                  gutter: ''
+                  justify: space-between
+                children:
+                  - id: col_dC862Xdtz3
+                    type: col
+                    props:
+                      span: '24'
+                    children:
+                      - id: button_pztQDBC6kd
+                        type: button
+                        props:
+                          type: primary
+                          block: true
+                          style:
+                            width: ''
+                          value: 领券
+  - id: backend_p4dB5rf2J4
+    type: backend
+    children:
+      - id: props_txeEKSWfCs
+        type: props
+        children:
+          - id: bPAttr_bAshrrwYkP
+            type: bPAttr
+            children: []
+          - id: bPMethod_pPEDcbxjkh
+            type: bPMethod
+            children: []
+      - id: state_TeHdmnGQW6
+        type: state
+        children: []
+      - id: services_FF646BK4sG
+        type: services
+        children: []
+  - id: modules_6bZWmHKXSS
+    type: modules
+    children: []

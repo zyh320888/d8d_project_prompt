@@ -1,0 +1,410 @@
+
+- id: cell_abc123456789
+  type: cell
+  name: 单元格
+  props: 
+    title: 标题文本
+    label: 描述文本
+    center: 是否让内容垂直居中
+  children:
+    - id: cellHeader_def123456789
+      type: cellHeader
+      name: 标题容器
+      props:
+        title: 标题
+        label: 描述
+    - id: cellBody_ghi123456789
+      type: cellBody
+      name: 内容容器
+
+- id: badge_jkl123456789
+  type: badge
+  name: 徽标
+  props:
+    content: 徽标内容
+    type: 徽标类型
+    shape: 徽标形状
+    max: 最大值 
+
+- id: button_mno123456789
+  type: button
+  name: 按钮
+  props:
+    type: 按钮类型  
+    size: 尺寸
+    plain: 是否空心
+    round: 是否圆角
+    block: 是否块级元素
+    loading: 是否加载中 
+    disabled: 是否禁用
+    text: 按钮文字
+  children: []  
+
+- id: calendar_pqr123456789
+  type: calendar
+  name: 日历
+  props:
+    defaultDate: 默认日期
+    minDate: 最小日期  
+    maxDate: 最大日期
+    readonly: 是否只读
+    range: 是否范围选择
+  children: []
+
+- id: cascader_stu123456789
+  type: cascader
+  name: 级联选择器
+  props:
+    options: 可选项数据源
+    value: 选中项绑定值
+    title: 标题文本
+    placeholder: 未选中时的提示文本
+  children: []  
+
+- id: checkbox_vwx123456789
+  type: checkbox
+  name: 多选框
+  props:
+    value: 是否选中
+    shape: 形状
+    disabled: 是否禁用
+  children: []
+
+- id: col_yz123456789
+  type: col
+  name: 列
+  props:
+    span: 列宽度占比  
+    offset: 列偏移距离
+    justify: 水平排列方式
+    align: 垂直排列方式 
+  children: []
+
+- id: collapse_abc123456789
+  type: collapse
+  name: 折叠面板
+  props: 
+    value: 当前激活面板名称
+    accordion: 是否手风琴模式
+  children: []
+
+- id: countdown_def123456789
+  type: countdown
+  name: 倒计时
+  props:
+    time: 倒计时(毫秒)
+    format: 时间格式
+    autoStart: 是否自动开始 
+  children: []
+
+- id: datetime_ghi123456789  
+  type: datetime
+  name: 时间选择
+  props:
+    value: 日期时间值
+    type: 选择类型
+    title: 标题文本
+    label: 提示文本 
+    required: 是否必填
+  children: []
+
+- id: dialog_jkl123456789
+  type: dialog
+  name: 弹出框
+  props:
+    title: 标题
+    message: 内容 
+    theme: 主题
+    showCancel: 是否显示取消按钮
+    closeOnClickOverlay: 是否点击遮罩关闭
+  children: []
+
+- id: dropdown_mno123456789
+  type: dropdown 
+  name: 下拉菜单
+  props:
+    title: 标题
+    options: 选项数组  
+    value: 当前值
+  children: []
+
+- id: empty_pqr123456789
+  type: empty
+  name: 空状态
+  props: 
+    description: 文本描述
+    image: 图片链接
+  children: []
+
+- id: fab_stu123456789
+  type: fab
+  name: 浮动按钮
+  props:
+    icon: 图标类型
+    text: 文字
+  children: []
+
+- id: form_vwx123456789
+  type: form
+  name: 表单
+  props:
+    model: 表单数据对象
+    rules: 校验规则
+  children: []
+
+- id: input_yz123456789
+  type: input
+  name: 输入框
+  props:
+    value: 输入值绑定
+    type: 类型  
+    maxlength: 最大长度 
+    placeholder: 占位提示文字
+    disabled: 是否禁用
+  children: []
+
+- id: list_abc123456789 
+  type: list
+  name: 列表
+  props:
+    finished: 是否已加载完成 
+    immediateCheck: 是否立即检查点击反馈
+    offsetAccuracy: 点击位置偏差
+    
+  children: []
+
+- id: navbar_def123456789
+  type: navbar
+  name: 导航栏
+  props:
+    title: 标题  
+    fixed: 是否固定在顶部
+    border: 是否显示下边框
+    leftText: 左侧文本
+    leftArrow: 是否显示左侧箭头
+    rightText: 右侧文本 
+    placeholder: 搜索框占位提示文字
+  children: []
+
+- id: pagination_ghi123456789
+  type: pagination
+  name: 分页
+  props:
+    pageCount: 总页数
+    value: 当前页码
+    prevText: 前一页文字
+    nextText: 下一页文字
+    forceEllipses: 是否显示省略号
+  children: []
+
+- id: popup_jkl123456789
+  type: popup
+  name: 弹出层
+  props:
+    show: 是否显示  
+    round: 是否圆角
+    position: 位置
+    closeable: 是否显示关闭图标 
+    closeOnClickOverlay: 点击遮罩是否关闭
+  children: []
+
+- id: progress_mno123456789
+  type: progress
+  name: 进度条
+  props:
+    percentage: 进度百分比
+    pivotText: 进度文字提示
+    pivotColor: 文字背景颜色  
+    trackColor: 轨道颜色
+    showPivot: 是否显示进度文字
+  children: [] 
+
+- id: radio_pqr123456789
+  type: radio
+  name: 单选框
+  props:
+    value: 当前选中值  
+    direction: 排列方向
+    disabled: 是否禁用
+  children: []
+
+- id: rate_stu123456789
+  type: rate
+  name: 评分
+  props:
+    value: 当前分值
+    count: 评分总数
+    size: 图标大小
+    color: 选中时的颜色  
+    disabled: 是否只读
+    allowHalf: 是否允许半选
+  children: []
+
+- id: row_vwx123456789
+  type: row
+  name: 行
+  props:
+    gutter: 列元素之间的间距
+    justify: 水平排列方式
+    align: 垂直对齐方式
+    wrap: 是否自动换行
+  children: []
+
+- id: search_yz123456789
+  type: search
+  name: 搜索框
+  props:
+    value: 当前值  
+    shape: 形状
+    clearable: 是否启用清除图标
+    label: 搜索框下方文字提示
+  children: []
+
+- id: slider_abc123456789
+  type: slider 
+  name: 滑块
+  props:
+    value: 当前取值
+    min: 最小值
+    max: 最大值
+    step: 步长  
+    disabled: 是否禁用
+    barHeight: 滑块大小
+  children: []
+
+- id: sticky_def123456789
+  type: sticky
+  name: 粘性布局
+  props:
+    offsetTop: 距离顶部距离
+    zIndex: z-index层级
+    disabled: 是否禁用 
+    container: 设置父容器
+  children: []
+
+- id: steps_ghi123456789
+  type: steps
+  name: 步骤条
+  props:
+    current: 当前步骤
+    direction: 排列方向
+    vertical: 是否垂直排列
+  children: []  
+
+- id: swiper_jkl123456789
+  type: swiper
+  name: 轮播
+  props: 
+    loop: 是否循环播放
+    showIndicators: 是否显示指示器
+  children: []
+
+- id: swiperItem_mno123456789
+  type: swiperItem
+  name: 轮播项
+  props: {}
+  children: []
+
+- id: switch_pqr123456789
+  type: switch
+  name: 开关
+  props:
+    value: 绑定值
+    loading: 是否显示加载状态  
+    disabled: 是否禁用
+    size: 开关尺寸
+    beforeChange: 开关切换前的回调函数
+  children: []
+
+- id: tab_stu123456789
+  type: tab
+  name: 标签页
+  props:
+    value: 当前激活的标签名 
+    scrollspy: 是否使用滚动模式
+    scrollbar: 是否显示滚动条
+    sticky: 是否使用粘性布局
+  children: []
+
+- id: tabbar_vwx123456789
+  type: tabbar
+  name: 标签栏
+  props:
+    value: 当前激活的标签名
+    border: 是否显示外边框
+    fixed: 是否固定在底部
+    safeAreaInsetBottom: 是否为iPhoneX留出底部安全距离 
+  children: []
+
+- id: tabbarItem_yz123456789
+  type: tabbarItem
+  name: 标签栏项
+  props:
+    icon: 图标
+    title: 标题
+  children: []  
+
+- id: table_abc123456789
+  type: table
+  name: 表格
+  props:
+    columns: 表格列配置数组
+    dataSource: 数据数组
+  children: []
+
+- id: tabs_def123456789
+  type: tabs
+  name: 标签页
+  props:
+    value: 当前激活的标签名
+    scrollspy: 是否使用滚动模式
+    sticky: 是否使用粘性布局 
+    closable: 是否显示标签关闭按钮
+  children: []
+
+- id: tag_ghi123456789
+  type: tag
+  name: 标签
+  props:
+    type: 主题类型  
+    mark: 是否为标记样式
+    color: 文字颜色
+    plain: 是否为空心样式
+    round: 是否为圆角样式 
+    textColor: 文本颜色
+    size: 尺寸
+  children: []
+
+- id: toast_jkl123456789
+  type: toast
+  name: 轻提示
+  props:
+    msg: 提示消息文字  
+    duration: 持续时长
+    position: 显示位置
+    icon: 图标类型
+    type: 主题类型
+  children: []
+
+- id: tooltip_mno123456789
+  type: tooltip
+  name: 文字提示
+  props:
+    content: 显示内容  
+    placement: 显示位置
+    theme: 主题风格
+    disabled: 是否禁用
+    enterable: 鼠标是否可进入浮层内
+  children: []
+
+- id: upload_pqr123456789
+  type: upload
+  name: 上传
+  props: 
+    fileList: 已上传的文件列表
+    accept: 接受上传的文件类型  
+    maxCount: 最大上传数量
+    maxSize: 文件大小限制
+    disabled: 是否禁用上传
+    uploadText: 上传区域文字提示
+  children: []

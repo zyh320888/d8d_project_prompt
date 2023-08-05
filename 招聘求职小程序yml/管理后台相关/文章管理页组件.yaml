@@ -1,0 +1,165 @@
+id: route_RysCTpjMpa
+name: 文章管理
+type: route  
+props:
+  path: article/manage
+  devId: route_RysCTpjMpa
+
+children:
+
+  - id: fComponent_5jQKZGsntP
+    name: ''
+    type: fComponent
+    props:
+      attr:
+
+        - attrId: variable_xprakCZSMp
+          attrType: js
+          attrJsCode: |
+            [
+              {
+                label:'关键字',
+                type:'input'  
+              },
+            ]
+
+        - attrId: variable_iBsTwHceQA
+          attrType: js 
+          attrJsCode: |
+            [
+              {
+                title: '序号',
+                dataIndex: '_index',
+                key: '_index',
+              },
+              {
+                title: '文章标题',
+                dataIndex: '文章标题',
+                key: '文章标题',
+              },
+              {
+                title: '文章标签',
+                dataIndex: '文章标签', 
+                key: '文章标签',
+              },
+              {
+                title: '文章内容',
+                dataIndex: '文章内容',
+                key: '文章内容',
+                width: 300,
+                ellipsis: true,
+              },
+              {
+                title: '更新时间',
+                dataIndex: '_update',
+                key: '_update',
+                render: (text, record) => {
+                  //获取dayjs对象
+                  const dayjs = _F('date_func').callMethod('dayjs');
+                  // 获取当前日期
+                  const now = dayjs(text * 1000);
+                  return now.format('YYYY-MM-DD');
+                }
+              },
+              {
+                title: '操作',
+                dataIndex: '操作',
+                key: 'operate',  
+              },
+
+            ]
+
+        - attrId: variable_YNDnsMCrnc
+          attrType: js
+          attrJsCode: |
+            ({
+              搜索:'/v1/admin/article/search',
+              新增:'/v1/admin/article/add',
+              编辑:'/v1/admin/article/edit',
+              删除:'/v1/admin/article/del', 
+            })
+            
+        - attrId: variable_MJHtQRsnsR
+          attrType: js
+          attrJsCode: 'true'
+          
+        - attrId: variable_SbaMQEMnjM
+          attrType: js
+          attrJsCode: |  
+            [
+              {
+                label:'文章标题',
+                name:'文章标题',
+                type:'input'
+              },
+              {
+                label:'文章标签',
+                name:'文章标签',
+                type:'input'
+              },
+              {
+                label:'文章内容',
+                name:'文章内容',
+                type:'textarea'
+              },
+            ]
+
+        - attrId: variable_GPmKRdbzpm
+          attrType: js
+          attrJsCode: 'true'
+
+        - attrId: variable_sSSxjAwSnQ
+          attrType: js
+          attrJsCode: 'false'
+          
+        - attrId: variable_s8TWaBnH7S
+          attrType: js
+          attrJsCode: |
+            [
+              {
+                title: '序号',
+                dataIndex: '_index',
+              },
+              {
+                title: '文章ID',
+                dataIndex: '_id',
+              },
+              {
+                title: '文章标题',
+                dataIndex: '文章标题',
+              },
+              {
+                title: '文章标签',
+                dataIndex: '文章标签',
+              },
+              {
+                title: '文章内容',
+                dataIndex: '文章内容',
+                span: 2,
+              },
+              {
+                title: '创建时间',  
+                dataIndex: '_create',
+                render: (text, record) => {
+                  const dayjs = _F('date_func').callMethod('dayjs');
+                  const now = dayjs(text * 1000);
+                  return now.format('YYYY-MM-DD hh:mm:ss');
+                }
+              },
+              {
+                title: '更新时间',
+                dataIndex: '_update',
+                render: (text, record) => {
+                  const dayjs = _F('date_func').callMethod('dayjs');
+                  const now = dayjs(text * 1000);
+                  return now.format('YYYY-MM-DD hh:mm:ss');
+                }  
+              },
+
+            ]
+    
+    devId: fComponent_5jQKZGsntP
+    moduleId: group_AXmGGMMcym
+    
+pathNav: /admin/article/manage
+

@@ -1,0 +1,40 @@
+id: route_fPbZZTYF7Z
+name: 职位管理
+type: route
+props:
+  path: position/manage
+  devId: route_fPbZZTYF7Z
+  style: {}
+  element:
+    - id: fComponent_2BjmyH6hX2
+      name: 职位管理页组件
+      type: fComponent
+      props:
+        attr:
+          - attrId: variable_xprakCZSMp
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    label:'关键字',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'结算方式',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'用户ID',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'行业分类',\r\n    type:'input'\r\n  },\r\n  {\r\n    label:'审核状态',\r\n    type:'input'\r\n  },\r\n]"
+          - attrId: variable_iBsTwHceQA
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    title: '序号',\r\n    dataIndex: '_index',\r\n    key: '_index',\r\n    fixed: 'left',\r\n  },\r\n  {\r\n    title: '用户ID',\r\n    dataIndex: '用户ID',\r\n    key: 'userId',\r\n    fixed: 'left',\r\n  },\r\n  {\r\n    title: '职位名称',\r\n    dataIndex: '职位名称',\r\n    key: 'positionName',\r\n    fixed: 'left',\r\n  },\r\n  {\r\n    title: '职位待遇',\r\n    dataIndex: '职位待遇',\r\n    key: 'salary',\r\n  },\r\n  {\r\n    title: '结算方式',\r\n    dataIndex: '结算方式',\r\n    key: '结算方式',\r\n  },\r\n  {\r\n    title: '行业分类',\r\n    dataIndex: '行业分类',\r\n    key: '行业分类',\r\n  },\r\n  {\r\n    title: '审核状态',\r\n    dataIndex: '审核状态',\r\n    key: '审核状态',\r\n    render: (text, record) => {\r\n      if(text === 1)return '展示中';\r\n      else if(text === 2)return '未通过';\r\n      else return '未审核';\r\n    }\r\n  },\r\n  {\r\n    title: '发布时间',\r\n    dataIndex: '_create',\r\n    key: '_create',\r\n    render: (text, record) => {\r\n      //获取dayjs对象\r\n      const dayjs = _F('date_func').callMethod('dayjs');\r\n      // 获取当前日期\r\n      const now = dayjs(text * 1000);\r\n      // console.log(now.format('YYYY-MM-DD'));\r\n      return now.format('YYYY-MM-DD');\r\n    }\r\n  },\r\n  {\r\n    title: '操作',\r\n    dataIndex: '操作',\r\n    key: 'operate',\r\n  },\r\n\r\n]"
+          - attrId: variable_YNDnsMCrnc
+            attrType: js
+            attrValue: ''
+            attrJsCode: "({\r\n  搜索:'/v1/admin/position/list',\r\n  编辑:'/v1/admin/position/edit',\r\n})"
+          - attrId: variable_GPmKRdbzpm
+            attrType: js
+            attrValue: ''
+            attrJsCode: 'true'
+          - attrId: variable_SbaMQEMnjM
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    label:'审核状态',\r\n    name:'审核状态',\r\n    type:'input'\r\n  },\r\n]"
+          - attrId: variable_s8TWaBnH7S
+            attrType: js
+            attrValue: ''
+            attrJsCode: "[\r\n  {\r\n    title: '序号',\r\n    dataIndex: '_index',\r\n  },\r\n  {\r\n    title: '用户ID',\r\n    dataIndex: '用户ID',\r\n  },\r\n  {\r\n    title: '职位名称',\r\n    dataIndex: '职位名称',\r\n  },\r\n  {\r\n    title: '薪资范围',\r\n    dataIndex: '薪资范围',\r\n  },\r\n  {\r\n    title: '结算方式',\r\n    dataIndex: '结算方式',\r\n  },\r\n  {\r\n    title: '行业分类',\r\n    dataIndex: '行业分类',\r\n  },\r\n  {\r\n    title: '联系人',\r\n    dataIndex: '联系人',\r\n  },\r\n  {\r\n    title: '联系电话',\r\n    dataIndex: '联系电话',\r\n  },\r\n  {\r\n    title: '招聘人数',\r\n    dataIndex: '招聘人数',\r\n  },\r\n  {\r\n    title: '工作地点',\r\n    dataIndex: '工作地点',\r\n  },\r\n  {\r\n    title: '详细地址',\r\n    dataIndex: '详细地址',\r\n    span: 2,\r\n  },\r\n  {\r\n    title: '职位描述',\r\n    dataIndex: '职位描述',\r\n    span: 2,\r\n  },\r\n  {\r\n    title: '审核状态',\r\n    dataIndex: '审核状态',\r\n    render: (text, record) => {\r\n      if(text === 1)return '展示中';\r\n      else if(text === 2)return '未通过';\r\n      else return '未审核';\r\n    }\r\n  },\r\n  {\r\n    title: '发布时间',\r\n    dataIndex: '_create',\r\n    render: (text, record) => {\r\n      //获取dayjs对象\r\n      const dayjs = _F('date_func').callMethod('dayjs');\r\n      // 获取当前日期\r\n      const now = dayjs(text * 1000);\r\n      // console.log(now.format('YYYY-MM-DD'));\r\n      return now.format('YYYY-MM-DD');\r\n    }\r\n  },\r\n  {\r\n    title: '更新时间',\r\n    dataIndex: '_update',\r\n    render: (text, record) => {\r\n      //获取dayjs对象\r\n      const dayjs = _F('date_func').callMethod('dayjs');\r\n      // 获取当前日期\r\n      const now = dayjs(text * 1000);\r\n      // console.log(now.format('YYYY-MM-DD'));\r\n      return now.format('YYYY-MM-DD');\r\n    }\r\n  },\r\n\r\n]"
+        devId: fComponent_2BjmyH6hX2
+        moduleId: module_KXT548Mji5
+  pathNav: /admin/position/manage

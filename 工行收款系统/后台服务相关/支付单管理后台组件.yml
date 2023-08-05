@@ -1,0 +1,412 @@
+id: module_EtBCjFe8Xy
+name: 支付单管理后台组件
+type: module
+props: null
+children:
+  - id: config_tZnAKbdXQQ
+    type: config
+    props: null
+  - id: front_EDwBCQXGay
+    name: 前台
+    type: front
+    props: null
+    children:
+      - id: props_5FFQ88SCwi
+        type: props
+        children:
+          - id: fPAttr_AzSnXW2ZMG
+            type: fPAttr
+            children: []
+          - id: fPMethod_PRfeh2f4TE
+            type: fPMethod
+            children: []
+          - id: fPEvent_J2AArbjZ63
+            type: fPEvent
+            children: []
+      - id: state_wjFmzkmXJ4
+        type: state
+        children: []
+      - id: method_6DP5hXDJEH
+        type: method
+        children: []
+      - id: dom_BZ4AdFFCFJ
+        type: dom
+        children: []
+  - id: backend_nk8YMFyiba
+    name: 后台
+    type: backend
+    props: null
+    children:
+      - id: props_sAZihzGFS6
+        type: props
+        children:
+          - id: bPAttr_7ra575ttC8
+            type: bPAttr
+            children: []
+          - id: bPMethod_cazTnGfGsG
+            type: bPMethod
+            children:
+              - id: service_N23fNtTcyp
+                name: 新增支付单
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+                    // 订单号生成函数
+                    function generateOrderNo() {
+
+                      let date = new Date();
+                      let year = date.getFullYear();
+                      let month = date.getMonth() + 1;
+                      let day = date.getDate();
+
+                      let randomNum = Math.floor(Math.random() * 900) + 100;
+
+                      let orderNo = year + month + day + Date.now() + randomNum;
+
+                      return orderNo;
+
+                    }
+
+                    // 新增支付单服务
+                    const emitter = new events.EventEmitter();
+
+                    emitter.on('add', () => {
+
+                      let orderNo = generateOrderNo();
+
+                      let data = {
+                        订单号: orderNo,
+                        商户ID: param.商户ID,
+                        用户ID: param.用户ID,
+                        支付方式: param.支付方式,
+                        支付金额: param.支付金额,
+                        优惠券金额: param.优惠券金额,
+                        实付金额: param.实付金额,
+                        第三方订单号: param.第三方订单号,
+                        支付时间: param.支付时间,
+                        支付状态: param.支付状态
+                      };
+
+                      _F('dbTableTemp_Gf83SMhtNs').callMethod('addRow', {
+                        row: data,
+                        success: () => {
+                          _funcCb({code: 200, errMsg: '新增成功'});
+                        }  
+                      });
+
+                    });
+
+                    emitter.emit('add');
+                  inParams:
+                    - 商户ID
+                    - 用户ID
+                    - 支付方式
+                    - 支付金额
+                    - 优惠券金额
+                    - 实付金额
+                    - 第三方订单号
+                    - 支付时间
+                    - 支付状态
+                  outParams: []
+              - id: service_A5asWi7rSF
+                name: 编辑支付单
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+                    const emitter = new events.EventEmitter();
+
+                    if(param.hasOwnProperty('行ID')) {
+                      emitter.emit('edit');
+                    } else {
+                      emitter.emit('noId');
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请提供行ID'});
+                    });
+
+                    emitter.on('edit', () => {
+
+                      let condition = {_id: param.行ID};
+                      let updateData = {};
+                      
+                      
+                      if(param.hasOwnProperty('商户ID')) {
+                        updateData.商户ID = param.商户ID;
+                      }
+                      
+                      if(param.hasOwnProperty('用户ID')) {
+                        updateData.用户ID = param.用户ID;
+                      }
+                      
+                      if(param.hasOwnProperty('支付方式')) {
+                        updateData.支付方式 = param.支付方式;
+                      }
+                      
+                      if(param.hasOwnProperty('支付金额')) {
+                        updateData.支付金额 = param.支付金额;
+                      }
+                      
+                      if(param.hasOwnProperty('优惠券金额')) {
+                        updateData.优惠券金额 = param.优惠券金额;
+                      }
+                      
+                      if(param.hasOwnProperty('实付金额')) {
+                        updateData.实付金额 = param.实付金额;
+                      }
+                      
+                      if(param.hasOwnProperty('第三方订单号')) {
+                        updateData.第三方订单号 = param.第三方订单号;
+                      }
+                      
+                      if(param.hasOwnProperty('支付时间')) {
+                        updateData.支付时间 = param.支付时间;
+                      }
+                      
+                      if(param.hasOwnProperty('支付状态')) {
+                        updateData.支付状态 = param.支付状态;
+                      }
+
+                      _F('dbTableTemp_Gf83SMhtNs').callMethod('editRow', {
+                        condition,
+                        row: updateData,
+                        success: () => {
+                          _funcCb({code: 200, errMsg:'修改成功'});
+                        }
+                      });
+                      
+                    });
+
+                    emitter.emit('edit');
+                  inParams:
+                    - 行ID
+                    - 商户ID
+                    - 用户ID
+                    - 支付方式
+                    - 支付金额
+                    - 优惠券金额
+                    - 实付金额
+                    - 第三方订单号
+                    - 支付时间
+                    - 支付状态
+                  outParams: []
+              - id: service_H6W3m38ttW
+                name: 获取支付单列表
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    let pageNum = 1;
+                    let pageSize = 10;
+                    let condition = {};
+
+                    if(param.当前页码) {
+                      pageNum = param.当前页码;
+                    }
+
+                    if(param.每页大小) {
+                      pageSize = param.每页大小;
+                    }
+
+                    if(param.搜索条件) {
+
+                      let 搜索条件 = param.搜索条件;
+
+                      if(搜索条件.订单号) {
+                        condition['订单号'] = 搜索条件.订单号; 
+                      }
+
+                      if(搜索条件.商户ID) {
+                        condition['商户ID'] = 搜索条件.商户ID;
+                      }
+
+                      if(搜索条件.用户ID) {
+                        condition['用户ID'] = 搜索条件.用户ID;
+                      }
+
+                      if(搜索条件.支付方式) {
+                        condition['支付方式'] = 搜索条件.支付方式;
+                      }
+
+                      if(搜索条件.支付状态) {
+                        condition['支付状态'] = 搜索条件.支付状态;
+                      }
+
+                      if(搜索条件.支付时间起始) {
+                        condition['支付时间'] = ['>', 搜索条件.支付时间起始];
+                      }
+
+                      if(搜索条件.支付时间截止) {
+                        condition['支付时间'] = ['<', 搜索条件.支付时间截止];
+                      }
+
+                      if(搜索条件.订单时间起始) {
+                        condition['_create'] = ['>', 搜索条件.订单时间起始];
+                      }
+
+                      if(搜索条件.订单时间截止) {
+                        condition['_create'] = ['<', 搜索条件.订单时间截止];
+                      }
+
+                    }
+
+                    let total = 0;
+                    let list = [];
+
+                    emitter.on('output', () => {
+
+                      let result = {
+                        code: 200,
+                        errMsg: 'ok',
+                        result: list,
+                        total: total
+                      };
+                      
+                      _funcCb(result);
+                      
+                    });
+
+                    // 查询总记录数
+
+                    _F('dbTableTemp_Gf83SMhtNs').callMethod('getCount', {
+                      condition,
+                      success: (res) => {   
+                        total = res[0].count;
+                        emitter.emit('getList');
+                      },
+                      fail: (error) => {
+                        emitter.emit('error', error);  
+                      }
+                    });
+
+                    // 查询列表数据
+
+                    emitter.on('getList', () => {
+
+                      _F('dbTableTemp_Gf83SMhtNs').callMethod('getRows', {
+                        condition,
+                        pageNum,
+                        pageSize,  
+                        orderby: '_update',
+                        sort: 'desc',
+                        success: (res) => {
+                          list = res;
+                          emitter.emit('output');
+                        },
+                        fail: (error) => {
+                          emitter.emit('error', error);
+                        }
+                      });
+                      
+                    });
+
+                    // 输出结果
+
+                    emitter.emit('output');
+                  inParams:
+                    - 当前页码
+                    - 每页大小
+                    - 搜索条件
+                  outParams: []
+              - id: service_XWPNc6Seie
+                name: 删除支付单
+                type: service
+                props:
+                  isOpen: false
+                  jsCode: |
+
+                    const emitter = new events.EventEmitter();
+
+                    if(param.hasOwnProperty('行ID')) {
+                      emitter.emit('delete');
+                    } else {
+                      emitter.emit('noId');
+                    }
+
+                    emitter.on('noId', () => {
+                      _funcCb({code: 0, errMsg: '请提供行ID'});
+                    });
+
+                    emitter.on('delete', () => {
+
+                      let condition = {_id: param.行ID};
+                      
+                      _F('dbTableTemp_Gf83SMhtNs').callMethod('deleteRow', {
+                        condition,
+                        success: () => {
+                          _funcCb({code: 200, errMsg:'删除成功'});
+                        }
+                      });
+                      
+                    });
+
+                    emitter.emit('delete');
+                  inParams:
+                    - 行ID
+                  outParams: []
+      - id: state_NYRHDyMSGi
+        type: state
+        children: []
+      - id: services_PBX2CiEpTT
+        type: services
+        children:
+          - id: group_TPp8aS7e5i
+            name: 数据表
+            type: group
+            props:
+              devId: group_TPp8aS7e5i
+            children:
+              - id: dbTableTemp_Gf83SMhtNs
+                name: 支付单表
+                type: dbTableTemp
+                props:
+                  devId: dbTableTemp_Gf83SMhtNs
+                  fields:
+                    - comment: 主键ID
+                      columnName: _id
+                      columnType: int unsigned
+                    - comment: 订单号
+                      columnName: 订单号
+                      columnType: varchar(64)
+                    - comment: 商户ID
+                      columnName: 商户ID
+                      columnType: int unsigned
+                    - comment: 用户ID
+                      columnName: 用户ID
+                      columnType: int unsigned
+                    - comment: 支付方式 1-微信 2-支付宝 3-银联
+                      columnName: 支付方式
+                      columnType: tinyint unsigned
+                    - comment: 支付金额,单位分
+                      columnName: 支付金额
+                      columnType: int
+                    - comment: 优惠券金额,单位分
+                      columnName: 优惠券金额
+                      columnType: int
+                    - comment: 实付金额,单位分
+                      columnName: 实付金额
+                      columnType: int
+                    - comment: 第三方支付平台订单号
+                      columnName: 第三方订单号
+                      columnType: varchar(64)
+                    - comment: 支付时间
+                      columnName: 支付时间
+                      columnType: bigint unsigned
+                    - comment: 支付状态 0-未支付 1-已支付
+                      columnName: 支付状态
+                      columnType: tinyint
+                    - comment: 创建时间
+                      columnName: _create
+                      columnType: bigint unsigned
+                    - comment: 更新时间
+                      columnName: _update
+                      columnType: bigint unsigned
+  - id: modules_CPmWnMHXfB
+    name: 模块
+    type: modules
+    props: {}

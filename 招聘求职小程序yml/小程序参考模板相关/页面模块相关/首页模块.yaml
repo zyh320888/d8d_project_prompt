@@ -1,0 +1,243 @@
+id: module_2YeACPPABp
+name: 首页模块
+type: module
+props: {}
+children:
+  - id: front_HCYnni3ptc
+    type: front
+    children:
+      - id: props_BWECFXsGzx
+        type: props
+        children:
+          - id: fPAttr_Qnk2GGXifM
+            type: fPAttr
+            children: []
+          - id: fPMethod_TfWaTfj4mp
+            type: fPMethod
+            children: []
+          - id: fPEvent_D2Zkd3brXD
+            type: fPEvent
+            children: []
+      - id: state_JWtmJNZCzQ
+        type: state
+        children:
+          - id: variable_ZEAFPhfErp
+            name: 批次列表对象数组
+            type: variable
+            props:
+              valueJs: '[]'
+              valueType: js
+          - id: variable_ZQrmM6ynyD
+            name: 广告列表对象数组
+            type: variable
+            props:
+              valueJs: '[]'
+              valueType: js
+      - id: method_JEyWFbca2j
+        type: method
+        children:
+          - id: jsFunc_cEhs5iKJyt
+            name: 加载批次列表
+            type: jsFunc
+            props:
+              jsCode: "const emitter = new events.EventEmitter();\r\n\r\nemitter.on('getStockList', (code) => {\r\n  const apiHost = _F('global_func').callMethod('getConfig', 'apiHost');\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (USER_INFO.token) {\r\n\r\n    //发起网络请求\r\n    wx.request({\r\n      url: apiHost + '/v1/mini/user/stock/search',\r\n      method: 'POST',\r\n      data: {\r\n        //code: code\r\n        token: USER_INFO.token,\r\n        搜索条件对象: {\r\n          是否首页展示: 1,\r\n          是否上架: 1,\r\n          是否删除: 0\r\n        }\r\n      },\r\n      success: (res) => {\r\n        if (res.data.code === 200) {\r\n          _F('variable_ZEAFPhfErp').callMethod('set', res.data.result)\r\n        } else {\r\n          console.log('加载批次列表失败', res.data);\r\n        }\r\n\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nif (wx) {\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (!USER_INFO.token) {\r\n    _F('store_func').callMethod(\"subscribe\", {\r\n      callback: () => {\r\n        emitter.emit('getStockList');\r\n      }\r\n    });\r\n  } else {\r\n    emitter.emit('getStockList');\r\n  }\r\n\r\n}\r\n\r\n"
+          - id: jsFunc_tez4kPyby6
+            name: 领券
+            type: jsFunc
+            props:
+              jsCode: "const emitter = new events.EventEmitter();\r\n\r\nemitter.on('getCoupon', () => {\r\n  const apiHost = _F('global_func').callMethod('getConfig', 'apiHost');\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (USER_INFO.token) {\r\n\r\n    //发起网络请求\r\n    wx.request({\r\n      url: apiHost + '/v1/mini/user/stock_log/add',\r\n      method: 'POST',\r\n      data: {\r\n        token: USER_INFO.token,\r\n        批次号: param.批次号,\r\n        批次分类ID: param.批次分类ID,\r\n        制券商户号: param.制券商户号,\r\n        最大领取次数: 0,\r\n      },\r\n      success: (res) => {\r\n        if (res.data.code === 200) {\r\n          wx.showToast({\r\n            title: '领券成功',\r\n            icon: 'success',\r\n            mask: true,\r\n            duration: 2000\r\n          })\r\n        } else {\r\n          console.log('领券失败', res.data);\r\n\r\n          wx.showToast({\r\n            title: '领券失败',\r\n            icon: 'error',\r\n            mask: true,\r\n            duration: 2000\r\n          })\r\n        }\r\n\r\n      },\r\n      fail: (res) => {\r\n        console.log('领券失败', res.data);\r\n\r\n        wx.showToast({\r\n          title: '领券失败',\r\n          icon: 'error',\r\n          mask: true,\r\n          duration: 2000\r\n        })\r\n\r\n\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nif (wx) {\r\n  emitter.emit('getCoupon');\r\n}\r\n\r\n"
+              inParams:
+                - 批次号
+                - 批次分类ID
+                - 制券商户号
+          - id: jsFunc_ZeDa7kWmZ7
+            name: 加载广告列表
+            type: jsFunc
+            props:
+              jsCode: "const emitter = new events.EventEmitter();\r\n\r\nemitter.on('getStockList', (code) => {\r\n  const apiHost = _F('global_func').callMethod('getConfig', 'apiHost');\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (USER_INFO.token) {\r\n\r\n    //发起网络请求\r\n    wx.request({\r\n      url: apiHost + '/v1/mini/user/ad/search',\r\n      method: 'POST',\r\n      data: {\r\n        //code: code\r\n        token: USER_INFO.token,\r\n        搜索条件对象:{\r\n          广告位ID: 1,\r\n          是否删除: 0\r\n        }\r\n      },\r\n      success: (res) => {\r\n        if (res.data.code === 200) {\r\n          _F('variable_ZQrmM6ynyD').callMethod('set', res.data.result)\r\n        } else {\r\n          console.log('加载广告列表失败', res.data);\r\n        }\r\n\r\n      }\r\n    })\r\n  }\r\n})\r\n\r\nif (wx) {\r\n  const USER_INFO = _F('store_func').callMethod('get', { key: 'USER_INFO' }) || {};\r\n  if (!USER_INFO.token) {\r\n    _F('store_func').callMethod(\"subscribe\", {\r\n      callback: () => {\r\n        emitter.emit('getStockList');\r\n      }\r\n    });\r\n  } else {\r\n    emitter.emit('getStockList');\r\n  }\r\n\r\n}\r\n\r\n"
+          - id: jsFunc_BAHW7jNwxJ
+            name: 页面初始化处理
+            type: jsFunc
+            props:
+              jsCode: "//加载首页批次列表\r\n_F('jsFunc_cEhs5iKJyt').call();\r\n\r\n//加载首页广告列表\r\n_F('jsFunc_ZeDa7kWmZ7').call();"
+      - id: dom_NSTx2SX5Gh
+        type: dom
+        children:
+          - id: navbar_WG8msjXW2G
+            type: navbar
+            props: {}
+            children:
+              - id: span_JD8bscxCf4
+                name: ''
+                type: span
+                props:
+                  children: 首页
+                children: []
+          - id: swiper_7KFccQx88c
+            type: swiper
+            props:
+              height: 220
+              autoPlay: true
+            children:
+              - id: for_A4Pcb6cSYz
+                type: for
+                props:
+                  dataSourceJs: _F('variable_ZQrmM6ynyD').callMethod('get')
+                children:
+                  - id: swiperitem_2rMGdApcSa
+                    type: swiperitem
+                    props: {}
+                    children:
+                      - id: image_BxDa7x4C6D
+                        type: image
+                        props:
+                          src: https://dummyimage.com/375x220/ff0000/fff
+                          srcJs: >-
+                            (_F('for_A4Pcb6cSYz').callMethod('getItem') ||
+                            {}).图片地址
+                          height: 220px
+                          srcType: js
+                          onClickJs: "(e) => {\r\n // _F('page_func').callMethod('navigate', { path: '/huodong' })\r\n}"
+                        children: []
+          - id: div_zXaRHfExQJ
+            type: div
+            props:
+              style:
+                paddingLeft: 16px
+                paddingRight: 16px
+              onLoadJs: "() => {\r\n  _F('jsFunc_BAHW7jNwxJ').call()\r\n}"
+            children:
+              - id: row_iNFfAprZnN
+                name: 兑换行
+                type: row
+                props:
+                  type: flex
+                  align: center
+                  style:
+                    marginTop: 12px
+                  gutter: ''
+                  justify: space-between
+                children:
+                  - id: col_HjZtB7eNHG
+                    type: col
+                    props:
+                      span: '16'
+                    children:
+                      - id: input_5YQPFsy4Wh
+                        type: input
+                        props:
+                          style:
+                            borderColor: '#4a4a4a'
+                            borderStyle: solid
+                            borderWidth: 1px
+                            borderRadius: 8px
+                          placeholder: 请输入兑换码
+                        children: []
+                  - id: col_2Y2wdbjbc7
+                    type: col
+                    props:
+                      span: '8'
+                    children:
+                      - id: div_Q5dKwfprrm
+                        type: div
+                        props:
+                          style:
+                            textAlign: center
+                        children:
+                          - id: button_8NB8y66tsH
+                            type: button
+                            props:
+                              type: primary
+                              block: false
+                              style:
+                                width: 100px
+                              value: 兑换
+                              onClickJs: "(event)=>{\r\n  _F('page_func').callMethod('navigate',{path:'/duihuan'})\r\n}"
+              - id: for_4jR35saf5t
+                type: for
+                props:
+                  dataSourceJs: _F('variable_ZEAFPhfErp').callMethod('get')
+                children:
+                  - id: row_Q5zA8yAtET
+                    name: 领券行
+                    type: row
+                    props:
+                      type: flex
+                      align: center
+                      style:
+                        height: 80px
+                        marginTop: 12px
+                        borderColor: '#4a4a4a'
+                        borderStyle: solid
+                        borderWidth: 1px
+                        borderRadius: 8px
+                    children:
+                      - id: col_MiwJZB5ZX2
+                        type: col
+                        props:
+                          span: '4'
+                        children:
+                          - id: div_B4BbKhcKHC
+                            type: div
+                            props:
+                              style:
+                                textAlign: center
+                            children:
+                              - id: span_HWAXABRDeY
+                                type: span
+                                props:
+                                  children: 5元
+                                  childrenJs: >-
+                                    (_F('for_4jR35saf5t').callMethod('getItem')
+                                    || {}).批次名称
+                                  childrenType: js
+                                children: []
+                      - id: col_hFyEQrn4BS
+                        type: col
+                        props:
+                          span: '12'
+                        children:
+                          - id: span_GNb6wc6s6E
+                            type: span
+                            props:
+                              children: 满10减5，限华联超市使用
+                              childrenJs: >-
+                                (_F('for_4jR35saf5t').callMethod('getItem') ||
+                                {}).批次简介
+                              childrenType: js
+                            children: []
+                      - id: col_6TYmdNsShs
+                        type: col
+                        props:
+                          span: '8'
+                        children:
+                          - id: button_NEXKQ8QAK3
+                            type: button
+                            props:
+                              type: primary
+                              block: false
+                              style:
+                                width: 100px
+                              value: 领券
+                              onClickJs: "(event)=>{\r\n  _F('jsFunc_tez4kPyby6').call({\r\n    批次号: (_F('for_4jR35saf5t').callMethod('getItem') || {}).批次号,\r\n    批次分类ID: (_F('for_4jR35saf5t').callMethod('getItem') || {}).批次分类ID,\r\n    制券商户号: (_F('for_4jR35saf5t').callMethod('getItem') || {}).制券商户号,\r\n  })\r\n}"
+  - id: backend_2a8BMxCcci
+    type: backend
+    children:
+      - id: props_QYbyGNfK5X
+        type: props
+        children:
+          - id: bPAttr_iCMweHBAiZ
+            type: bPAttr
+            children: []
+          - id: bPMethod_jXnCciHca2
+            type: bPMethod
+            children: []
+      - id: state_c4pirMG8nj
+        type: state
+        children: []
+      - id: services_kN6Bs852My
+        type: services
+        children: []
+  - id: modules_CFm2TeJyAP
+    type: modules
+    children: []

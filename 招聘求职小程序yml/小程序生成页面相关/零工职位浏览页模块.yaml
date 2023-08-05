@@ -1,0 +1,841 @@
+id: module_Sb5PysZ8D4
+name: 招聘页面
+type: module
+props: {}
+children:
+  - id: front_DaZrCyXW6K
+    type: front
+    props:
+      onLoadJs: "() => {\r\n  _F('jsFunc_getJobList').call()\r\n}"
+    children:
+      - id: props_jNTMy87REt
+        type: props
+        children:
+          - id: fPAttr_sNhzfizEMd
+            type: fPAttr
+            children: []
+          - id: fPMethod_cgC33fhQWG
+            type: fPMethod
+            children: []
+          - id: fPEvent_cgC33fhQWG
+            type: fPEvent
+            children: []
+      - id: state_SRFayNkG3w
+        type: state
+        children:
+          - id: variable_cXsK86j4xG
+            name: 搜索关键词
+            type: variable
+            props:
+              valueJs: ''
+              valueType: js
+          - id: variable_BB2XGY3kBT
+            name: 选中的结算方式
+            type: variable
+            props:
+              valueJs: []
+              valueType: js
+          - id: variable_kwYAx8Dkna
+            name: 选中的行业分类
+            type: variable
+            props:
+              valueJs: []
+              valueType: js
+          - id: variable_6X74GyT4kX
+            name: 选中的地区
+            type: variable
+            props:
+              valueJs: '''全城'''
+              valueType: js
+          - id: variable_Sa2zy28TBj
+            name: 岗位列表
+            type: variable
+            props:
+              valueJs: |-
+                [
+                    {
+                        "_id": 20,
+                        "用户ID": 20,
+                        "职位名称": "文员",
+                        "职位部门": "行政部",
+                        "职位要求": "熟练办公软件操作",
+                        "职位待遇": "4k-6k",
+                        "职位描述": "负责公司日常文书工作",
+                        "工作地点": "北京",
+                        "学历要求": "大专及以上",
+                        "工作年限要求": "1年以上",
+                        "职位类别": "行政",
+                        "招聘人数": 1,
+                        "截止日期": "2023-05-31T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "李经理",
+                        "联系电话": "13588888888",
+                        "电子邮箱": "lisi@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "月结",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市朝阳区XX大厦",
+                        "薪资范围": "4k-6k",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 1
+                    },
+                    {
+                        "_id": 19,
+                        "用户ID": 19,
+                        "职位名称": "采购助理",
+                        "职位部门": "采购部",
+                        "职位要求": "了解办公用品采购流程",
+                        "职位待遇": "4k-6k",
+                        "职位描述": "协助部门日常采购事务",
+                        "工作地点": "北京",
+                        "学历要求": "大专及以上",
+                        "工作年限要求": "1年以上",
+                        "职位类别": "采购",
+                        "招聘人数": 1,
+                        "截止日期": "2023-05-24T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "周经理",
+                        "联系电话": "13888888888",
+                        "电子邮箱": "zhouqi@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "月结",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市海淀区XX大厦",
+                        "薪资范围": "4k-6k",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 2
+                    },
+                    {
+                        "_id": 18,
+                        "用户ID": 17,
+                        "职位名称": "后勤管理",
+                        "职位部门": "后勤部",
+                        "职位要求": "负责公司后勤工作统筹",
+                        "职位待遇": "6k-10k",
+                        "职位描述": "管理公司日常后勤事宜",
+                        "工作地点": "北京",
+                        "学历要求": "大专及以上",
+                        "工作年限要求": "2年以上",
+                        "职位类别": "后勤",
+                        "招聘人数": 1,
+                        "截止日期": "2023-05-14T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "汪经理",
+                        "联系电话": "13888888888",
+                        "电子邮箱": "wangwu@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "月结",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市海淀区XX大厦",
+                        "薪资范围": "6k-10k",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 3
+                    },
+                    {
+                        "_id": 17,
+                        "用户ID": 15,
+                        "职位名称": "前端工程师",
+                        "职位部门": "技术部",
+                        "职位要求": "精通HTML/CSS/JavaScript",
+                        "职位待遇": "10k-15k",
+                        "职位描述": "负责网站/App前端开发",
+                        "工作地点": "北京",
+                        "学历要求": "本科及以上",
+                        "工作年限要求": "2年以上",
+                        "职位类别": "技术",
+                        "招聘人数": 2,
+                        "截止日期": "2023-05-09T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "赵经理",
+                        "联系电话": "13599999999",
+                        "电子邮箱": "zhaoliu@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "月结",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市海淀区XX大厦",
+                        "薪资范围": "10k-15k",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 4
+                    },
+                    {
+                        "_id": 16,
+                        "用户ID": 18,
+                        "职位名称": "销售专员",
+                        "职位部门": "销售部",
+                        "职位要求": "具备销售业务基础能力",
+                        "职位待遇": "5k-8k提成",
+                        "职位描述": "协助销售工作,开发潜在客户",
+                        "工作地点": "北京",
+                        "学历要求": "大专及以上",
+                        "工作年限要求": "1年以上",
+                        "职位类别": "销售",
+                        "招聘人数": 2,
+                        "截止日期": "2023-05-19T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "赵经理",
+                        "联系电话": "13599999999",
+                        "电子邮箱": "zhaoliu@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "提成",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市朝阳区XX大厦",
+                        "薪资范围": "5k-8k提成",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 5
+                    },
+                    {
+                        "_id": 15,
+                        "用户ID": 16,
+                        "职位名称": "财务助理",
+                        "职位部门": "财务部",
+                        "职位要求": "熟练财务基础操作",
+                        "职位待遇": "5k-8k",
+                        "职位描述": "协助完成公司财务工作",
+                        "工作地点": "北京",
+                        "学历要求": "大专及以上",
+                        "工作年限要求": "1年以上",
+                        "职位类别": "财务",
+                        "招聘人数": 1,
+                        "截止日期": "2023-04-30T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "郑经理",
+                        "联系电话": "18912341234",
+                        "电子邮箱": "zhengli@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "月结",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市朝阳区XX大厦",
+                        "薪资范围": "5k-8k",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 6
+                    },
+                    {
+                        "_id": 14,
+                        "用户ID": 14,
+                        "职位名称": "平面设计师",
+                        "职位部门": "设计部",
+                        "职位要求": "精通Photoshop及Illustrator",
+                        "职位待遇": "8k-12k",
+                        "职位描述": "负责视觉设计工作",
+                        "工作地点": "北京",
+                        "学历要求": "大专及以上",
+                        "工作年限要求": "2年以上",
+                        "职位类别": "设计",
+                        "招聘人数": 1,
+                        "截止日期": "2023-04-24T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "李经理",
+                        "联系电话": "13588888888",
+                        "电子邮箱": "lisi@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "月结",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市海淀区XX大厦",
+                        "薪资范围": "8k-12k",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 7
+                    },
+                    {
+                        "_id": 13,
+                        "用户ID": 13,
+                        "职位名称": "市场营销",
+                        "职位部门": "市场部",
+                        "职位要求": "熟悉互联网营销",
+                        "职位待遇": "8k-15k",
+                        "职位描述": "负责企业互联网营销",
+                        "工作地点": "北京",
+                        "学历要求": "本科及以上",
+                        "工作年限要求": "2年以上",
+                        "职位类别": "市场营销",
+                        "招聘人数": 2,
+                        "截止日期": "2023-04-30T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "张经理",
+                        "联系电话": "13888888888",
+                        "电子邮箱": "zhangsan@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "月结",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市朝阳区XX大厦",
+                        "薪资范围": "8k-15k",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 8
+                    },
+                    {
+                        "_id": 12,
+                        "用户ID": 12,
+                        "职位名称": "人力资源",
+                        "职位部门": "人力资源部",
+                        "职位要求": "熟悉招聘及薪酬管理",
+                        "职位待遇": "8k-12k",
+                        "职位描述": "负责公司人力资源管理",
+                        "工作地点": "北京",
+                        "学历要求": "本科及以上",
+                        "工作年限要求": "3年以上",
+                        "职位类别": "人力资源",
+                        "招聘人数": 1,
+                        "截止日期": "2023-04-14T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "王经理",
+                        "联系电话": "13888888888",
+                        "电子邮箱": "wangwu@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "月结",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市海淀区XX大厦",
+                        "薪资范围": "8k-12k",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 9
+                    },
+                    {
+                        "_id": 11,
+                        "用户ID": 11,
+                        "职位名称": "仓库管理",
+                        "职位部门": "仓库部",
+                        "职位要求": "熟悉入库管理",
+                        "职位待遇": "5k-8k",
+                        "职位描述": "负责仓库管理及发货",
+                        "工作地点": "北京",
+                        "学历要求": "高中及以上",
+                        "工作年限要求": "2年以上",
+                        "职位类别": "仓库",
+                        "招聘人数": 2,
+                        "截止日期": "2023-04-30T16:00:00.000Z",
+                        "所属项目": "无",
+                        "联系人": "刘经理",
+                        "联系电话": "13888888888",
+                        "电子邮箱": "liuqi@company.com",
+                        "投递邮箱": "hr@company.com",
+                        "浏览次数": null,
+                        "是否置顶": 0,
+                        "结算方式": "月结",
+                        "行业分类": "服务业",
+                        "是否删除": 0,
+                        "所在地区": "北京",
+                        "详细地址": "北京市朝阳区XX大厦",
+                        "薪资范围": "5k-8k",
+                        "企业性质": "民营企业",
+                        "_create": 1689752012,
+                        "_update": 1689752012,
+                        "_index": 10
+                    }
+                ]
+              valueType: js
+          - id: variable_xr2X3PN6EA
+            name: 岗位总数
+            type: variable
+            props:
+              valueJs: 0
+              valueType: js
+          - id: variable_r34kCXbAzp
+            name: 当前页码
+            type: variable
+            props:
+              valueJs: '1'
+              valueType: js
+      - id: method_DWdDFGm4ek
+        type: method
+        children:
+          - id: jsFunc_bYT5tnyeD7
+            name: 请求接口
+            type: jsFunc
+            props:
+              jsCode: >-
+                const apiHost = _F('global_func').callMethod('getConfig',
+                'apiHost');
+
+                const options = param;
+
+                return wx.request({
+                  url: `${apiHost}${options.url}`,
+                  method: options.method || 'GET',
+                  data: options.data || {},
+                  success: options.success,
+                  fail: options.fail
+                })
+              inParams:
+                - url
+                - method
+                - data
+                - success
+                - fail
+          - id: jsFunc_getJobList
+            name: 获取岗位列表
+            type: jsFunc
+            props:
+              jsCode: |-
+                // 名称:搜索招聘职位服务
+                // 路径:v1/mini/position/search
+                // 入参:当前页码、每页大小、搜索条件(关键字、是否置顶、职位部门)
+                // 出参:无
+
+                function formatPubilshDate(timestamp) {
+                  //获取dayjs对象
+                  const dayjs = _F('date_func').callMethod('dayjs');
+                  // 获取当前日期
+                  const now = dayjs(timestamp * 1000);
+                  // console.log(now.format('YYYY-MM-DD'));
+                  return now.format('YYYY-MM-DD');
+                }
+
+                const 搜索条件 = {};
+
+                const 关键字 = _F('variable_cXsK86j4xG').callMethod('get');
+                if(关键字)搜索条件.关键字 = 关键字;
+                const 结算方式 = _F('variable_BB2XGY3kBT').callMethod('get');
+                if(结算方式)搜索条件.结算方式 = 结算方式;
+                const 行业分类 = _F('variable_kwYAx8Dkna').callMethod('get');
+                if(行业分类)搜索条件.行业分类 = 行业分类;
+
+
+                _F('jsFunc_bYT5tnyeD7').call({
+                  url: '/v1/mini/position/search',
+                  method: 'POST',
+                  data: {
+                    当前页码: _F('variable_r34kCXbAzp').callMethod('get'),
+                    每页大小: 10,
+                    搜索条件: 搜索条件
+                  },
+                  success: (res) => {
+                    console.log('搜索招聘职位服务', res.data)
+
+                    let list = res.data.result;
+                    list = list.map(item => {
+                      item.发布日期 = formatPubilshDate(item._create);
+                      return item;
+                    })
+
+                    //获取当前列表数组
+                    const oldList = _F('variable_Sa2zy28TBj').callMethod('get');
+                    list = oldList.concat(list);
+                    _F('variable_Sa2zy28TBj').callMethod('set', list);
+                    _F('variable_xr2X3PN6EA').callMethod('set', res.data.total);
+                  },
+                  fail: (err) => {
+                    wx.showToast({
+                      title: err,
+                      icon: 'error',
+                      duration: 2000
+                    })
+                  }
+                })
+          - id: jsFunc_viewDetail
+            name: 查看岗位详情
+            type: jsFunc
+            props:
+              jsCode: |
+                this.request({
+                  url: '/jobs/detail',
+                  data: {
+                    id: jobId
+                  },
+                  success: (res) => {
+                    wx.navigateTo({
+                      url: '/pages/detail?id=' + jobId
+                    })
+                  }
+                });
+          - id: jsFunc_searchJobs
+            name: 搜索岗位
+            type: jsFunc
+            props:
+              jsCode: |-
+                // _F('variable_r34kCXbAzp').callMethod('set', 1);
+                // _F('jsFunc_getJobList').call();
+
+                console.log('搜索岗位.关键字',param.关键字);
+
+                //设置 搜索关键词
+                _F('variable_cXsK86j4xG').callMethod('set', param.关键字);
+
+                //刷新列表
+                _F('jsFunc_A3kmYHiGW6').call();
+              inParams:
+                - 关键字
+          - id: jsFunc_filterJobs
+            name: 筛选岗位
+            type: jsFunc
+            props:
+              jsCode: |-
+                console.log('结算方式',param.结算方式);
+                console.log('行业分类',param.行业分类);
+
+                //设置 结算方式
+                if(param.结算方式 !== undefined)
+                  _F('variable_BB2XGY3kBT').callMethod('set', param.结算方式);
+                //设置 行业分类
+                if(param.行业分类 !== undefined)
+                  _F('variable_kwYAx8Dkna').callMethod('set', param.行业分类);
+
+                //刷新列表
+                _F('jsFunc_A3kmYHiGW6').call();
+              inParams:
+                - 结算方式
+                - 行业分类
+          - id: jsFunc_switchPage
+            name: 加载下一页
+            type: jsFunc
+            props:
+              jsCode: >+
+                const page = _F('variable_r34kCXbAzp').callMethod('get');
+
+                _F('variable_r34kCXbAzp').callMethod('set', Number(page) + 1, ()
+                => {
+                  _F('jsFunc_getJobList').call();
+                });
+
+          - id: jsFunc_GQkbzPs7S4
+            name: 联系岗位发布者
+            type: jsFunc
+            props:
+              jsCode: |
+                wx.showModal({
+                  title: '联系发布者',
+                  content: '电话:' + phone 
+                })
+          - id: jsFunc_A3kmYHiGW6
+            name: 刷新岗位列表
+            type: jsFunc
+            props:
+              jsCode: |+
+                //清空当前列表数组
+                _F('variable_Sa2zy28TBj').callMethod('set', []);
+
+                //重置当前页码为1
+                _F('variable_r34kCXbAzp').callMethod('set', 1, () => {
+                  _F('jsFunc_getJobList').call();
+                });
+
+      - id: dom_8pidWax5Xw
+        type: dom
+        children:
+          - id: navbar_kkJptABisN
+            type: navbar
+            props:
+              back: ''
+              onClickBackJs: "(event) => {\r\n  //_F('page_func').callMethod('navigate', { path: '/' })\r\n}"
+            children:
+              - id: span_wDSjMGShnE
+                name: ''
+                type: span
+                props:
+                  children: 零工广场
+                children: []
+          - id: searchbar_A4JWwaWpnn
+            type: searchbar
+            props:
+              valueJs: _F('variable_cXsK86j4xG').callMethod('get')
+              onChangeJs: "(value, event) => {\r\n  // console.log('输入关键字',value);\r\n  // //设置 搜索关键词\r\n  // _F('variable_cXsK86j4xG').callMethod('set', value);\r\n}"
+              onSearchJs: "(val) => {\r\n  _F('jsFunc_searchJobs').call({关键字:val})\r\n}"
+              onSubmitJs: |
+                (event) => {
+                  _F('jsFunc_searchJobs').call()
+                }
+              placeholder: 请输入关键词
+          - id: menu_Rk2jjKa7w4
+            type: menu
+            props: {}
+            children:
+              - id: menu.item_eBTasziK5p
+                name: 结算方式
+                type: menu.item
+                props:
+                  title: 结算方式
+                  titleJs: _F('variable_BB2XGY3kBT').callMethod('get') || '结算方式'
+                  optionsJs: "[\r\n  {text: '不限', value: ''},\r\n  {text: '月结', value: '月结'},\r\n  {text: '周结', value: '周结'},\r\n  {text: '小时结', value: '小时结'}  \r\n]\r\n"
+                  titleType: js
+                  onChangeJs: "(event) => {\r\n  // console.log('选择结算方式', event)\r\n  //设置选中的结算方式\r\n  _F('jsFunc_filterJobs').call({ 结算方式: event.value })\r\n}"
+                children: []
+              - id: menu.item_wEWSHJmNtf
+                name: 行业分类
+                type: menu.item
+                props:
+                  titleJs: _F('variable_kwYAx8Dkna').callMethod('get') || '行业分类'
+                  optionsJs: "[\r\n  {text: '不限', value: ''},\r\n  {text: '旅游业', value: '旅游业'},\r\n  {text: '服务业', value: '服务业'},\r\n  // {text: '小时结', value: 2}  \r\n]\r\n"
+                  titleType: js
+                  onChangeJs: "(event) => {\r\n  //设置选中的行业分类\r\n  _F('jsFunc_filterJobs').call({ 行业分类: event.value })\r\n}"
+                children: []
+          - id: row_QzeFPBPpQk
+            type: row
+            props:
+              type: flex
+              style:
+                height: calc(100vh - 251px)
+                overflow: hidden auto
+                paddingLeft: ''
+                marginBottom: 100px
+                paddingRight: ''
+              hideScroll: true
+            children:
+              - id: infiniteloading_H7RXH5hJdR
+                type: infiniteloading
+                props:
+                  onRefreshJs: "(done) => {\r\n  console.log('下拉刷新')\r\n  _F('jsFunc_A3kmYHiGW6').call();\r\n  done();\r\n}"
+                  pullRefresh: true
+                  onLoadMoreJs: "(done) => {\r\n  console.log('继续加载')\r\n  _F('jsFunc_switchPage').call();\r\n  done();\r\n}"
+                children:
+                  - id: for_CTWabXz83c
+                    type: for
+                    props:
+                      dataSourceJs: _F('variable_Sa2zy28TBj').callMethod('get')
+                    children:
+                      - id: cell_fb6AiFse5T
+                        type: cell
+                        props:
+                          style:
+                            marginLeft: ''
+                            marginRight: ''
+                          titleJs: ''
+                          onClickJs: |
+                            (event) => {
+                              _F('jsFunc_viewDetail').call({
+                                jobId: _F('for_CTWabXz83c').callMethod('getItem')._id
+                              })
+                            }
+                        children:
+                          - id: row_XkRTZQxrCQ
+                            type: row
+                            children:
+                              - id: row_Rhhims7FTd
+                                type: row
+                                props:
+                                  type: flex
+                                children:
+                                  - id: col_Wx8ssYZFTT
+                                    type: col
+                                    props:
+                                      span: 12
+                                      alignItems: flex-start
+                                    children:
+                                      - id: span_khpfWdJ5bP
+                                        type: span
+                                        props:
+                                          style:
+                                            fontWeight: bold
+                                          contentJs: >-
+                                            _F('for_CTWabXz83c').callMethod('getItem').职位名称
+                                  - id: col_pN3YZPKMsX
+                                    type: col
+                                    props:
+                                      span: 12
+                                      style:
+                                        textAlign: right
+                                      alignItems: flex-end
+                                    children:
+                                      - id: span_NY5aaDEMZA
+                                        type: span
+                                        props:
+                                          style:
+                                            color: red
+                                            fontWeight: bold
+                                          contentJs: >-
+                                            _F('for_CTWabXz83c').callMethod('getItem').薪资范围
+                              - id: row_fiWaQjYnyH
+                                type: row
+                                props:
+                                  type: flex
+                                children:
+                                  - id: col_JbJdS25BQ4
+                                    type: col
+                                    props:
+                                      span: 12
+                                      alignItems: flex-start
+                                    children:
+                                      - id: tag_4jJpaFz4mK
+                                        type: tag
+                                        props:
+                                          style:
+                                            color: '#999999'
+                                            background: '#E9E9E9'
+                                            marginRight: 5px
+                                        children:
+                                          - id: span_bJeQdAANPj
+                                            type: span
+                                            props:
+                                              style:
+                                                fontSize: 12px
+                                              childrenJs: >-
+                                                _F('for_CTWabXz83c').callMethod('getItem').行业分类
+                                              childrenType: js
+                                      - id: tag_EzefYFFBN8
+                                        type: tag
+                                        props:
+                                          style:
+                                            color: '#999999'
+                                            background: '#E9E9E9'
+                                            marginRight: 5px
+                                        children:
+                                          - id: span_iSrpQGDJsa
+                                            type: span
+                                            props:
+                                              style:
+                                                fontSize: 12px
+                                              childrenJs: >-
+                                                _F('for_CTWabXz83c').callMethod('getItem').结算方式
+                                              childrenType: js
+                                  - id: col_FzBMhJdTc7
+                                    type: col
+                                    props:
+                                      span: 12
+                                      style:
+                                        textAlign: right
+                                      alignItems: flex-end
+                                    children:
+                                      - id: span_S4sskkxykY
+                                        type: span
+                                        props:
+                                          style:
+                                            color: null
+                                            fontSize: 12px
+                                          contentJs: >-
+                                            _F('for_CTWabXz83c').callMethod('getItem').发布日期
+                              - id: divider_aHkQchF4Wj
+                                type: divider
+                                props:
+                                  color: null
+                              - id: row_RefJiGaJBW
+                                type: row
+                                props:
+                                  type: flex
+                                children:
+                                  - id: col_nX7Yrhhc6J
+                                    type: col
+                                    props:
+                                      span: 12
+                                      alignItems: flex-start
+                                    children:
+                                      - id: span_dCM3KtDHZW
+                                        type: span
+                                        props:
+                                          style:
+                                            fontSize: 12px
+                                          contentJs: >-
+                                            _F('for_CTWabXz83c').callMethod('getItem').详细地址
+                                  - id: col_7bNb6Py7pr
+                                    type: col
+                                    props:
+                                      span: 12
+                                      style:
+                                        textAlign: right
+                                      alignItems: flex-end
+                                    children:
+                                      - id: button_mMZDFCfR55
+                                        type: button
+                                        props:
+                                          size: small
+                                          type: primary
+                                          style:
+                                            fontSize: 12px
+                                          value: 联系老板
+                                          onClickJs: |
+                                            (event) => {
+                                              _F('jsFunc_GQkbzPs7S4').call({
+                                                phone: _F('for_CTWabXz83c').callMethod('getItem').联系方式
+                                              })
+                                            }
+          - id: tabbar_tkjft2E6s3
+            type: tabbar
+            props:
+              fixed: true
+              safeArea: true
+            children:
+              - id: tabbar.item_nciMRHjf3B
+                type: tabbar.item
+                props:
+                  icon: home
+                  title: 首页
+              - id: tabbar.item_HMD5bk5RGK
+                type: tabbar.item
+                props:
+                  icon: activity
+                  title: 招聘广场
+              - id: tabbar.item_zWhYA8jAxa
+                type: tabbar.item
+                props:
+                  icon: release
+                  title: 发布
+              - id: tabbar.item_Z5ps7bhMbA
+                type: tabbar.item
+                props:
+                  icon: activity
+                  title: 用工大厅
+              - id: tabbar.item_G4acBX5e7R
+                type: tabbar.item
+                props:
+                  icon: user
+                  title: 我的
+  - id: backend_WEJXzfQkcb
+    type: backend
+    children:
+      - id: props_zfQzfhQWcb
+        type: props
+        children:
+          - id: bPAttr_EtRgzfQkcb
+            type: bPAttr
+            children: []
+          - id: bPMethod_zfQJgWWQcb
+            type: bPMethod
+            children: []
+      - id: state_cgFQzfhEty
+        type: state
+        children: []
+      - id: services_zfQzfhQWcb
+        type: services
+        children: []
+  - id: modules_8TbiTTQQ3E
+    type: modules
+    children: []

@@ -1,0 +1,393 @@
+id: module_wc2xE5SxX8
+name: 商户中台模块
+type: module
+props: null
+children:
+  - id: config_DrYAQPCmzh
+    type: config
+    props:
+      style: {}
+  - id: front_EzBatPxrZJ
+    name: 前台
+    type: front
+    props: null
+    children:
+      - id: props_fsQ2FEWfrQ
+        type: props
+        children:
+          - id: fPAttr_3tfS7BQT3t
+            type: fPAttr
+            children: []
+          - id: fPMethod_J72YiPd38d
+            type: fPMethod
+            children: []
+          - id: fPEvent_tC3XrhNzXP
+            type: fPEvent
+            children: []
+      - id: state_kZGeEDT6hf
+        type: state
+        children: []
+      - id: method_ip6fsHjBhe
+        type: method
+        children: []
+      - id: dom_xm6yMC3fPC
+        type: dom
+        children: []
+  - id: backend_hMYYB26yzB
+    name: 后台
+    type: backend
+    props: null
+    children:
+      - id: props_XDTzsbpzzF
+        type: props
+        children:
+          - id: bPAttr_jZjJ5nRTdX
+            type: bPAttr
+            children: []
+          - id: bPMethod_5Af6az6k6J
+            type: bPMethod
+            children:
+              - id: service_amBQpHZ56h
+                name: 编辑用户信息
+                type: service
+                props:
+                  devId: service_amBQpHZ56h
+                  isOpen: false
+                  jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nif(!param.用户ID){\r\n  _funcCb({code:0,errMsg:'请传入用户ID',result:{}});\r\n  return;\r\n}\r\n\r\nlet editObj = {};\r\nif(param.昵称)editObj.昵称 = param.昵称;\r\nif(param.手机号)editObj.手机号 = param.手机号;\r\n\r\nemitter.on('editUser', ()=>{\r\n  _F('dbTableTemp_6xG6thEJQS').callMethod('editRow',{\r\n      row:editObj,\r\n      condition:{\r\n        _id:param.用户ID,\r\n      },\r\n      success:(data)=>{\r\n        _funcCb({code:200,errMsg:'编辑用户成功',result:data});\r\n      },\r\n      fail:(err)=>{\r\n        _funcCb({code:0,errMsg:'编辑用户失败',result:err});\r\n      }\r\n    });\r\n});\r\n\r\nemitter.emit('editUser');"
+                  inParams:
+                    - 用户ID
+                    - 昵称
+                    - 手机号
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_DE3rN7bad6
+                name: 用户名密码登录
+                type: service
+                props:
+                  devId: service_DE3rN7bad6
+                  isOpen: false
+                  jsCode: "//let 用户信息对象 = 调用 数据表.数据表查询(用户名==用户名，密码 == 密码)\r\nconst emitter = new events.EventEmitter(); \r\nlet userInfo = null;\r\nlet userToken = null;\r\nlet userLoginTokenKey = 'userLoginToken';//用户登录串缓存key\r\nlet userLoginTokenSetKey = 'userLoginTokenSet';//用户登录串缓存集合key \r\nlet userTokenSet = [];//用户登录串缓存key集合\r\nlet multLogin = param.允许多端登录?true:false;\r\nlet useCookie = param.使用cookie?true:false;\r\nlet cookieHost = param.cookie域名?param.cookie域名:'';\r\nlet loginExpire = param.登录有效时长 > 0?param.登录有效时长:3600;\r\n\r\nemitter.on('showError',(errMsg,result)=>{\r\n\t_funcCb({code:0,errMsg,result:result || {}});\r\n});\r\n\r\nif(!param.用户名){\r\n  _funcCb({code:0,errMsg:'请传入用户名',result:{}});\r\n  return;\r\n}\r\n\r\nif(!param.密码){\r\n  _funcCb({code:0,errMsg:'请传入密码',result:{}});\r\n  return;\r\n}\r\n\r\n\r\nemitter.on('getUserInfo', ()=>{\r\n  _F('dbTableTemp_6xG6thEJQS').callMethod('getRow',{\r\n    condition:{\r\n      用户名: param.用户名,\r\n      密码: param.密码,\r\n    },\r\n    success:(data)=>{\r\n      if(Array.isArray(data) && data.length <= 0 ) \r\n      \temitter.emit('noUserInfo');\r\n      else{\r\n\t\t\t\tuserInfo = data[0];\r\n\t\t\t\temitter.emit('getUserToken');\r\n\t\t\t\temitter.emit('setUserLoginTokenKey');\r\n\t\t\t\temitter.emit('getUserTokenSet');\r\n\t\t\t}\r\n      \t\r\n    },\r\n    fail:(err)=>{\r\n      emitter.emit('showError','获取用户信息失败',err);\r\n    }\r\n  });\r\n});\r\n\r\nemitter.on('noUserInfo',()=>{\r\n\t_funcCb({code:0,errMsg:'用户名或密码不正确',result:{}});\r\n});\r\n\r\nemitter.on('setUserLoginTokenKey',()=>{\r\n\tuserLoginTokenKey = `${userLoginTokenKey}:${userToken}`;\r\n\tuserLoginTokenSetKey = `${userLoginTokenSetKey}:${userInfo._id}`;\r\n});\r\n\r\nemitter.on('getUserToken',()=>{\r\n\t_F('service_xk6eian5Dd').call({},(data)=>{\r\n\t\tuserToken = data.result;\r\n\t});\r\n\t\r\n});\r\n\r\nemitter.on('getUserTokenSet',()=>{\r\n\t_F('bCacheTemp_wJfaNQwj3d').callMethod('get',{\r\n\t\t\tkey:userLoginTokenSetKey,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t\tif(data)\r\n\t\t\t\t\tuserTokenSet = JSON.parse(data);\r\n\t\t\t\t\r\n\t\t\t\temitter.emit('checkMultLogin');\r\n\t\t\t\temitter.emit('checkUseCookie');\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n\t\r\n});\r\n\r\nemitter.on('delUserToken',(token)=>{\r\n\t//调用 后台缓存redis组件.缓存删除(用户登录串缓存key)\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('del',{\r\n\t\t\tkey:`userLoginToken:${token}`,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n});\r\n\r\nemitter.on('setUserToken',()=>{\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('set',{\r\n\t\t\tkey:userLoginTokenKey,\r\n\t\t\tvalue:JSON.stringify(userInfo),\r\n\t\t\texpire:loginExpire,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n});\r\n\r\nemitter.on('setCookie',()=>{\r\n\t\t_F('cookie_func').callMethod('set',{\r\n\t\t\tname:'userLoginToken',\r\n\t\t\tvalue:userToken,\r\n\t\t\texpire:loginExpire,\r\n\t\t\tpath:'/',\r\n\t\t\tdomain: cookieHost,\r\n\t\t\t//sameSite: 'None'\r\n\t\t});\r\n});\r\n\r\nemitter.on('setUserTokenSet',()=>{\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('set',{\r\n\t\t\tkey:userLoginTokenSetKey,\r\n\t\t\tvalue:JSON.stringify(userTokenSet),\r\n\t\t\texpire:3600,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n});\r\n\r\nemitter.on('checkMultLogin',()=>{\r\n\tuserInfo.multLogin = multLogin;\r\n\tconsole.log('checkMultLogin',userTokenSet,!multLogin);\r\n\tif(!multLogin){\r\n\t\tuserTokenSet.map(item => {\r\n\t\t\temitter.emit('delUserToken',item);\r\n\t\t});\r\n\t\tuserTokenSet = [];\r\n\t}\r\n\tuserTokenSet.push(userToken);\r\n\t//调用 后台缓存redis组件.缓存设置(用户登录串缓存key集合,tokenSet,登录有效时长)\r\n\temitter.emit('setUserTokenSet');\r\n\t//调用 后台缓存redis组件.缓存设置(用户登录串缓存key:token,用户信息对象,登录有效时长)\r\n\temitter.emit('setUserToken');\r\n});\r\n\r\nemitter.on('checkUseCookie',()=>{\r\n\tif(useCookie){\r\n\t\t//调用 后台cookie组件.cookie设置(用户登录串缓存key,token,登录有效时长)\r\n\t\temitter.emit('setCookie');\r\n\t}else{\r\n\t\tuserInfo.token = userToken;\r\n\t}\r\n\t\r\n\t_funcCb({code:200,errMsg:'ok',result:userInfo});\r\n});\r\n\r\nemitter.emit('getUserInfo');"
+                  inParams:
+                    - 用户名
+                    - 密码
+                    - 登录有效时长
+                    - 使用cookie
+                    - 允许多端登录
+                    - cookie域名
+                  outParams:
+                    - code
+                    - errMsg
+                    - result
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_5xT7BspmbA
+                name: 用户名密码注册
+                type: service
+                props:
+                  devId: service_5xT7BspmbA
+                  isOpen: false
+                  jsCode: |
+                    function generateMerchantNo() {
+                      let date = new Date();
+                      let merchantNo = date.getTime() + Math.floor(Math.random()*1000);
+                      return merchantNo;
+                    }
+                    const merchantNo = generateMerchantNo();
+
+                    const emitter = new events.EventEmitter(); 
+
+                    if(!param.用户名){
+                      _funcCb({code:0,errMsg:'请传入用户名',result:{}});
+                      return;
+                    }
+
+                    if(!param.密码){
+                      _funcCb({code:0,errMsg:'请传入密码',result:{}});
+                      return;
+                    }
+
+                    emitter.on('getUserInfo', ()=>{
+                      _F('dbTableTemp_6xG6thEJQS').callMethod('getRow',{
+                        condition:{
+                          用户名: param.用户名,
+                          密码: param.密码,
+                        },
+                        success:(data)=>{
+                          if(Array.isArray(data) && data.length <= 0 ) 
+                            emitter.emit('addUser');
+                          else
+                            emitter.emit('hadUser');
+                        },
+                        fail:()=>{
+                        }
+                      });
+                    });
+
+                    emitter.on('hadUser',()=>{
+                      _funcCb({code:0,errMsg:'用户已注册，请直接登录',result:{}});
+                    });
+                      
+                    emitter.on('addUser',()=>{
+                        let userInfo = {};
+                        _F('dbTableTemp_6xG6thEJQS').callMethod('addRow',{
+                          row:{
+                            商户号: merchantNo,
+                            用户名: param.用户名,
+                            密码: param.密码,
+                          },
+                          success:(data)=>{
+                            _funcCb({code:200,errMsg:'注册成功',result:data});
+                          },
+                          fail:()=>{
+                          }
+                        });
+                      
+                    });
+
+                    emitter.emit('getUserInfo');
+                  inParams:
+                    - 用户名
+                    - 密码
+                  outParams:
+                    - code
+                    - errMsg
+                    - result
+                  openApiPath: ''
+                  inParamsDebug:
+                    密码: '123123'
+                    用户名: '13800138000'
+              - id: service_8rNTjXTpbf
+                name: 获取当前登录用户信息
+                type: service
+                props:
+                  devId: service_8rNTjXTpbf
+                  isOpen: false
+                  jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nlet userToken = param.token;\r\nlet userLoginTokenKey = 'userLoginToken';//用户登录串缓存key \r\nlet userInfo = null;\r\n\r\n\r\nemitter.on('getUserInfo',()=>{\r\n\tif(userToken){\r\n\t\tuserLoginTokenKey = `${userLoginTokenKey}:${userToken}`;\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('get',{\r\n\t\t\t\tkey:userLoginTokenKey,\r\n\t\t\t\tsuccess:(data)=>{\r\n\t\t\t\t\tconsole.log('getUserInfo.success',data);\r\n\t\t\t\t\tif(data){\r\n\t\t\t\t\t\tuserInfo = JSON.parse(data);\r\n\t\t\t\t\t\t_funcCb({code:200,errMsg:'已登录',result:userInfo});\r\n\t\t\t\t\t}\r\n\t\t\t\t\telse \r\n\t\t\t\t\t\temitter.emit('noUserInfo');\r\n\t\t\t\t},\r\n\t\t\t\tfail:(err)=>{\r\n\t\t\t\t\t_funcCb({code:0,errMsg:'获取登录信息缓存失败',result:err});\r\n\t\t\t\t}\r\n\t\t\t});\r\n\t\t\r\n\t}\r\n\telse \r\n\t\temitter.emit('noUserInfo');\r\n});\r\n\r\nemitter.on('getUserTokenCookie',()=>{\r\n\t\tuserToken = _F('cookie_func').callMethod('get',{\r\n\t\t\tname:userLoginTokenKey\r\n\t\t});\r\n});\r\n\r\nemitter.on('noUserInfo',()=>{\r\n\t_funcCb({code:0,errMsg:'请先登录',result:{}});\r\n});\r\n\r\nif(!userToken)\r\n\temitter.emit('getUserTokenCookie');\r\n\r\nemitter.emit('getUserInfo');"
+                  inParams:
+                    - token
+                  outParams:
+                    - code
+                    - errMsg
+                    - result
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_hB82nRtmDR
+                name: 退出登录
+                type: service
+                props:
+                  devId: service_hB82nRtmDR
+                  isOpen: false
+                  jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nlet userToken = param.token;\r\nlet cookieHost = param.cookie域名?param.cookie域名:'';\r\nlet userLoginTokenKey = 'userLoginToken';//用户登录串缓存key \r\nlet userInfo = null;\r\n\r\n\r\nemitter.on('getUserInfo',()=>{\r\n\tif(userToken){\r\n\t\tlet userLoginTokenCacheKey = `${userLoginTokenKey}:${userToken}`;\r\n\t\t  _F('bCacheTemp_wJfaNQwj3d').callMethod('get',{\r\n\t\t\t\tkey:userLoginTokenCacheKey,\r\n\t\t\t\tsuccess:(data)=>{\r\n\t\t\t\t\tconsole.log('getUserInfo.success',data);\r\n\t\t\t\t\tif(data){\r\n\t\t\t\t\t\temitter.emit('delUserTokenCache',userLoginTokenCacheKey);\r\n\t\t\t\t\t}\r\n\t\t\t\t\telse \r\n\t\t\t\t\t\temitter.emit('noUserInfo');\r\n\t\t\t\t},\r\n\t\t\t\tfail:(err)=>{\r\n\t\t\t\t\t_funcCb({code:0,errMsg:'获取登录信息缓存失败',result:err});\r\n\t\t\t\t}\r\n\t\t\t});\r\n\t\t\r\n\t}\r\n\telse \r\n\t\temitter.emit('noUserInfo');\r\n});\r\n\r\nemitter.on('getUserTokenCookie',()=>{\r\n\t\tuserToken = _F('cookie_func').callMethod('get',{\r\n\t\t\tname:userLoginTokenKey\r\n\t\t});\r\n});\r\n\r\nemitter.on('noUserInfo',()=>{\r\n\t_funcCb({code:0,errMsg:'请先登录',result:{}});\r\n});\r\n\r\nemitter.on('delUserTokenCookie',()=>{\r\n\t_F('cookie_func').callMethod('del',{\r\n    name:userLoginTokenKey,\r\n\t\texpire:-3600,\r\n\t\tpath:'/',\r\n\t\tdomain: cookieHost,\r\n  });\r\n  _funcCb({code:200,errMsg:'退出登录成功',result:{}});\r\n});\r\n\r\nemitter.on('delUserTokenCache',(userLoginTokenCacheKey)=>{\r\n\t_F('bCacheTemp_wJfaNQwj3d').callMethod('del',{\r\n    key:userLoginTokenCacheKey,\r\n    success:(data)=>{\r\n      emitter.emit('delUserTokenCookie');\r\n    },\r\n    fail:(err)=>{\r\n      _funcCb({code:0,errMsg:'删除登录信息缓存失败',result:err});\r\n    }\r\n  });\r\n});\r\n\r\nif(!userToken)\r\n\temitter.emit('getUserTokenCookie');\r\n\r\nemitter.emit('getUserInfo');"
+                  inParams:
+                    - token
+                    - cookie域名
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_DTz27rE4GR
+                name: openid密码注册及登录
+                type: service
+                props:
+                  devId: service_DTz27rE4GR
+                  isOpen: false
+                  jsCode: "//let 用户信息对象 = 调用 数据表.数据表查询(用户名==用户名)\r\nconst emitter = new events.EventEmitter();\r\n\r\nif (!param.openid) {\r\n  _funcCb({ code: 0, errMsg: '请传入openid', result: {} });\r\n  return;\r\n}\r\n\r\nif (!param.密码) {\r\n  _funcCb({ code: 0, errMsg: '请传入密码', result: {} });\r\n  return;\r\n}\r\n\r\nemitter.on('getUserInfo', () => {\r\n  _F('dbTableTemp_6xG6thEJQS').callMethod('getRow', {\r\n    condition: {\r\n      openid: param.openid,\r\n      密码: param.密码,\r\n    },\r\n    success: (data) => {\r\n      if (Array.isArray(data) && data.length <= 0)\r\n        emitter.emit('addUser');\r\n      else\r\n        emitter.emit('hadUser');\r\n    },\r\n    fail: () => {\r\n    }\r\n  });\r\n});\r\n\r\nemitter.on('hadUser', () => {\r\n  //_funcCb({code:0,errMsg:'openid已注册，请直接登录',result:{}});\r\n  emitter.emit('openidLogin');\r\n});\r\n\r\nemitter.on('openidLogin', () => {\r\n  _F('service_edcBYDzKcE').call({ openid: param.openid, 使用cookie: 0 }, (data) => {\r\n    _funcCb(data);\r\n  });\r\n});\r\n\r\nemitter.on('addUser', () => {\r\n  let userInfo = {};\r\n  _F('dbTableTemp_6xG6thEJQS').callMethod('addRow', {\r\n    row: {\r\n      openid: param.openid,\r\n      密码: param.密码,\r\n    },\r\n    success: (data) => {\r\n      //_funcCb({ code: 200, errMsg: '注册成功', result: data });\r\n      emitter.emit('openidLogin');\r\n    },\r\n    fail: () => {\r\n    }\r\n  });\r\n\r\n});\r\n\r\nemitter.emit('getUserInfo');"
+                  inParams:
+                    - openid
+                    - 密码
+                  outParams:
+                    - code
+                    - errMsg
+                    - result
+                  openApiPath: ''
+                  inParamsDebug:
+                    openid: ''
+                    密码: '123123'
+              - id: service_edcBYDzKcE
+                name: openid登录
+                type: service
+                props:
+                  devId: service_edcBYDzKcE
+                  isOpen: false
+                  jsCode: "//let 用户信息对象 = 调用 数据表.数据表查询(openid==openid，密码 == 密码)\r\nconst emitter = new events.EventEmitter(); \r\nlet userInfo = null;\r\nlet userToken = null;\r\nlet userLoginTokenKey = 'userLoginToken';//用户登录串缓存key\r\nlet userLoginTokenSetKey = 'userLoginTokenSet';//用户登录串缓存集合key \r\nlet userTokenSet = [];//用户登录串缓存key集合\r\nlet multLogin = param.允许多端登录?true:false;\r\nlet useCookie = param.使用cookie?true:false;\r\nlet cookieHost = param.cookie域名?param.cookie域名:'';\r\nlet loginExpire = param.登录有效时长 > 0?param.登录有效时长:3600;\r\n\r\nemitter.on('showError',(errMsg,result)=>{\r\n\t_funcCb({code:0,errMsg,result:result || {}});\r\n});\r\n\r\nif(!param.openid){\r\n  _funcCb({code:0,errMsg:'请传入openid',result:{}});\r\n  return;\r\n}\r\n\r\nemitter.on('getUserInfo', ()=>{\r\n  _F('dbTableTemp_6xG6thEJQS').callMethod('getRow',{\r\n    condition:{\r\n      openid: param.openid,\r\n    },\r\n    success:(data)=>{\r\n      if(Array.isArray(data) && data.length <= 0 ) \r\n      \temitter.emit('noUserInfo');\r\n      else{\r\n\t\t\t\tuserInfo = data[0];\r\n\t\t\t\temitter.emit('getUserToken');\r\n\t\t\t\temitter.emit('setUserLoginTokenKey');\r\n\t\t\t\temitter.emit('getUserTokenSet');\r\n\t\t\t}\r\n      \t\r\n    },\r\n    fail:(err)=>{\r\n      emitter.emit('showError','获取用户信息失败',err);\r\n    }\r\n  });\r\n});\r\n\r\nemitter.on('noUserInfo',()=>{\r\n\t_funcCb({code:0,errMsg:'openid不正确',result:{}});\r\n});\r\n\r\nemitter.on('setUserLoginTokenKey',()=>{\r\n\tuserLoginTokenKey = `${userLoginTokenKey}:${userToken}`;\r\n\tuserLoginTokenSetKey = `${userLoginTokenSetKey}:${userInfo._id}`;\r\n});\r\n\r\nemitter.on('getUserToken',()=>{\r\n\t_F('service_xk6eian5Dd').call({},(data)=>{\r\n\t\tuserToken = data.result;\r\n\t});\r\n\t\r\n});\r\n\r\nemitter.on('getUserTokenSet',()=>{\r\n\t_F('bCacheTemp_wJfaNQwj3d').callMethod('get',{\r\n\t\t\tkey:userLoginTokenSetKey,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t\tif(data)\r\n\t\t\t\t\tuserTokenSet = JSON.parse(data);\r\n\t\t\t\t\r\n\t\t\t\temitter.emit('checkMultLogin');\r\n\t\t\t\temitter.emit('checkUseCookie');\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n\t\r\n});\r\n\r\nemitter.on('delUserToken',(token)=>{\r\n\t//调用 后台缓存redis组件.缓存删除(用户登录串缓存key)\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('del',{\r\n\t\t\tkey:`userLoginToken:${token}`,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n});\r\n\r\nemitter.on('setUserToken',()=>{\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('set',{\r\n\t\t\tkey:userLoginTokenKey,\r\n\t\t\tvalue:JSON.stringify(userInfo),\r\n\t\t\texpire:loginExpire,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n});\r\n\r\nemitter.on('setCookie',()=>{\r\n\t\t_F('cookie_func').callMethod('set',{\r\n\t\t\tname:'userLoginToken',\r\n\t\t\tvalue:userToken,\r\n\t\t\texpire:loginExpire,\r\n\t\t\tpath:'/',\r\n\t\t\tdomain: cookieHost,\r\n\t\t\t//sameSite: 'None'\r\n\t\t});\r\n});\r\n\r\nemitter.on('setUserTokenSet',()=>{\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('set',{\r\n\t\t\tkey:userLoginTokenSetKey,\r\n\t\t\tvalue:JSON.stringify(userTokenSet),\r\n\t\t\texpire:3600,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n});\r\n\r\nemitter.on('checkMultLogin',()=>{\r\n\tuserInfo.multLogin = multLogin;\r\n\tconsole.log('checkMultLogin',userTokenSet,!multLogin);\r\n\tif(!multLogin){\r\n\t\tuserTokenSet.map(item => {\r\n\t\t\temitter.emit('delUserToken',item);\r\n\t\t});\r\n\t\tuserTokenSet = [];\r\n\t}\r\n\tuserTokenSet.push(userToken);\r\n\t//调用 后台缓存redis组件.缓存设置(用户登录串缓存key集合,tokenSet,登录有效时长)\r\n\temitter.emit('setUserTokenSet');\r\n\t//调用 后台缓存redis组件.缓存设置(用户登录串缓存key:token,用户信息对象,登录有效时长)\r\n\temitter.emit('setUserToken');\r\n});\r\n\r\nemitter.on('checkUseCookie',()=>{\r\n\tif(useCookie){\r\n\t\t//调用 后台cookie组件.cookie设置(用户登录串缓存key,token,登录有效时长)\r\n\t\temitter.emit('setCookie');\r\n\t}else{\r\n\t\tuserInfo.token = userToken;\r\n\t}\r\n\t\r\n\t_funcCb({code:200,errMsg:'ok',result:userInfo});\r\n});\r\n\r\nemitter.emit('getUserInfo');"
+                  inParams:
+                    - openid
+                    - 登录有效时长
+                    - 使用cookie
+                    - 允许多端登录
+                    - cookie域名
+                  outParams:
+                    - code
+                    - errMsg
+                    - result
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_c2SDBJeYBs
+                name: 手机号登录
+                type: service
+                props:
+                  devId: service_c2SDBJeYBs
+                  isOpen: false
+                  jsCode: "//let 用户信息对象 = 调用 数据表.数据表查询(openid==openid，密码 == 密码)\r\nconst emitter = new events.EventEmitter(); \r\nlet userInfo = null;\r\nlet userToken = null;\r\nlet userLoginTokenKey = 'userLoginToken';//用户登录串缓存key\r\nlet userLoginTokenSetKey = 'userLoginTokenSet';//用户登录串缓存集合key \r\nlet userTokenSet = [];//用户登录串缓存key集合\r\nlet multLogin = param.允许多端登录?true:false;\r\nlet useCookie = param.使用cookie?true:false;\r\nlet cookieHost = param.cookie域名?param.cookie域名:'';\r\nlet loginExpire = param.登录有效时长 > 0?param.登录有效时长:3600;\r\n\r\nemitter.on('showError',(errMsg,result)=>{\r\n\t_funcCb({code:0,errMsg,result:result || {}});\r\n});\r\n\r\nif(!param.手机号){\r\n  _funcCb({code:0,errMsg:'请传入手机号',result:{}});\r\n  return;\r\n}\r\n\r\nemitter.on('getUserInfo', ()=>{\r\n  _F('dbTableTemp_6xG6thEJQS').callMethod('getRow',{\r\n    condition:{\r\n      手机号: param.手机号,\r\n    },\r\n    success:(data)=>{\r\n      if(Array.isArray(data) && data.length <= 0 ) \r\n      \temitter.emit('noUserInfo');\r\n      else{\r\n\t\t\t\tuserInfo = data[0];\r\n\t\t\t\temitter.emit('getUserToken');\r\n\t\t\t\temitter.emit('setUserLoginTokenKey');\r\n\t\t\t\temitter.emit('getUserTokenSet');\r\n\t\t\t}\r\n      \t\r\n    },\r\n    fail:(err)=>{\r\n      emitter.emit('showError','获取用户信息失败',err);\r\n    }\r\n  });\r\n});\r\n\r\nemitter.on('noUserInfo',()=>{\r\n\t_funcCb({code:0,errMsg:'手机号不正确',result:{}});\r\n});\r\n\r\nemitter.on('setUserLoginTokenKey',()=>{\r\n\tuserLoginTokenKey = `${userLoginTokenKey}:${userToken}`;\r\n\tuserLoginTokenSetKey = `${userLoginTokenSetKey}:${userInfo._id}`;\r\n});\r\n\r\nemitter.on('getUserToken',()=>{\r\n\t_F('service_xk6eian5Dd').call({},(data)=>{\r\n\t\tuserToken = data.result;\r\n\t});\r\n\t\r\n});\r\n\r\nemitter.on('getUserTokenSet',()=>{\r\n\t_F('bCacheTemp_wJfaNQwj3d').callMethod('get',{\r\n\t\t\tkey:userLoginTokenSetKey,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t\tif(data)\r\n\t\t\t\t\tuserTokenSet = JSON.parse(data);\r\n\t\t\t\t\r\n\t\t\t\temitter.emit('checkMultLogin');\r\n\t\t\t\temitter.emit('checkUseCookie');\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n\t\r\n});\r\n\r\nemitter.on('delUserToken',(token)=>{\r\n\t//调用 后台缓存redis组件.缓存删除(用户登录串缓存key)\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('del',{\r\n\t\t\tkey:`userLoginToken:${token}`,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n});\r\n\r\nemitter.on('setUserToken',()=>{\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('set',{\r\n\t\t\tkey:userLoginTokenKey,\r\n\t\t\tvalue:JSON.stringify(userInfo),\r\n\t\t\texpire:loginExpire,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n});\r\n\r\nemitter.on('setCookie',()=>{\r\n\t\t_F('cookie_func').callMethod('set',{\r\n\t\t\tname:'userLoginToken',\r\n\t\t\tvalue:userToken,\r\n\t\t\texpire:loginExpire,\r\n\t\t\tpath:'/',\r\n\t\t\tdomain: cookieHost,\r\n\t\t\t//sameSite: 'None'\r\n\t\t});\r\n});\r\n\r\nemitter.on('setUserTokenSet',()=>{\r\n\t\t_F('bCacheTemp_wJfaNQwj3d').callMethod('set',{\r\n\t\t\tkey:userLoginTokenSetKey,\r\n\t\t\tvalue:JSON.stringify(userTokenSet),\r\n\t\t\texpire:3600,\r\n\t\t\tsuccess:(data)=>{\r\n\t\t\t},\r\n\t\t\tfail:()=>{\r\n\t\t\t}\r\n\t\t});\r\n});\r\n\r\nemitter.on('checkMultLogin',()=>{\r\n\tuserInfo.multLogin = multLogin;\r\n\tconsole.log('checkMultLogin',userTokenSet,!multLogin);\r\n\tif(!multLogin){\r\n\t\tuserTokenSet.map(item => {\r\n\t\t\temitter.emit('delUserToken',item);\r\n\t\t});\r\n\t\tuserTokenSet = [];\r\n\t}\r\n\tuserTokenSet.push(userToken);\r\n\t//调用 后台缓存redis组件.缓存设置(用户登录串缓存key集合,tokenSet,登录有效时长)\r\n\temitter.emit('setUserTokenSet');\r\n\t//调用 后台缓存redis组件.缓存设置(用户登录串缓存key:token,用户信息对象,登录有效时长)\r\n\temitter.emit('setUserToken');\r\n});\r\n\r\nemitter.on('checkUseCookie',()=>{\r\n\tif(useCookie){\r\n\t\t//调用 后台cookie组件.cookie设置(用户登录串缓存key,token,登录有效时长)\r\n\t\temitter.emit('setCookie');\r\n\t}else{\r\n\t\tuserInfo.token = userToken;\r\n\t}\r\n\t\r\n\t_funcCb({code:200,errMsg:'ok',result:userInfo});\r\n});\r\n\r\nemitter.emit('getUserInfo');"
+                  inParams:
+                    - 手机号
+                    - 登录有效时长
+                    - 使用cookie
+                    - 允许多端登录
+                    - cookie域名
+                  outParams:
+                    - code
+                    - errMsg
+                    - result
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_rjeDJp8KpH
+                name: 获取商户信息
+                type: service
+                props:
+                  jsCode: |
+                    const emitter = new events.EventEmitter();
+
+                    let merchantInfo = null;
+
+                    emitter.on('getCache', () => {
+                      let cacheKey = `merchantInfo:${param.商户号}`;
+                      
+                      _F('bCacheTemp_wJfaNQwj3d').callMethod('get', {
+                        key: cacheKey,
+                        success: (data) => {
+                          if (data) {
+                            merchantInfo = JSON.parse(data);
+                            emitter.emit('returnData');  
+                          } else {
+                            emitter.emit('queryDb');
+                          }
+                        },
+                        fail: (err) => {
+                          console.log('获取缓存失败', err);
+                          emitter.emit('queryDb');
+                        }
+                      });
+                      
+                    });
+
+                    emitter.on('queryDb', () => {
+                      _F('dbTableTemp_6xG6thEJQS').callMethod('getRow', {
+                        condition: {
+                          商户号: param.商户号  
+                        },
+                        success: (data) => {
+                          if (data && data.length > 0) {
+                            merchantInfo = data[0];
+                            let cacheKey = `merchantInfo:${param.商户号}`;
+                            let cacheData = JSON.stringify(merchantInfo);
+                            
+                            _F('bCacheTemp_wJfaNQwj3d').callMethod('set', {
+                              key: cacheKey,
+                              value: cacheData,
+                              success: () => {
+                                emitter.emit('returnData');
+                              }
+                            });
+                            
+                          } else {
+                            emitter.emit('noData');  
+                          }
+                        },
+                        fail: (err) => {
+                          console.log('查询数据库失败', err);
+                          emitter.emit('returnError');
+                        }
+                      });
+                    });
+
+                    emitter.on('noData', () => {
+                      _funcCb({code: 0, errMsg: '没有查询到该商户数据', result: null});
+                    });
+
+                    emitter.on('returnError', () => {
+                      _funcCb({code: 0, errMsg: '查询商户数据错误', result: null});  
+                    });
+
+                    emitter.on('returnData', () => {
+                      _funcCb({code: 200, errMsg: 'ok', result: merchantInfo});
+                    });
+
+                    emitter.emit('getCache');
+                  inParams:
+                    - 商户号
+                  outParams:
+                    - code
+                    - errMsg
+                    - result
+      - id: state_brktiPxPbp
+        type: state
+        children: []
+      - id: services_AkMYeYdYhZ
+        type: services
+        children:
+          - id: group_ZY7j4rRFaE
+            name: 数据表相关
+            type: group
+            props:
+              devId: group_ZY7j4rRFaE
+            children:
+              - id: dbTableTemp_6xG6thEJQS
+                name: 用户表
+                type: dbTableTemp
+                props:
+                  devId: dbTableTemp_6xG6thEJQS
+                  fields:
+                    - columnName: _id
+                      columnType: int
+                    - comment: 商户号,自动生成
+                      columnName: 商户号
+                      columnType: varchar(32)
+                    - columnName: 用户名
+                      columnType: text
+                    - columnName: openid
+                      columnType: text
+                    - columnName: 手机号
+                      columnType: text
+                    - columnName: 昵称
+                      columnType: text
+                    - columnName: 密码
+                      columnType: text
+                    - columnName: _create
+                      columnType: int
+                    - columnName: _update
+                      columnType: int
+              - id: bCacheTemp_wJfaNQwj3d
+                name: 用户登录信息缓存
+                type: bCacheTemp
+                props:
+                  devId: bCacheTemp_wJfaNQwj3d
+          - id: group_rTsCTAeH2W
+            name: 内部方法
+            type: group
+            props:
+              devId: group_rTsCTAeH2W
+            children:
+              - id: service_xk6eian5Dd
+                name: 用户token生成
+                type: service
+                props:
+                  devId: service_xk6eian5Dd
+                  isOpen: false
+                  jsCode: >-
+                    let token =
+                    _F('string_func').callMethod('randomString',{length:32});
+
+
+                    _funcCb({code:200,errMsg:'ok',result:token});
+                  inParams: []
+                  outParams:
+                    - code
+                    - errMsg
+                    - result
+                  openApiPath: ''
+                  inParamsDebug: {}
+  - id: modules_ZQQHbsTjXz
+    name: 模块
+    type: modules
+    props: {}

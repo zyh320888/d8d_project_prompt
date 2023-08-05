@@ -1,0 +1,382 @@
+id: module_Sb5PysZ8D4
+name: 人才浏览页面  
+type: module
+props: {}
+children:
+
+  # 前端定义
+  - id: front_DaZrCyXW6K  
+    type: front
+    props:
+      onLoadJs: "() => { \r\n  _F('jsFunc_getTalentList').call() \r\n}"
+    children:
+    
+      # 定义页面状态
+      - id: state_SRFayNkG3w
+        type: state
+        children:
+        
+          # 搜索关键词  
+          - id: variable_cXsK86j4xG
+            name: 搜索关键词
+            type: variable
+            props:
+              valueJs: ''
+              valueType: js
+              
+          # 选中的过滤条件 
+          - id: variable_BB2XGY3kBT
+            name: 选中的行业分类
+            type: variable
+            props:
+              valueJs: []
+              valueType: js
+              
+          # 人才列表
+          - id: variable_Sa2zy28TBj
+            name: 人才列表
+            type: variable 
+            props:
+              valueJs: []
+              valueType: js
+          
+          # 当前页码  
+          - id: variable_r34kCXbAzp
+            name: 当前页码
+            type: variable
+            props:
+              valueJs: '1'
+              valueType: js
+              
+      # 定义页面方法
+      - id: method_DWdDFGm4ek
+        type: method
+        children:
+        
+          # 获取人才列表
+          - id: jsFunc_getTalentList
+            name: 获取人才列表
+            type: jsFunc
+            props:
+              jsCode: |-
+                // TODO: 调用人才列表接口
+                
+                // 格式化发布日期
+                function formatPubDate(timestamp) {
+                  const dayjs = _F('date_func').call('dayjs'); 
+                  return dayjs(timestamp).format('YYYY-MM-DD');
+                }
+                
+                _F('variable_Sa2zy28TBj').callMethod('set', [
+                  {
+                    头像: '/avatar1.png',
+                    姓名: '李四',
+                    发布日期: formatPubDate(Date.now()), 
+                    技能: '室内装修',
+                    期望薪资: '时薪25元',
+                    工作地点: '成都市双流区',
+                    工作年限: '3年',
+                  },
+                  {
+                    头像: '/avatar2.png', 
+                    姓名: '王五',
+                    发布日期: formatPubDate(Date.now()),
+                    技能: '货运代理',
+                    期望薪资: '日薪120元',
+                    工作地点: '成都市高新区',
+                    工作年限: '应届毕业生',
+                  }
+                ]);
+                
+          # 搜索人才  
+          - id: jsFunc_searchTalents
+            name: 搜索人才
+            type: jsFunc
+            props:
+              jsCode: |-
+                _F('variable_cXsK86j4xG').callMethod('set', param.关键字);
+                _F('jsFunc_A3kmYHiGW6').call();
+                
+          # 筛选人才
+          - id: jsFunc_filterTalents
+            name: 筛选人才
+            type: jsFunc
+            props:
+              jsCode: |-
+                _F('variable_BB2XGY3kBT').callMethod('set', param.行业分类);
+                _F('jsFunc_A3kmYHiGW6').call();
+          
+          # 加载下一页  
+          - id: jsFunc_switchPage
+            name: 加载下一页
+            type: jsFunc
+            props:
+              jsCode: |+
+                const page = _F('variable_r34kCXbAzp').callMethod('get');
+
+                _F('variable_r34kCXbAzp').callMethod('set', Number(page) + 1, () => {
+                  _F('jsFunc_getTalentList').call();
+                });
+                
+          # 刷新人才列表
+          - id: jsFunc_A3kmYHiGW6
+            name: 刷新人才列表
+            type: jsFunc
+            props:
+              jsCode: |+
+                _F('variable_Sa2zy28TBj').callMethod('set', []);
+                _F('variable_r34kCXbAzp').callMethod('set', 1, () => {
+                  _F('jsFunc_getTalentList').call();
+                });
+
+      # 定义页面结构           
+      - id: dom_8pidWax5Xw
+        type: dom
+        children:
+        
+          # 顶部搜索栏
+          - id: navbar_kkJptABisN
+            type: navbar
+            props:
+              back: ''
+            children:
+            
+              - id: searchbar_A4JWwaWpnn
+                type: searchbar
+                props:
+                  valueJs: _F('variable_cXsK86j4xG').callMethod('get')
+                  onSearchJs: "(val) => { \r\n  _F('jsFunc_searchTalents').call({关键字:val}) \r\n}"
+                  placeholder: 请输入关键词
+                  
+          # 顶部筛选菜单
+          - id: menu_Rk2jjKa7w4 
+            type: menu
+            children:
+            
+              - id: menu.item_wEWSHJmNtf
+                name: 行业分类
+                type: menu.item
+                props:
+                  titleJs: _F('variable_BB2XGY3kBT').callMethod('get') || '行业分类'
+                  optionsJs: "[\r\n  {text: '不限', value: ''},\r\n  {text: '服务业', value: '服务业'},\r\n]\r\n"
+                  titleType: js
+                  onChangeJs: |
+                    (event) => {
+                      _F('jsFunc_filterTalents').call({行业分类: event.value})
+                    }
+
+          # 人才列表          
+          - id: row_QzeFPBPpQk
+            type: row
+            props:
+              style:
+                height: calc(100vh - 251px)
+                overflow: hidden auto
+                paddingLeft: ''
+                marginBottom: 100px
+                paddingRight: ''
+              hideScroll: true
+            children:
+            
+              - id: infiniteloading_H7RXH5hJdR
+                type: infiniteloading
+                props:
+                  onRefreshJs: |
+                    (done) => {
+                      _F('jsFunc_A3kmYHiGW6').call();
+                      done();
+                    }
+                  pullRefresh: true
+                  onLoadMoreJs: |
+                    (done) => {
+                      _F('jsFunc_switchPage').call();
+                      done();
+                    }
+                  
+                children:
+                
+                  - id: for_CTWabXz83c
+                    type: for
+                    props:
+                      dataSourceJs: _F('variable_Sa2zy28TBj').callMethod('get')
+                    children:
+
+                      - id: cell_fb6AiFse5T
+                        type: cell
+                        props:
+                          titleJs: ''
+                          onClickJs: |
+                            (event) => {
+                              // TODO: 点击查看详情
+                            }
+                              
+                        children:
+                        
+                          # 人才信息
+                          - id: row_XkRTZQxrCQ
+                            type: row
+                            children:
+                              
+                              - id: row_fiWaQjYnyH
+                                type: row
+                                props:
+                                  type: flex
+                                children:
+
+                                  - id: col_Wx8ssYZFTT
+                                    type: col
+                                    props:
+                                      span: 12
+                                      alignItems: flex-start
+                                    children:
+                                      
+                                      - id: span_khpfWdJ5bP
+                                        type: span
+                                        props:
+                                          style:
+                                            fontWeight: bold
+                                          contentJs: >-
+                                            _F('for_CTWabXz83c').callMethod('getItem').姓名
+                                            
+                                  - id: col_pN3YZPKMsX
+                                    type: col
+                                    props:
+                                      span: 12
+                                      style:
+                                        textAlign: right
+                                      alignItems: flex-end
+                                    children:
+                                      
+                                      - id: span_NY5aaDEMZA
+                                        type: span
+                                        props:
+                                          style:
+                                            color: red
+                                            fontWeight: bold
+                                          contentJs: >-
+                                            _F('for_CTWabXz83c').callMethod('getItem').期望薪资
+                              
+                              - id: row_fiWaQjYnyH
+                                type: row
+                                props:
+                                  type: flex
+                                children:
+
+                                  - id: col_JbJdS25BQ4
+                                    type: col
+                                    props:
+                                      span: 12
+                                      alignItems: flex-start
+                                    children:
+                                      
+                                      - id: tag_4jJpaFz4mK
+                                        type: tag
+                                        props:
+                                          style:
+                                            color: '#999999'
+                                            background: '#E9E9E9'
+                                            marginRight: 5px
+                                        children:
+                                          
+                                          - id: span_bJeQdAANPj
+                                            type: span
+                                            props:
+                                              style:
+                                                fontSize: 12px
+                                              contentJs: >-
+                                                _F('for_CTWabXz83c').callMethod('getItem').技能
+                                  
+                                  - id: col_FzBMhJdTc7
+                                    type: col
+                                    props:
+                                      span: 12
+                                      style:
+                                        textAlign: right
+                                      alignItems: flex-end
+                                    children:
+                                      
+                                      - id: span_S4sskkxykY
+                                        type: span
+                                        props:
+                                          style:
+                                            color: null
+                                            fontSize: 12px
+                                          contentJs: >-
+                                            _F('for_CTWabXz83c').callMethod('getItem').发布日期
+                              
+                              # 分割线
+                              - id: divider_aHkQchF4Wj
+                                type: divider
+                                props:
+                                  color: null
+                                  
+                              - id: row_RefJiGaJBW
+                                type: row
+                                props:
+                                  type: flex
+                                children:
+
+                                  - id: col_nX7Yrhhc6J
+                                    type: col
+                                    props:
+                                      span: 12
+                                      alignItems: flex-start
+                                    children:
+                                      
+                                      - id: span_dCM3KtDHZW
+                                        type: span
+                                        props:
+                                          style:
+                                            fontSize: 12px
+                                          contentJs: >-
+                                            _F('for_CTWabXz83c').callMethod('getItem').工作地点
+                                            
+                                  - id: col_7bNb6Py7pr
+                                    type: col
+                                    props:
+                                      span: 12
+                                      style:
+                                        textAlign: right
+                                      alignItems: flex-end
+                                    children:
+                                      
+                                      - id: span_S4sskkxykY
+                                        type: span
+                                        props:
+                                          style:
+                                            fontSize: 12px
+                                          contentJs: >-
+                                            _F('for_CTWabXz83c').callMethod('getItem').工作年限
+          
+          # 底部标签栏
+          - id: tabbar_tkjft2E6s3
+            type: tabbar
+            props:
+              fixed: true
+              safeArea: true
+            children:
+              - id: tabbar.item_nciMRHjf3B
+                type: tabbar.item
+                props:
+                  icon: home
+                  title: 首页
+              - id: tabbar.item_HMD5bk5RGK
+                type: tabbar.item
+                props:
+                  icon: activity
+                  title: 招聘广场
+              - id: tabbar.item_zWhYA8jAxa
+                type: tabbar.item
+                props:
+                  icon: release
+                  title: 发布
+              - id: tabbar.item_Z5ps7bhMbA
+                type: tabbar.item
+                props:
+                  icon: activity
+                  title: 用工大厅
+              - id: tabbar.item_G4acBX5e7R
+                type: tabbar.item
+                props:
+                  icon: user
+                  title: 我的

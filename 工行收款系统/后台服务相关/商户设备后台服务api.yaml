@@ -1,0 +1,246 @@
+id: group_SjTTx7Ymdi
+name: 商户设备中台相关  
+type: group
+props: null
+children:
+  - id: bComponent_QPh7NtTCfp  
+    name: 商户设备管理后台组件
+    type: bComponent
+    props:
+      moduleId: module_XsjzxxT2ex
+      dbConnect:
+        - tempId: dbTableTemp_p8iihPjMsh
+          tableId: dbTable_8m58JZaY7m
+
+  - id: group_QsP4fbc5CZ
+    name: 小程序api相关
+    type: group   
+    props: {}
+    children:
+      - id: service_yh72fbPxZD
+        name: 新增商户设备服务
+        type: service
+        props:
+          devId: service_新增商户设备
+          isOpen: true
+          jsCode: |
+            // 调用组件中的新增服务
+            const emitter = new events.EventEmitter();
+            const USER_INFO = _F('middle_func').callMethod('last');
+              
+            param.用户ID = USER_INFO._id;
+              
+            emitter.on('add', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_YNcmY3kpcp', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+              
+            emitter.emit('add');
+          inParams:
+            - 用户ID
+            - 商户ID
+            - 设备序列号
+            - 设备名称
+          outParams: []
+          openApiPath: v1/mini/user/device/add
+          inParamsDebug:
+            用户ID: 1
+            商户ID: 1001
+            设备序列号: SN1001  
+            设备名称: 收款机1
+      - id: service_ZKj25krYik
+        name: 编辑商户设备服务
+        type: service
+        props:
+          devId: service_编辑商户设备
+          isOpen: true
+          jsCode: |
+            // 调用组件中的编辑服务
+            const emitter = new events.EventEmitter();
+              
+            emitter.on('edit', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_wcYEB6YZBk', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+              
+            emitter.emit('edit');
+          inParams:
+            - 设备ID
+            - 商户ID
+            - 设备序列号
+            - 设备名称
+          outParams: []
+          openApiPath: v1/mini/user/device/edit
+          inParamsDebug:
+            设备ID: 1
+            商户ID: 1001
+            设备序列号: SN1001
+            设备名称: 收款机2
+      - id: service_xDmBWR6fmM  
+        name: 搜索商户设备服务
+        type: service
+        props:
+          devId: service_搜索商户设备
+          isOpen: true
+          jsCode: |
+            // 调用组件中的搜索服务
+            const emitter = new events.EventEmitter();
+              
+            emitter.on('search', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_swadXcNEpQ', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+              
+            emitter.emit('search');
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/mini/device/search
+          inParamsDebug:
+            当前页码:  
+            搜索条件:
+              关键字: 
+              商户ID:  
+            每页大小: 
+      - id: service_WyaH36hF28
+        name: 获取我的商户设备列表服务
+        type: service
+        props:
+          devId: service_获取商户设备列表
+          isOpen: true
+          jsCode: |
+            // 调用组件中的获取列表服务
+            const emitter = new events.EventEmitter();
+            const USER_INFO = _F('middle_func').callMethod('last');
+              
+            param.搜索条件 = {
+              ...param.搜索条件,
+              用户ID: USER_INFO._id
+            }
+              
+            emitter.on('list', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_swadXcNEpQ', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+              
+            emitter.emit('list');
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/mini/user/device/list
+          inParamsDebug:
+            当前页码: 1
+            搜索条件:
+              关键字: SN1001
+              商户ID: 1001
+            每页大小: 10
+
+
+  - id: group_x7xrBtQJwj
+    name: 管理后台api相关
+    type: group
+    props: null
+    children:
+      - id: service_6eCe6eRr8k
+        name: 编辑商户设备服务
+        type: service
+        props:
+          devId: service_编辑商户设备
+          isOpen: true
+          jsCode: |
+            // 调用组件中的编辑服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('edit', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_wcYEB6YZBk', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('edit');
+          inParams:
+            - 行ID
+            - 商户ID
+            - 设备序列号
+            - 设备名称
+          outParams: []
+          openApiPath: v1/admin/device/edit
+          inParamsDebug:
+            行ID: 1
+            商户ID: 1001
+            设备序列号: SN1001
+            设备名称: 收款机1
+      - id: service_mBDEP3XzkA
+        name: 获取商户设备列表服务
+        type: service
+        props:
+          devId: service_获取商户设备列表
+          isOpen: true
+          jsCode: |
+            // 调用组件中的获取列表服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('list', () => {
+              _F('bComponent_QPh7NtTCfp').callMethod('service_swadXcNEpQ', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('list');
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件  
+          outParams: []
+          openApiPath: v1/admin/device/list
+          inParamsDebug:
+            当前页码: 1
+            搜索条件:
+              关键字: SN1001
+              商户ID: 1001
+            每页大小: 10
+  - id: dbTable_8m58JZaY7m
+    name: 商户设备表
+    type: dbTable
+    props:
+      fields:
+        - columnName: _id
+          columnType: int unsigned
+        - columnName: 商户ID  
+          columnType: int unsigned
+        - columnName: 设备序列号
+          columnType: text
+        - columnName: 设备名称
+          columnType: text
+        - columnName: 是否删除
+          columnType: int
+        - columnName: _create
+          columnType: bigint unsigned
+        - columnName: _update
+          columnType: bigint unsigned

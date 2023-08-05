@@ -1,0 +1,152 @@
+id: group_w25pYAw887
+name: 商户相关
+type: group
+props: {}
+children:
+  - id: bComponent_afe8PAmksr
+    name: 商户中台组件
+    type: bComponent
+    props:
+      moduleId: module_wc2xE5SxX8
+      dbConnect:
+        - tempId: dbTableTemp_6xG6thEJQS
+          tableId: dbTable_Am7ThrMXRf
+      bCacheConnect:
+        - tempId: bCacheTemp_wJfaNQwj3d
+          bCacheId: bCache_f8reCF6N7Z
+  - id: group_WmSfePJDR3
+    name: 小程序api
+    type: group
+    props: {}
+    children:
+      - id: service_6XZjBsMF4A
+        name: 商户openid密码注册及登录
+        type: service
+        props:
+          devId: service_6XZjBsMF4A
+          isOpen: false
+          jsCode: "//let 商户信息对象 = 调用 数据表.数据表查询(商户名==商户名)\r\nconst emitter = new events.EventEmitter(); \r\n\r\nemitter.on('getUserInfo', ()=>{\r\n  _F('bComponent_afe8PAmksr').callMethod('service_DTz27rE4GR',{\r\n      inParam:param,\r\n      callback:(data)=>{\r\n        _funcCb(data);\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.emit('getUserInfo');"
+          inParams:
+            - openid
+            - 密码
+          outParams:
+            - code
+            - errMsg
+            - result
+          openApiPath: service_6XZjBsMF4A
+          inParamsDebug:
+            openid: oPC5r5bZArKsVFeH4I7fO1p1y4yk
+            姓名: 超级管理员
+            密码: '123123'
+            用户名: 超级管理员
+      - id: service_2x2TjCeiWR
+        name: openid登录
+        type: service
+        props:
+          devId: service_2x2TjCeiWR
+          isOpen: false
+          jsCode: "//let 商户信息对象 = 调用 数据表.数据表查询(用户名==用户名)\r\nconst emitter = new events.EventEmitter(); \r\n\r\nemitter.on('getUserInfo', ()=>{\r\n  _F('bComponent_afe8PAmksr').callMethod('service_edcBYDzKcE',{\r\n      inParam:{\r\n        openid: param.openid,\r\n\t\t\t\t使用cookie:param.使用cookie==false?0:1,\r\n\t\t\t\tcookie域名:param.cookie域名,\r\n        登录有效时长:3600 * 24 * 10,\r\n\t\t\t\t允许多端登录:1,\r\n      },\r\n      callback:(data)=>{\r\n        _funcCb(data);\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.emit('getUserInfo');"
+          inParams:
+            - openid
+            - cookie域名
+            - 使用cookie
+          outParams:
+            - code
+            - errMsg
+            - result
+          openApiPath: service_2x2TjCeiWR
+          inParamsDebug:
+            openid: oPC5r5bZArKsVFeH4I7fO1p1y4yk
+            密码: '123123'
+            用户名: '13800138000'
+            cookie域名: .devstudio.aliyuncs.com
+            使用cookie: '0'
+      - id: service_nk3s2ntff6
+        name: 获取商户登录信息
+        type: service
+        props:
+          devId: service_nk3s2ntff6
+          isOpen: true
+          jsCode: "//let 商户信息对象 = 调用 数据表.数据表查询(商户名==商户名)\r\nconst emitter = new events.EventEmitter(); \r\n\r\nemitter.on('getUserInfo', ()=>{\r\n  _F('bComponent_afe8PAmksr').callMethod('service_8rNTjXTpbf',{\r\n      inParam:{\r\n        token: param.token,\r\n      },\r\n      callback:(data)=>{\r\n        _funcCb(data);\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.emit('getUserInfo');"
+          inParams:
+            - token
+          outParams:
+            - code
+            - errMsg
+            - result
+          openApiPath: v1/mini/logined/info
+          inParamsDebug:
+            token: HBINJdWdXUoszV46BES0tdcWJD2Gru17
+      - id: service_ri74MwpTih
+        name: 更新商户手机号
+        type: service
+        props:
+          devId: service_ri74MwpTih
+          isOpen: false
+          jsCode: "//let 商户信息对象 = 调用 数据表.数据表查询(商户名==商户名)\r\nconst emitter = new events.EventEmitter(); \r\n\r\nemitter.on('getUserInfo', ()=>{\r\n  _F('bComponent_afe8PAmksr').callMethod('service_amBQpHZ56h',{\r\n      inParam:param,\r\n      callback:(data)=>{\r\n        //_funcCb(data);\r\n        emitter.emit('mobileLogin');\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.on('mobileLogin', () => {\r\n  _F('service_maN5PbrePp').call({ 手机号:param.手机号 }, (data) => {\r\n    _funcCb(data);\r\n  });\r\n});\r\n\r\nemitter.emit('getUserInfo');"
+          inParams:
+            - 行ID
+            - 手机号
+          outParams:
+            - code
+            - errMsg
+            - result
+          openApiPath: service_ri74MwpTih
+          inParamsDebug:
+            行ID: '1'
+            手机号: '13900139000'
+      - id: service_maN5PbrePp
+        name: 手机号登录
+        type: service
+        props:
+          devId: service_maN5PbrePp
+          isOpen: false
+          jsCode: "//let 商户信息对象 = 调用 数据表.数据表查询(商户名==商户名)\r\nconst emitter = new events.EventEmitter(); \r\n\r\nemitter.on('getUserInfo', ()=>{\r\n  _F('bComponent_afe8PAmksr').callMethod('service_c2SDBJeYBs',{\r\n      inParam:{\r\n        手机号: param.手机号,\r\n\t\t\t\t使用cookie:0,\r\n\t\t\t\tcookie域名:param.cookie域名,\r\n        登录有效时长:3600 * 24 * 10,\r\n\t\t\t\t允许多端登录:0,\r\n      },\r\n      callback:(data)=>{\r\n        _funcCb(data);\r\n      }\r\n    }\r\n  );\r\n});\r\n\r\nemitter.emit('getUserInfo');"
+          inParams:
+            - 手机号
+            - cookie域名
+            - 使用cookie
+          outParams:
+            - code
+            - errMsg
+            - result
+          openApiPath: service_maN5PbrePp
+          inParamsDebug:
+            openid: oPC5r5bZArKsVFeH4I7fO1p1y4yk
+            密码: '123123'
+            用户名: '13800138000'
+            cookie域名: .devstudio.aliyuncs.com
+            使用cookie: '0'
+  - id: group_kEyJwr46dD
+    name: 数据表
+    type: group
+    props: {}
+    children:
+      - id: bCache_f8reCF6N7Z
+        name: 商户登录信息缓存
+        type: bCache
+        props: {}
+      - id: dbTable_Am7ThrMXRf
+        name: 商户表
+        type: dbTable
+        props:
+          fields:
+            - columnName: _id
+              columnType: int unsigned
+            - comment: 商户号,自动生成
+              columnName: 商户号
+              columnType: varchar(32)
+            - columnName: 用户名
+              columnType: text
+            - columnName: 手机号
+              columnType: text
+            - columnName: openid
+              columnType: text
+            - columnName: 昵称
+              columnType: text
+            - columnName: 密码
+              columnType: text
+            - columnName: _create
+              columnType: bigint unsigned
+            - columnName: _update
+              columnType: bigint unsigned

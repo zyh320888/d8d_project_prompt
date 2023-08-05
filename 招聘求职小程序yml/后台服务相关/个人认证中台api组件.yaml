@@ -1,0 +1,291 @@
+id: group_wiZkwnhhee
+name: 个人认证中台相关
+type: group
+props: null
+children:
+
+  - id: bComponent_PTixBsyrD8
+    name: 个人认证管理后台组件
+    type: bComponent    
+    props:
+      moduleId: module_ypEXN7mixz
+      dbConnect:
+        - tempId: dbTableTemp_JmyYd2Gm4S
+          tableId: dbTable_p2nnDd7GBJ
+            
+  - id: group_NP3TQm2sda
+    name: 小程序api相关
+    type: group
+    props: {}
+    children:
+    
+      - id: service_DGAEwMYewk
+        name: 新增个人认证服务
+        type: service
+        props:
+          devId: service_新增个人认证
+          isOpen: true
+          jsCode: |
+          
+            // 调用组件中的新增服务
+            const emitter = new events.EventEmitter();
+            const USER_INFO = _F('middle_func').callMethod('last');
+
+            param.用户ID = USER_INFO._id;
+            
+            emitter.on('add', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_NZwQyWzf43', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('add');
+            
+          inParams:
+            - 用户ID
+            - 姓名
+            - 联系电话
+            - 身份证正面照
+            - 身份证反面照
+            - 个人简介
+          outParams: []
+          openApiPath: v1/mini/user/personal/add
+          inParamsDebug:
+            用户ID: 1
+            姓名: 李四
+            联系电话: 13888888888
+            身份证正面照: https://test.jpg 
+            身份证反面照: https://test.jpg
+            个人简介: 我是一名程序员
+            
+      - id: service_K3yARpDEPa
+        name: 编辑个人认证服务 
+        type: service
+        props:
+          devId: service_编辑个人认证
+          isOpen: true
+          jsCode: |
+          
+            // 调用组件中的编辑服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('edit', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_hcFrAteKA7', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('edit');
+            
+          inParams: 
+            - 行ID
+            - 用户ID
+            - 姓名
+            - 联系电话
+            - 身份证正面照
+            - 身份证反面照
+            - 个人简介
+            - 是否认证
+          outParams: []
+          openApiPath: v1/mini/user/personal/edit
+          inParamsDebug:
+            是否认证: ''
+            个人简介: ''
+            身份证反面照: ''
+            身份证正面照: ''
+            联系电话: ''
+            姓名: ''
+            用户ID: ''
+            
+      - id: service_Wbn3DDGZRy
+        name: 搜索个人认证服务
+        type: service
+        props:
+          devId: service_搜索个人认证
+          isOpen: true
+          jsCode: |
+          
+            // 调用组件中的搜索服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('search', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_Bpd5x5rpeJ', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('search');
+            
+          inParams:
+            - 当前页码 
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/mini/personal/search
+          inParamsDebug:
+            当前页码: ''
+            搜索条件: 
+              关键字: ''
+              是否认证: ''
+            每页大小: ''
+            
+      - id: service_SkXbc5cpwe
+        name: 获取我的个人认证列表服务
+        type: service
+        props:
+          devId: service_获取个人认证列表
+          isOpen: true
+          jsCode: |
+          
+            // 调用组件中的获取列表服务
+            const emitter = new events.EventEmitter();
+            const USER_INFO = _F('middle_func').callMethod('last');
+
+            param.搜索条件 = {
+              ...param.搜索条件,
+              用户ID: USER_INFO._id
+            }
+
+            emitter.on('list', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_Bpd5x5rpeJ', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('list');
+            
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []
+          openApiPath: v1/mini/user/personal/list
+          inParamsDebug:
+            当前页码: 1
+            搜索条件:
+              关键字: 小程序 
+              用户ID: 1
+            每页大小: 10
+
+  - id: group_Kda5YBr5n5
+    name: 管理后台api相关
+    type: group
+    props: null
+    children:
+    
+      - id: service_rYATPZ4WET
+        name: 编辑个人认证服务
+        type: service
+        props:
+          devId: service_编辑个人认证
+          isOpen: true
+          jsCode: |
+          
+            // 调用组件中的编辑服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('edit', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_hcFrAteKA7', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('edit');
+            
+          inParams:
+            - 行ID
+            - 用户ID
+            - 姓名
+            - 联系电话
+            - 身份证正面照
+            - 身份证反面照
+            - 个人简介
+            - 是否认证
+          outParams: []
+          openApiPath: v1/admin/personal/edit
+          inParamsDebug:
+            是否认证: ''
+            个人简介: ''
+            身份证反面照: ''
+            身份证正面照: ''
+            联系电话: ''
+            姓名: ''
+            用户ID: ''
+            
+      - id: service_AYhZWzh3DD
+        name: 获取个人认证列表服务
+        type: service
+        props:
+          devId: service_获取个人认证列表
+          isOpen: true
+          jsCode: |
+          
+            // 调用组件中的获取列表服务
+            const emitter = new events.EventEmitter();
+
+            emitter.on('list', () => {
+              _F('bComponent_PTixBsyrD8').callMethod('service_Bpd5x5rpeJ', {
+                inParam: param,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('list');
+            
+          inParams:
+            - 当前页码
+            - 每页大小
+            - 搜索条件
+          outParams: []  
+          openApiPath: v1/admin/personal/list
+          inParamsDebug:
+            当前页码: 1
+            搜索条件:
+              关键字: 小程序
+              是否认证: ''
+            每页大小: 10
+            
+  - id: dbTable_p2nnDd7GBJ
+    name: 个人认证表
+    type: dbTable
+    props:
+      fields:
+        - columnName: _id
+          columnType: int unsigned  
+        - columnName: 用户ID
+          columnType: int unsigned
+        - columnName: 姓名
+          columnType: text
+        - columnName: 联系电话
+          columnType: text  
+        - columnName: 身份证正面照
+          columnType: text
+        - columnName: 身份证反面照
+          columnType: text
+        - columnName: 个人简介
+          columnType: text
+        - columnName: 是否认证
+          columnType: int
+        - columnName: 是否删除  
+          columnType: int
+        - columnName: _create
+          columnType: bigint unsigned
+        - columnName: _update
+          columnType: bigint unsigned

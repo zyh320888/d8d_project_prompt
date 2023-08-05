@@ -1,0 +1,395 @@
+id: module_bktyRNEbfE
+name: 编辑简历表单页模块
+type: module
+props: {}
+children:
+  - id: front_tPDsHfDsKK
+    type: front
+    props:
+      onLoadJs: "() => {\r\n  _F('jsFunc_84SQYrnyEt').call()\r\n}"
+    children:
+      - id: props_C6JzGnap8y
+        type: props
+        children:
+          - id: fPAttr_F457EJxre5
+            type: fPAttr
+            children: []
+          - id: fPMethod_CHt73JCYhM
+            type: fPMethod
+            children: []
+          - id: fPEvent_FHXr6pNQSd
+            type: fPEvent
+            children: []
+      - id: state_fXY4xfnJwk
+        type: state
+        children:
+          - id: variable_aG8i3YADh2
+            name: 行业分类选择器显示状态
+            type: variable
+            props:
+              valueJs: 'false'
+              valueType: js
+          - id: variable_5zGNPzmmR7
+            name: 简历ID
+            type: variable
+            props: {}
+      - id: method_KK5jKD8fEd
+        type: method
+        children:
+          - id: jsFunc_84SQYrnyEt
+            name: 获取我的简历详情
+            type: jsFunc
+            props:
+              jsCode: >-
+                const formData = {}; 
+
+
+                // console.log('formData',formData)
+
+
+                const  apiReq = _F('store_func').callMethod('get', { key:
+                'LOGINED_API_REQ' });
+
+
+                apiReq({
+                  url: '/v1/mini/user/resume/my',
+                  method: 'POST',
+                  data: formData,
+                  success: (res) => {
+                    console.log('我的简历详情',res.data)
+
+                    const result = res.data.result;
+                    if(result?.length > 0){
+                      const 表单数据 = result[0];
+                      表单数据.出生年份 = [表单数据.出生年份];
+                      表单数据.工作年限 = [表单数据.工作年限];
+                      表单数据.期望地点 = [...表单数据.期望地点.split(',')];
+                      _F('form_jzmQx3Zfcd').callMethod('getInstance').setFieldsValue(表单数据);
+
+                      //设置简历ID
+                      _F('variable_5zGNPzmmR7').callMethod('set',表单数据._id);
+                    }
+                  },
+                  fail: (err) => {
+                    wx.showToast({
+                      title: err,
+                      icon: 'error',
+                      duration: 2000
+                    })
+                  }
+                })
+              inParams: []
+          - id: jsFunc_QSiTE6hYhW
+            name: 编辑简历
+            type: jsFunc
+            props:
+              jsCode: >-
+                const originalFormData = param.表单数据;
+
+
+
+                const formData = { ...originalFormData };
+
+
+                // 遍历formData,判断值是数组时进行处理
+
+                Object.keys(formData).forEach(key => {
+                  if (Array.isArray(formData[key])) {
+                    formData[key] = formData[key].join(',');
+                  }
+                });
+
+
+                console.log('formData', formData)
+
+
+                const apiReq = _F('store_func').callMethod('get', { key:
+                'LOGINED_API_REQ' });
+
+
+                const 简历ID = _F('variable_5zGNPzmmR7').callMethod('get');
+
+
+                let url = '/v1/mini/user/resume/add';
+
+                if (简历ID) {
+                  url = '/v1/mini/user/resume/edit';
+                  formData.简历ID = 简历ID;
+                }
+
+
+                apiReq({
+                  url,
+                  method: 'POST',
+                  data: formData,
+                  success: (res) => {
+                    wx.showToast({
+                      title: '操作成功',
+                      icon: 'success',
+                      duration: 2000
+                    })
+                  },
+                  fail: (err) => {
+                    wx.showToast({
+                      title: err,
+                      icon: 'error',
+                      duration: 2000
+                    })
+                  }
+                })
+              inParams:
+                - 表单数据
+      - id: dom_iC8DDTyDBw
+        type: dom
+        children:
+          - id: navbar_j36WCZzTrj
+            type: navbar
+            props:
+              back: <
+              onBackClickJs: |
+                (event) => {
+                  _F('page_func').callMethod('navigateBack',-2)
+                }
+            children:
+              - id: span_Md4FEt3AXk
+                type: span
+                props:
+                  children: 基础信息
+          - id: row_X2ePAejwsp
+            type: row
+            props:
+              type: flex
+              align: flex-start
+              style:
+                height: calc(100vh - 135px)
+                overflow: hidden auto
+              justify: start
+              hideScroll: true
+            children:
+              - id: col_ZYbfw6BdCn
+                type: col
+                props: null
+                children:
+                  - id: form_jzmQx3Zfcd
+                    type: form
+                    props:
+                      onFinishJs: |
+                        (values) => {
+                          console.log('表单提交',values)
+                          _F('jsFunc_QSiTE6hYhW').call({表单数据:values});
+                        }
+                      onFinishFailedJs: |
+                        (error) => {  
+                          console.log('表单错误',error)
+                        }
+                    children:
+                      - id: form.item_tyZfGTceEJ
+                        name: 姓名
+                        type: form.item
+                        props:
+                          name: 姓名
+                          label: 姓名
+                          rulesJs: '[{ required: true, message: "请输入姓名" }]'
+                          required: true
+                        children:
+                          - id: input_iwtiSbXszY
+                            type: input
+                            props:
+                              placeholder: 请输入姓名
+                      - id: form.item_fHbzmApdN4
+                        name: 性别
+                        type: form.item
+                        props:
+                          name: 性别
+                          label: 性别
+                          rulesJs: '[{ required: true, message: "请选择性别" }]'
+                          required: true
+                        children:
+                          - id: radio.group_MJCFs85N3Z
+                            type: radio.group
+                            props:
+                              direction: horizontal
+                            children:
+                              - id: radio_xiQCxQ2bFQ
+                                type: radio
+                                props:
+                                  value: 男
+                                children:
+                                  - id: span_3abZhmSCn7
+                                    type: span
+                                    props:
+                                      children: 男
+                                    children: []
+                              - id: radio_As86kJbdnZ
+                                type: radio
+                                props:
+                                  value: 女
+                                children:
+                                  - id: span_CHwarFYMpp
+                                    type: span
+                                    props:
+                                      children: 女
+                                    children: []
+                      - id: form.item_BF2Y8fs5hC
+                        name: 联系电话
+                        type: form.item
+                        props:
+                          name: 手机号
+                          label: 联系电话
+                          rulesJs: '[{ required: true, message: "请输入手机号码" }]'
+                          required: true
+                        children:
+                          - id: input_aE7C84AjWf
+                            type: input
+                            props:
+                              type: tel
+                              placeholder: 请输入手机号码
+                      - id: form.item_B4S2JeM5hd
+                        name: 出生年份
+                        type: form.item
+                        props:
+                          name: 出生年份
+                          label: 出生年份
+                          rulesJs: '[{ required: true, message: "请选择出生年份" }]'
+                          trigger: onConfirm
+                          required: true
+                          onClickJs: "(event, componentRef) => {\r\n  componentRef.open()\r\n}"
+                          getValueFromEventJs: "(...args) => {\r\n  return args[1]\r\n}"
+                        children:
+                          - id: picker_p3NspyEANZ
+                            type: picker
+                            props:
+                              optionsJs: |+
+                                (
+                                  function () {
+                                    const years = [];
+                                    for (let i = 1960; i <= 2005; i++) {
+                                      years.push({
+                                        value: `${i}`,
+                                        text: `${i}年`
+                                      });
+                                    }
+                                    return years;
+                                  }()
+                                )
+
+                            children: []
+                      - id: form.item_PAEJfHjrs5
+                        name: 现居住地
+                        type: form.item
+                        props:
+                          name: 现居住地
+                          label: 现居住地
+                          required: false
+                        children:
+                          - id: input_iSJfKj8pPy
+                            type: input
+                            props:
+                              placeholder: 请输入现居住地
+                      - id: form.item_SaneRiJ4hc
+                        name: 工作经验
+                        type: form.item
+                        props:
+                          name: 工作年限
+                          label: 工作经验
+                          rulesJs: '[{ required: true, message: "请选择工作经验" }]'
+                          trigger: onConfirm
+                          required: true
+                          onClickJs: "(event, componentRef) => {\r\n  componentRef.open()\r\n}"
+                          getValueFromEventJs: "(...args) => {\r\n  return args[1]\r\n}"
+                        children:
+                          - id: picker_nyNFAJP2Xx
+                            type: picker
+                            props:
+                              optionsJs: >-
+                                [ { "value": "1年以下", "text": "1年以下" }, {
+                                "value": "1-3年", "text": "1-3年" },   { "value":
+                                "3-5年", "text": "3-5年" }, { "value": "5-10年",
+                                "text": "5-10年" } ]
+                            children: []
+                      - id: form.item_PeA4YYmjNB
+                        name: 意向职位
+                        type: form.item
+                        props:
+                          name: 期望职位
+                          label: 意向岗位
+                          rulesJs: '[{ required: true, message: "请输入意向岗位" }]'
+                          required: true
+                        children:
+                          - id: input_ZXb4Wd4JeJ
+                            type: input
+                            props:
+                              placeholder: 请输入意向岗位
+                      - id: form.item_T8nCJT2RAM
+                        name: 意向地区
+                        type: form.item
+                        props:
+                          name: 期望地点
+                          label: 意向地区
+                          rulesJs: '[{ required: true, message: "请选择意向地区" }]'
+                          trigger: onConfirm
+                          required: true
+                          onClickJs: "(event, componentRef) => {\r\n  componentRef.open()\r\n}"
+                          getValueFromEventJs: "(...args) => {\r\n  return args[1]\r\n}"
+                        children:
+                          - id: picker_PkiWpkQw2X
+                            type: picker
+                            props:
+                              optionsJs: "[\r\n  {\r\n    \"value\": \"铜仁市\",\r\n    \"text\": \"铜仁市\",\r\n    \"children\": [\r\n      { \"value\": \"碧江区\", \"text\": \"碧江区\" },\r\n      { \"value\": \"万山区\", \"text\": \"万山区\" },\r\n      { \"value\": \"江口县\", \"text\": \"江口县\" },\r\n      { \"value\": \"其他县区\", \"text\": \"其他县区\" }\r\n    ]\r\n  },\r\n  {\r\n    \"value\": \"其他城市\",\r\n    \"text\": \"其他城市\", \r\n    \"children\": [\r\n      { \"value\": \"其他县区\", \"text\": \"其他县区\" }\r\n    ]\r\n  }\r\n]"
+                      - id: form.item_JAyXKEmF8A
+                        name: 期望薪资
+                        type: form.item
+                        props:
+                          name: 期望薪资
+                          label: 期望薪资
+                          rulesJs: '[{ required: true, message: "请选择期望薪资" }]'
+                          required: true
+                        children:
+                          - id: input_GCencZpxpn
+                            type: input
+                            props:
+                              placeholder: 请输入期望薪资
+                      - id: form.item_jHA4XeHZa5
+                        name: 自我描述
+                        type: form.item
+                        props:
+                          name: 自我评价
+                          label: 自我描述
+                          required: false
+                        children:
+                          - id: textarea_6jkYxZidKX
+                            type: textarea
+                            props: {}
+                            children: []
+                      - id: form.item_ti82Sihmm5
+                        type: form.item
+                        props: {}
+                        children:
+                          - id: button_dwMJ5S6h2E
+                            type: button
+                            props:
+                              type: primary
+                              block: true
+                              value: 保存
+                              nativeType: submit
+  - id: backend_88crBz8xAe
+    type: backend
+    children:
+      - id: props_QNKSNkPNsf
+        type: props
+        children:
+          - id: bPAttr_xscxBK8Wm2
+            type: bPAttr
+            children: []
+          - id: bPMethod_74tAwja8JP
+            type: bPMethod
+            children: []
+      - id: state_2EZhkktQH2
+        type: state
+        children: []
+      - id: services_Tz3xeN2fis
+        type: services
+        children: []
+  - id: modules_XBSfWxKG48
+    type: modules
+    children: []

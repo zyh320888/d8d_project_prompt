@@ -1,0 +1,195 @@
+id: group_FDRAZWn5Ab
+name: 文章管理中台API组件
+type: group
+props:
+  devId: group_FDRAZWn5Ab
+children:
+  - id: bComponent_pSD8zMrj6R
+    name: 文章管理后台组件
+    type: bComponent
+    props:
+      devId: bComponent_pSD8zMrj6R
+      moduleId: module_ApCRnmeMM6
+      dbConnect:
+        - tempId: dbTableTemp_AkSadZKTRG
+          tableId: dbTable_QWi8wbeX5r
+  - id: group_GfCBNE5Ha5
+    name: 小程序API相关
+    type: group
+    props: {}
+    children:
+      - id: service_6ekAi6m22j
+        name: 文章管理小程序搜索服务
+        type: service
+        props:
+          isOpen: true
+          jsCode: |
+            // 调用管理后台搜索服务
+            const emitter = new events.EventEmitter();
+
+            let inParam = param;
+
+            emitter.on('search', () => {
+              _F('bComponent_pSD8zMrj6R').callMethod('service_hfWEWpxZ66', {
+                inParam,
+                callback: (data) => {
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('search');
+          inParams:
+            - 搜索条件
+            - 当前页码
+            - 每页大小
+          outParams: []
+          openApiPath: v1/mini/article/search
+  - id: group_4PnG2wTCdP
+    name: 管理后台API相关
+    type: group
+    props: {}
+    children:
+      - id: service_NTYwwdGdNh
+        name: 文章管理搜索服务
+        type: service
+        props:
+          devId: service_NTYwwdGdNh
+          isOpen: true
+          jsCode: |
+            const emitter = new events.EventEmitter();
+
+            let inParam = param;
+
+            emitter.on('getList', ()=>{
+              _F('bComponent_pSD8zMrj6R').callMethod('service_hfWEWpxZ66',{
+                  inParam,
+                  callback:(data)=>{
+                    _funcCb(data);
+                  }
+                }
+              );
+            });
+
+            emitter.emit('getList');
+          inParams:
+            - 搜索条件
+            - 当前页码
+            - 每页大小
+          outParams: []
+          openApiPath: v1/admin/article/search
+      - id: service_ETHFChRZnF
+        name: 文章管理删除服务
+        type: service
+        props:
+          devId: service_del
+          isOpen: true
+          jsCode: |
+            const emitter = new events.EventEmitter();
+
+            let inParam = {};
+            inParam['行ID'] = param.行ID;
+            if(param.hasOwnProperty('是否删除')){
+              inParam['是否删除'] = param.是否删除;
+            }
+
+            emitter.on('delete', ()=>{
+              _F('bComponent_pSD8zMrj6R').callMethod('service_7B3Ts2dj7n',{
+                inParam,
+                callback:(data)=>{
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('delete');
+          inParams:
+            - 行ID
+            - 是否删除
+          outParams: []
+          openApiPath: v1/admin/article/del
+      - id: service_66E7SfZfG8
+        name: 文章管理编辑服务
+        type: service
+        props:
+          devId: service_edit
+          isOpen: true
+          jsCode: |
+            const emitter = new events.EventEmitter();
+
+            let inParam = param;
+
+            emitter.on('edit', ()=>{
+              _F('bComponent_pSD8zMrj6R').callMethod('service_z3i8k6bpb5',{
+                inParam,
+                callback:(data)=>{
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('edit');
+          inParams:
+            - 行ID
+            - 文章标题
+            - 文章标签
+            - 文章内容
+            - 文章作者
+            - 文章分类
+          outParams: []
+          openApiPath: v1/admin/article/edit
+      - id: service_mZ8Nnd4BGz
+        name: 文章管理新增服务
+        type: service
+        props:
+          devId: service_add
+          isOpen: true
+          jsCode: |
+            const emitter = new events.EventEmitter();
+
+            emitter.on('add', ()=>{
+              _F('bComponent_pSD8zMrj6R').callMethod('service_dhjyAN5asN',{
+                inParam:param,
+                callback:(data)=>{
+                  _funcCb(data);
+                }
+              });
+            });
+
+            emitter.emit('add');
+          inParams:
+            - 文章标题
+            - 文章标签
+            - 文章内容
+            - 文章作者
+            - 文章分类
+          outParams: []
+          openApiPath: v1/admin/article/add
+  - id: group_8mSj73FQBj
+    name: 数据表相关
+    type: group
+    props: {}
+    children:
+      - id: dbTable_QWi8wbeX5r
+        name: 文章管理表
+        type: dbTable
+        props:
+          fields:
+            - columnName: _id
+              columnType: int unsigned
+            - columnName: 文章标题
+              columnType: varchar(100)
+            - columnName: 文章标签
+              columnType: text
+            - columnName: 文章内容
+              columnType: text
+            - columnName: 文章作者
+              columnType: varchar(50)
+            - columnName: 文章分类
+              columnType: varchar(20)
+            - columnName: 是否删除
+              columnType: int
+            - columnName: _create
+              columnType: bigint unsigned
+            - columnName: _update
+              columnType: bigint unsigned

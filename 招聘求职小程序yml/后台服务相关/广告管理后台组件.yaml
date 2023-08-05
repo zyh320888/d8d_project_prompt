@@ -1,0 +1,159 @@
+id: module_tG3DB3swB2
+name: 广告管理后台组件
+type: module
+props: {}
+children:
+  - id: front_bxHE4atZjM
+    type: front
+    children:
+      - id: props_JHtYBwhCtw
+        type: props
+        children:
+          - id: fPAttr_NHmtHAaFyP
+            type: fPAttr
+            children: []
+          - id: fPMethod_3pe6JDHFYm
+            type: fPMethod
+            children: []
+          - id: fPEvent_6ZwrPjb6NC
+            type: fPEvent
+            children: []
+      - id: state_StFKWSJn3M
+        type: state
+        children: []
+      - id: method_XGEGeDsEHy
+        type: method
+        children: []
+      - id: dom_rpph5F67DH
+        type: dom
+        children: []
+  - id: backend_P6sdXTe62x
+    name: 后台
+    type: backend
+    props:
+      style:
+        height: 200px
+        backgroundColor: red
+    children:
+      - id: props_sdfSespmWy
+        type: props
+        children:
+          - id: bPAttr_fWiaxeXDMc
+            type: bPAttr
+            children: []
+          - id: bPMethod_HGWKdTprPj
+            type: bPMethod
+            children:
+              - id: service_z2eG35jBYm
+                name: 广告关键字搜索服务
+                type: service
+                props:
+                  devId: service_z2eG35jBYm
+                  isOpen: false
+                  jsCode: "const emitter = new events.EventEmitter();\r\nlet condition = {};\r\n\r\nlet pageNum = param.hasOwnProperty('当前页码') && param.当前页码 > 0 ? parseInt(param.当前页码) : 1;\r\nlet pageSize = param.hasOwnProperty('每页大小') && param.每页大小 > 0 ? parseInt(param.每页大小) : 10;\r\nlet deptTotal = 0;\r\nlet deptList = [];\r\n\r\n\r\nemitter.on('output', () => {\r\n\r\n  deptList = deptList.map(item => {\r\n\r\n    return item;\r\n  })\r\n\r\n  _funcCb({\r\n    code: 200,\r\n    errMsg: 'ok',\r\n    result: deptList,\r\n    total: deptTotal\r\n  });\r\n})\r\n\r\nemitter.on('setCondition', () => {\r\n  let 搜索条件 = param.搜索条件 || {};\r\n\r\n  if(搜索条件.关键字) {\r\n    condition['标题'] = ['like', `%${搜索条件.关键字}%`];\r\n  }  \r\n\r\n  if (搜索条件.hasOwnProperty('广告位ID') && 搜索条件.广告位ID) condition['广告位ID'] = 搜索条件.广告位ID;\r\n  // if (搜索条件.hasOwnProperty('批次分类') && 搜索条件.批次分类) condition['批次分类'] = ['like', 搜索条件.批次分类];\r\n  if (搜索条件.hasOwnProperty('是否删除')) condition['是否删除'] = 搜索条件.是否删除;\r\n\r\n    \r\n  \r\n});\r\n\r\nemitter.on('getTotal', () => {\r\n\r\n  _F('dbTableTemp_FwdsHkCyht').callMethod('getCount', {\r\n    condition,\r\n    success: (res) => {\r\n      emitter.emit('getList', res[0].count);\r\n    },\r\n    fail: (err) => {\r\n      _funcCb({\r\n        code: 0,\r\n        errMsg: '获取列表总数失败',\r\n        result: err,\r\n        total: 0\r\n      });\r\n    },\r\n\r\n  });\r\n});\r\n\r\nemitter.on('getList', (total) => {\r\n\r\n  _F('dbTableTemp_FwdsHkCyht').callMethod('getRows', {\r\n    condition,\r\n    pageNum,\r\n    pageSize,\r\n    orderby: '_update',\r\n    sort: 'desc',\r\n    success: (res) => {\r\n      deptTotal = total;\r\n      deptList = res;\r\n      emitter.emit('output');\r\n    },\r\n    fail: (err) => {\r\n      _funcCb({\r\n        code: 0,\r\n        errMsg: '获取列表失败',\r\n        result: err,\r\n        total: 0\r\n      });\r\n    },\r\n\r\n  });\r\n});\r\n\r\n\r\nemitter.emit('setCondition');\r\nemitter.emit('getTotal');"
+                  inParams:
+                    - 搜索条件
+                    - 当前页码
+                    - 每页大小
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_HYJmcQ5Gbn
+                name: 广告删除服务
+                type: service
+                props:
+                  devId: service_HYJmcQ5Gbn
+                  isOpen: false
+                  jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nif(param.hasOwnProperty('行ID') && param['行ID'] > 0)emitter.emit('editDept');\r\nelse emitter.emit('noDeptID');\r\n\r\n\r\nemitter.on('noDeptID', ()=>{\r\n  _funcCb({code:0,errMsg:'请传入行ID',result:{}});\r\n})\r\n\r\nemitter.on('editDept', ()=>{\r\n  let condition = {};\r\n  condition['_id'] = param.行ID;\r\n\r\n  let editObj = {};\r\n  if(param.hasOwnProperty('是否删除'))editObj['是否删除'] = param.是否删除 == 1?1:0;\r\n\r\n  _F('dbTableTemp_FwdsHkCyht').callMethod('editRow',{\r\n      row:editObj,\r\n      condition,\r\n      success:(data)=>{\r\n        _funcCb({code:200,errMsg:'操作成功',result:data});\r\n      },\r\n      fail:()=>{\r\n      }\r\n    });\r\n})\r\n\r\nemitter.emit('editDept');"
+                  inParams:
+                    - 行ID
+                    - 是否删除
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug: {}
+              - id: service_4MKWFCZFmZ
+                name: 广告编辑服务
+                type: service
+                props:
+                  devId: service_4MKWFCZFmZ
+                  isOpen: false
+                  jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nif(param.hasOwnProperty('行ID') && param['行ID'] > 0)emitter.emit('editDept');\r\nelse emitter.emit('noDeptID');\r\n\r\n\r\nemitter.on('noDeptID', ()=>{\r\n  _funcCb({code:0,errMsg:'请传入行ID',result:{}});\r\n})\r\n\r\nemitter.on('editDept', ()=>{\r\n  let condition = {};\r\n  condition['_id'] = param.行ID;\r\n\r\n  let editObj = {};\r\n  if(param.hasOwnProperty('广告位ID'))editObj['广告位ID'] = param.广告位ID;\r\n  if(param.hasOwnProperty('标题'))editObj['标题'] = param.标题;\r\n  if(param.hasOwnProperty('链接地址'))editObj['链接地址'] = param.链接地址;\r\n  if(param.hasOwnProperty('图片地址'))editObj['图片地址'] = param.图片地址;\r\n  if(param.hasOwnProperty('排序'))editObj['排序'] = param.排序;\r\n\r\n  _F('dbTableTemp_FwdsHkCyht').callMethod('editRow',{\r\n      row:editObj,\r\n      condition,\r\n      success:(data)=>{\r\n        _funcCb({code:200,errMsg:'编辑成功',result:data});\r\n      },\r\n      fail:()=>{\r\n      }\r\n    });\r\n})\r\n\r\nemitter.emit('editDept');"
+                  inParams:
+                    - 行ID
+                    - 广告位ID
+                    - 标题
+                    - 图片地址
+                    - 链接地址
+                    - 排序
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug:
+                    标题: ''
+                    广告ID: ''
+                    广告位ID: ''
+                    图片地址: ''
+                    链接地址: ''
+              - id: service_Yz3teYJKma
+                name: 广告新增服务
+                type: service
+                props:
+                  devId: service_Yz3teYJKma
+                  isOpen: false
+                  jsCode: "const emitter = new events.EventEmitter(); \r\n\r\nemitter.on('addDept', ()=>{\r\n  _F('dbTableTemp_FwdsHkCyht').callMethod('addRow',{\r\n      row:{\r\n        ...param,\r\n        是否删除:0\r\n      },\r\n      success:(data)=>{\r\n        _funcCb({code:200,errMsg:'新增成功',result:data});\r\n      },\r\n      fail:()=>{\r\n      }\r\n    });\r\n})\r\n\r\nemitter.emit('addDept');"
+                  inParams:
+                    - 广告位ID
+                    - 标题
+                    - 图片地址
+                    - 链接地址
+                    - 排序
+                  outParams: []
+                  openApiPath: ''
+                  inParamsDebug:
+                    标题: ''
+                    广告位ID: ''
+                    图片地址: ''
+                    链接地址: ''
+      - id: state_HwaRtrB7T2
+        type: state
+        children: []
+      - id: services_Z3XWY8GjcQ
+        type: services
+        children:
+          - id: group_bWxhEiM4RW
+            name: 数据表
+            type: group
+            props:
+              devId: group_bWxhEiM4RW
+            children:
+              - id: dbTableTemp_FwdsHkCyht
+                name: 广告表
+                type: dbTableTemp
+                props:
+                  devId: dbTableTemp_FwdsHkCyht
+                  fields:
+                    - columnName: _id
+                      columnType: int unsigned
+                    - columnName: 广告位ID
+                      columnType: int
+                    - columnName: 标题
+                      columnType: text
+                    - columnName: 链接地址
+                      columnType: text
+                    - columnName: 图片地址
+                      columnType: text
+                    - columnName: 排序
+                      columnType: int
+                    - columnName: 是否删除
+                      columnType: int
+                    - columnName: _create
+                      columnType: bigint unsigned
+                    - columnName: _update
+                      columnType: bigint unsigned
+          - id: group_AkzSarWwe8
+            name: 中台服务
+            type: group
+            props:
+              devId: group_AkzSarWwe8
+  - id: modules_SJxAbwyiMh
+    type: modules
+    children: []

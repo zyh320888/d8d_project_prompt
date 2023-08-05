@@ -1,0 +1,357 @@
+type: module
+props: {}
+id: module_7rPb7ncTwS
+children:
+  - type: front
+    children:
+      - type: props
+        children:
+          - type: fPAttr
+            children: []
+            id: fPAttr_YXAwK2e2Dn
+          - type: fPMethod
+            children: []
+            id: fPMethod_PC6nSiFyKz
+          - type: fPEvent
+            children: []
+            id: fPEvent_28Q3EdyaTc
+        id: props_7fSdAKQsWD
+      - type: state
+        children: []
+        id: state_j4wxrRZzNF
+      - type: method
+        children: []
+        id: method_RTGmW5jRPA
+      - type: dom
+        children: []
+        id: dom_E2Dr4es7DF
+    id: front_iZEHPWJnDH
+  - type: backend
+    children:
+      - id: props_6iQFkrbbBi
+        type: props
+        children:
+          - id: bPAttr_zrr3CBMbWM
+            type: bPAttr
+            children: 
+              - id: variable_jhADDzZdTe
+                name: AES密钥
+                type: variable
+                props:
+                  value: lUF1mcsru1pgDA6SivlmMw==
+              - id: variable_4ZetPxxp28
+                name: 应用公钥
+                type: variable
+                props:
+                  value: >-
+                    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAguJnQ2NOg4zJoJ90rN+wQiSAAO/9enkiExv7TyT+Q/jS1vJS03UHxDaaF/X7JDhSUWl+r+crKoVQeq175vTUTsx7hvS6ziVMJqcdDSZxMwC/8SX0IVf6zW1msrLu4EYOdwNFfXU/O0MgeGjm+T5ctnIknMK4smz3zBupdRwnpqc1yVrzxKpG9cU8ZPZFk51GLyfbrTyGu6GJb5iAMRz/s5tHVMmNugqfqfpGYXEJnLb+8JLbu7knNFTYSMNgvdm3iIR9aDxl0Rd+sagKgkb+aCtjY7ho0zBMMlpDFeJOU7ubD9vKFFn00JxizelO+uQ7BWMWmsA53ihtUfCRHg09EwIDAQAB
+              - id: variable_mRcnX6DQBD
+                name: 应用私钥
+                type: variable
+                props:
+                  value: >-
+                    MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCC4mdDY06DjMmgn3Ss37BCJIAA7/16eSITG/tPJP5D+NLW8lLTdQfENpoX9fskOFJRaX6v5ysqhVB6rXvm9NROzHuG9LrOJUwmpx0NJnEzAL/xJfQhV/rNbWaysu7gRg53A0V9dT87QyB4aOb5Ply2ciScwriybPfMG6l1HCempzXJWvPEqkb1xTxk9kWTnUYvJ9utPIa7oYlvmIAxHP+zm0dUyY26Cp+p+kZhcQmctv7wktu7uSc0VNhIw2C92beIhH1oPGXRF36xqAqCRv5oK2NjuGjTMEwyWkMV4k5Tu5sP28oUWfTQnGLN6U765DsFYxaawDneKG1R8JEeDT0TAgMBAAECggEAbtVcDpOko/9vqmX9Pns53fjcsG6J3tF/CmGSoYW5D0RA/qY7fzdGOWDngkzZu+U5yBkmn7yJMDuuWARavMwskQHVxQWuvuyUnNK85irchw0mfQXfwvCmwJjY85BUenS4wQ1zJfdIcV25vF1Q4lVt202zNVAraWSfPidai4IpDZSls/zoXJlPDwNoIiLTltgUpUtz01MS7Z5/3X2jMwGaHVFip53n7/E2sITmLxnLw/57SslO/WLV9mtXGq57FDtxskSBevMFPdJHOgQv9IDZ2k43bGbmunZm4kqYo91m7EZV/y7ljlZj7s/OpyGu8Kk471M3Hu1tumuS4Em/xI8Q6QKBgQDcbrdn+SCn7/DJ/W9ZU28Lac/GszjBbLRymRb67HkGrx5t93WVuw7vgV/+YkZaDn4ZcgwnIMHyruAFMBxHqb+PTjYPvEzh0iVgNR92PO6dRUX/kM6B5zf6nGeiFvce5JszDIk/F7SSgsBXoD3ZJ1WZgvrk8Fzgh7FTqhUzEPkXrQKBgQCYAMXa3J7bE32zi3PDJaKVB21vL9Cj/uG8FtDus4s6kREku+4771l29dlnrrfxAif60qhMIUnTE/qB7aPDk2otQdHdJNmp4c3OcVYQWVyAbxFjf4VXTs8m4/euJ3YASZq4Pfm4Bpr+nVl+L8IB8fIo7TnysKxBwL1UZYHZlQU/vwKBgQCLWH4efxFSuE5aEhjSufiHmYMcU+178ND9ZKNvSg+T1x4AXB974L0nUHyzXcKlaWXzhfICxiV02XGKNgiakMcku0dXmSxs0KCJ+esCnrAkwUbnsM2qttTfWwH0KFpdsBwgIDueo8ilmXwnqIeQf9oP6gnascu0sHK7tdgi6QbeHQKBgAHqcJPzl+T29+ydY1YgUU5Di7ONDLokaj/uoa+Af867KVYnMDd9Ksl/C8BsyVC2UD6vDQP4n2+TnuKoVhoO75WmcLiy0DN97xQdBZKrLalIvRVd9BZHngDFesetI6WZR+PulAknvChdX1Vh0LYpkH3Hj6VpaKJjhX9c0Cgn4qsNAoGBAM1kkQgr03nBz4dxKRoLWzwLqLhePAWVBFGbAWc/ckosliTVOUgpkNkx+L5I4XMO/AklXi7tTJ2XQgsD4Zxr5JTL/gNLBL7XW9OlD0lvLyuYbWFgc42HJquIEnEIe/O3U0RMq1HjJhZNBB0jiAc82CfECBbh7OuWY6dO5qL7TIVB
+              - id: variable_FNxKejftNJ
+                name: 支付宝公钥
+                type: variable
+                props:
+                  value: >-
+                    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsbM2E9hWM9S0moKFAtTAM9Z52EpMLfg3Su6mDQ7Sh8afg6a1J2jlff2+Z5gvNOjiN7OcJARVoirkBhwLwaSidP2hShDb25ki4WQmolhnDYKIo73JX9Ih00WiQmwIAaFNHsnHREIzM4RJ5xY7KeoduIAH9nOAGzzM2AYrzjCF/880hqN5R7uUaq0cb1MXTr3rErMB3ecKqmUuK9m2LGO0vurs7XJ22FzeK5330ek5foLQ1REhF1tI4So4KWVuHyQmoNykC7SIiyLFHxI4ErmwrMXLJiOuEIbxSjirmkPpjfWD1ubX17jckFzZZCyRW1oz+6Be+L0S2L7jMqyjnXFkOwIDAQAB
+              - id: variable_4pmYFad7PR
+                name: 支付宝appId
+                type: variable
+                props:
+                  value: '2021004103679140'
+              - id: variable_6sizpxTXBb
+                name: 超市密钥key
+                type: variable
+                props:
+                  value: f559c752f1f7e85f55160b414d0da388
+              - id: variable_nMTTFGBDcW
+                name: 支付宝商家会员卡模板ID
+                type: variable
+                props:
+                  value: '20230712000000004781104000300717'
+          
+            
+          - id: bPMethod_zEMtcSCEGx
+            type: bPMethod
+            children: 
+              - id: group_xze7F4RdYc
+                name: 支付宝接口相关
+                type: group
+                props: {}
+                children:
+                  - id: service_kfChpMNN74
+                    name: 解密手机号
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "console.log('param',param);\r\n\r\nconst crypto = await Import('crypto');\r\nlet key = _F('variable_jhADDzZdTe').callMethod('get') // 解密的key\r\n// let crypted = `znkEM9ZTmiUxAvLOtEe2AKgmJ+o85vyOomoTwa/ESSsDP77nQzl6mS6Zez/rv9djyOh13CV8zKfZZ2mHKo7L7X3DRQHiLGWOEnaFiXXMs68rgBfCgTgjp+jrRg+xdX4SPIKTrz1LezGr0MOEnC50y+PI/QhUxVcyXmQKvmbNhjGgVjUmkUGlo+5cqKf28Y7` // 密文\r\nlet crypted = param.encryptedData; // 密文\r\ncrypted = Buffer.from(crypted, 'base64').toString('binary');\r\nkey = Buffer.from(key, 'base64');\r\nconst iv = Buffer.alloc(16, 0)\r\nconst decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);\r\nlet decoded = decipher.update(crypted, 'binary', 'utf8');\r\ndecoded += decipher.final('utf8');\r\n// 打印解密结果\r\nconsole.log('解密结果',decoded);\r\n_funcCb(decoded)"
+                      inParams:
+                        - encryptedData
+                  - id: service_paZ22C2TiH
+                    name: alipay-sdk测试
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "// const AlipaySdk = (await Import('alipay-sdk')).default;\r\n// TypeScript，可以使用 import AlipaySdk from 'alipay-sdk';\r\n\r\n// const appId = _F('variable_4pmYFad7PR').callMethod('get') // 应用私钥\r\n// const privateKey = _F('variable_mRcnX6DQBD').callMethod('get') // 应用私钥\r\n// const alipayPublicKey = _F('variable_FNxKejftNJ').callMethod('get') // 支付宝公钥\r\n\r\n// // 普通公钥模式\r\n// const alipaySdk = new AlipaySdk({\r\n//   appId: appId,\r\n//   keyType: 'PKCS8', // 默认值。请与生成的密钥格式保持一致，参考平台配置一节\r\n//   privateKey: privateKey,\r\n//   alipayPublicKey: alipayPublicKey,\r\n// });\r\n\r\n// console.log(alipaySdk);\r\n\r\n// _funcCb(alipaySdk);\r\nconst alipaySdk = await _F('service_KMHmifpsth').call();\r\n\r\n//验证配置\r\n\r\n// 小程序：生成二维码\r\nconst result = await alipaySdk.exec('alipay.open.public.qrcode.create');\r\n\r\nconsole.log(result);\r\n\r\n_funcCb(result);"
+                  - id: service_KMHmifpsth
+                    name: 获取支付宝sdk对象
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "const AlipaySdk = (await Import('alipay-sdk')).default;\r\n// TypeScript，可以使用 import AlipaySdk from 'alipay-sdk';\r\n\r\nconst appId = _F('variable_4pmYFad7PR').callMethod('get') // 应用私钥\r\nconst privateKey = _F('variable_mRcnX6DQBD').callMethod('get') // 应用私钥\r\nconst alipayPublicKey = _F('variable_FNxKejftNJ').callMethod('get') // 支付宝公钥\r\n\r\n// 普通公钥模式\r\nconst alipaySdk = new AlipaySdk({\r\n  appId: appId,\r\n  keyType: 'PKCS8', // 默认值。请与生成的密钥格式保持一致，参考平台配置一节\r\n  privateKey: privateKey,\r\n  alipayPublicKey: alipayPublicKey,\r\n});\r\n\r\n_funcCb(alipaySdk)"
+                  - id: service_4456EF8bXD
+                    name: 创建会员卡模板
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "//alipay.marketing.card.template.create\r\nconst alipaySdk = await _F('service_KMHmifpsth').call();\r\n\r\n// console.log(alipaySdk);\r\n\r\n// _funcCb(alipaySdk);\r\n\r\n/* \r\n{\r\n  \"code\": \"10000\",\r\n  \"msg\": \"Success\",\r\n  \"templateId\": \"20230712000000004781104000300717\"\r\n}\r\n */\r\n\r\n\r\nconst bizContent = param.请求内容;\r\n\r\nconst result = await alipaySdk.exec('alipay.marketing.card.template.create',{\r\n  notify_url: 'http://www.notify.com/notify', // 通知回调地址\r\n  bizContent: bizContent,\r\n  });\r\n\r\nconsole.log(result);\r\n\r\n_funcCb(result);"
+                      inParams:
+                        - 请求内容
+                      inParamsDebug:
+                        请求内容:
+                          shop_ids:
+                            - '2015122900077000000002409504'
+                          card_type: OUT_MEMBER_CARD
+                          request_id: '2023082600000000000000004'
+                          spi_app_id: '2021004103679140'
+                          pub_channels:
+                            - ext_info: '"key":"value"'
+                              pub_channel: SHOP_DETAIL
+                          biz_no_prefix: prex
+                          card_spec_tag: NONE
+                          open_card_conf:
+                            conf: '""'
+                            card_rights:
+                              - title: 积分兑换好礼
+                                detail: 积分随时查，积分换好礼
+                                logo_id: 1T8Pp00AT7eo9NoAJkMR3AAAACMAAQEC
+                            open_card_url: https://www.alipay.com
+                            source_app_id: '201609191111111'
+                            open_card_source_type: ISV
+                          write_off_type: qrcode
+                          card_level_conf:
+                            - level: VIP1
+                              level_desc: 黄金会员享受免费停车
+                              level_icon: 1T8Pp00AT7eo9NoAJkMR3AAAACMAAQEC
+                              level_show_name: 黄金会员
+                          field_rule_list:
+                            - rule_name: ASSIGN_FROM_REQUEST
+                              field_name: Balance
+                              rule_value: Balance
+                          card_action_list:
+                            - url: https://merchant.ali.com/ee/clock_in.do
+                              code: TO_CLOCK_IN
+                              text: 打卡
+                              url_type: url
+                              mini_app_url:
+                                mini_app_id: 2018xxxxxxx
+                                display_on_list: 'false'
+                                mini_page_param: xxxxxxxx
+                                mini_query_param: abcxxxxxx
+                          column_info_list:
+                            - tag: 热门
+                              code: BENEFIT_INFO
+                              title: 会员专享
+                              value: '80'
+                              icon_id: 1T8Pp00AT7eo9NoAJkMR3AAAACMAAQEC
+                              more_info:
+                                url: http://www.baidu.com
+                                descs:
+                                  - 会员生日7折
+                                title: 会员专享权益
+                                params: '{}'
+                              group_title: 校园助手
+                              operate_type: openWeb
+                          biz_no_suffix_len: '20'
+                          mdcode_notify_conf:
+                            url: https://www.ali123.com/ant/mdcode
+                            ext_params: '{"param1":"value1","param2":"value2"}'
+                          template_style_info:
+                            color: rgb(55,112,179)
+                            slogan: 会员权益享不停
+                            logo_id: 1T8Pp00AT7eo9NoAJkMR3AAAACMAAQEC
+                            bg_color: rgb(55,112,179)
+                            banner_url: http://www.baidu.com
+                            brand_name: XXX超市
+                            background_id: 1T8Pp00AT7eo9NoAJkMR3AAAACMAAQEC
+                            banner_img_id: 1T8Pp00AT7eo9NoAJkMR3AAAACMAAQEC
+                            slogan_img_id: 1T8Pp00AT7eo9NoAJkMR3AAAACMAAQEC
+                            card_show_name: XXX超市会员卡
+                            column_info_layout: list
+                            front_image_enable: false
+                            feature_descriptions:
+                              - 使用花呗卡可享受免费分期
+                            front_text_list_enable: false
+                          paid_outer_card_conf:
+                            manage_url_conf:
+                              renew_url: https://www.alipay.com
+                              refund_url: https://www.alipay.com
+                              upgrade_url: https://www.alipay.com
+                              downgrade_url: https://www.alipay.com
+                              cycle_manage_url: https://www.alipay.com
+                            open_selling_conf:
+                              end_date: '2031-01-01 12:00:00'
+                              start_date: '2021-01-01 12:00:00'
+                              selling_url: https://www.alipay.com
+                              price_detail:
+                                - desc: 99购超值会员卡
+                                  price: '99.99'
+                                  worth: '199.99'
+                                  price_type: FIXED
+                            cycle_selling_conf:
+                              cycle_type:
+                                - YEAR
+                                - QUARTER
+                              cycle_selling_url: https://www.alipay.com
+                              support_cycle_sell: true
+                          template_benefit_info:
+                            - title: 消费即折扣
+                              end_date: '2016-07-34 12:12:12'
+                              start_date: '2016-07-18 15:17:23'
+                              benefit_desc:
+                                - 消费即折扣
+                  - id: service_mbNYFhm26h
+                    name: 会员开卡模板设置
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "//alipay.marketing.card.template.create\r\nconst alipaySdk = await _F('service_KMHmifpsth').call();\r\n\r\n// console.log(alipaySdk);\r\n\r\n// _funcCb(alipaySdk);\r\n\r\n/* \r\n{\r\n  \"code\": \"10000\",\r\n  \"msg\": \"Success\",\r\n  \"templateId\": \"20230712000000004781104000300717\"\r\n}\r\n\r\n{\r\n  \"code\": \"10000\",\r\n  \"msg\": \"Success\"\r\n}\r\n */\r\n\r\n\r\nconst bizContent = param.请求内容;\r\n\r\nconst result = await alipaySdk.exec('alipay.marketing.card.formtemplate.set',{\r\n  notify_url: 'http://www.notify.com/notify', // 通知回调地址\r\n  bizContent: bizContent,\r\n  });\r\n\r\nconsole.log(result);\r\n\r\n_funcCb(result);"
+                      inParams:
+                        - 请求内容
+                      inParamsDebug:
+                        请求内容:
+                          fields:
+                            required: >-
+                              { "common_fields": [
+                              "OPEN_FORM_FIELD_MOBILE","OPEN_FORM_FIELD_NAME" ] }
+                          template_id: '20230712000000004781104000300717'
+                  - id: service_Qb6ys7x4Ph
+                    name: 会员开卡3_0 作废
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "//alipay.marketing.card.template.create\r\nconst alipaySdk = await _F('service_KMHmifpsth').call();\r\n\r\n// console.log(alipaySdk);\r\n\r\n// _funcCb(alipaySdk);\r\n\r\n/* \r\n{\r\n  \"code\": \"10000\",\r\n  \"msg\": \"Success\",\r\n  \"templateId\": \"20230712000000004781104000300717\"\r\n}\r\n\r\n{\r\n  \"code\": \"10000\",\r\n  \"msg\": \"Success\"\r\n}\r\n */\r\n\r\n\r\nconst bizContent = param.请求内容;\r\n\r\nconst result = await alipaySdk.exec('alipay.marketing.card.open',{\r\n  notify_url: 'http://www.notify.com/notify', // 通知回调地址\r\n  bizContent: bizContent,\r\n  auth_token:\"authusrB2cb0cf11bb294d42b88dabc4240f7X30\"\r\n  });\r\n\r\nconsole.log(result);\r\n\r\n_funcCb(result);"
+                      inParams:
+                        - 请求内容
+                      inParamsDebug:
+                        请求内容:
+                          card_ext_info:
+                            level: VIP1
+                            point: '88'
+                            balance: '124.89'
+                            open_date: '2023-07-02 21:20:46'
+                            valid_date: '2024-02-20 21:20:46'
+                            mdcode_info:
+                              code_value: 1KFCDY0002
+                              time_stamp: 1496996459L
+                              code_status: SUCCESS
+                              expire_time: '2024-02-20 21:20:46'
+                            front_image_id: 9fxnkgt0QFmqKAl5V2BqxQAAACMAAQED
+                            front_text_list:
+                              - label: 专业
+                                value: 金融贸易
+                            external_card_no: EXT0001
+                          out_serial_no: '202307120000002'
+                          card_user_info:
+                            user_uni_id: '2088002089895306'
+                            user_uni_id_type: UID
+                          member_ext_info:
+                            cell: '13000000000'
+                            name: 张学友
+                            birth: '2001-06-27'
+                            gende: MALE
+                          card_template_id: '20230712000000004781104000300717'
+                  - id: service_KwQyY4AfzG
+                    name: 获取会员授权信息
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "//alipay.marketing.card.template.create\r\nconst alipaySdk = await _F('service_KMHmifpsth').call();\r\n\r\n// console.log(alipaySdk);\r\n\r\n// _funcCb(alipaySdk);\r\n\r\n/* \r\n{\r\n  \"accessToken\": \"authusrB3ee35b230ce64fd9ac2c05ecc9388C30\",\r\n  \"alipayUserId\": \"20880055423325678346876143017130\",\r\n  \"authStart\": \"2023-07-12 11:10:27\",\r\n  \"expiresIn\": 1296000,\r\n  \"reExpiresIn\": 2592000,\r\n  \"refreshToken\": \"authusrBc156c43f25694a74a4572aec14cd9C30\",\r\n  \"userId\": \"2088002089895306\"\r\n}\r\n */\r\n\r\n\r\nconst bizContent = param.请求内容;\r\n\r\nconst result = await alipaySdk.exec('alipay.system.oauth.token', {\r\n  notify_url: 'http://www.notify.com/notify', // 通知回调地址\r\n  bizContent: bizContent,\r\n  \"code\": \"0bce868c42f84e398b1f15771704BX30\",\r\n  \"grantType\": \"authorization_code\"\r\n});\r\n\r\nconsole.log(result);\r\n\r\n_funcCb(result);"
+                      inParams:
+                        - 请求内容
+                      inParamsDebug:
+                        请求内容: {}
+                  - id: service_yEP5bCaPcn
+                    name: 更新会员授权信息
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "//alipay.marketing.card.template.create\r\nconst alipaySdk = await _F('service_KMHmifpsth').call();\r\n\r\n// console.log(alipaySdk);\r\n\r\n// _funcCb(alipaySdk);\r\n\r\n/* \r\n{\r\n  \"accessToken\": \"authusrB2cb0cf11bb294d42b88dabc4240f7X30\",\r\n  \"alipayUserId\": \"20880055423325678346876143017130\",\r\n  \"authStart\": \"2023-07-12 11:10:27\",\r\n  \"expiresIn\": 1296000,\r\n  \"reExpiresIn\": 2590076,\r\n  \"refreshToken\": \"authusrB02d9d61f04734b478afbabba2ad32B30\",\r\n  \"userId\": \"2088002089895306\"\r\n}\r\n */\r\n\r\n\r\nconst bizContent = param.请求内容;\r\n\r\nconst result = await alipaySdk.exec('alipay.system.oauth.token', {\r\n  notify_url: 'http://www.notify.com/notify', // 通知回调地址\r\n  bizContent: bizContent,\r\n  \"refresh_token\": \"authusrBc156c43f25694a74a4572aec14cd9C30\",\r\n  \"grant_type\": \"refresh_token\"\r\n});\r\n\r\nconsole.log(result);\r\n\r\n_funcCb(result);"
+                      inParams:
+                        - 请求内容
+                      inParamsDebug:
+                        请求内容: {}
+                  - id: service_kDwKyf5aTn
+                    name: 获取会员卡领卡投放链接)
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "//alipay.marketing.card.template.create\r\nconst alipaySdk = await _F('service_KMHmifpsth').call();\r\n\r\n// console.log(alipaySdk);\r\n\r\n// _funcCb(alipaySdk);\r\n\r\n/* \r\n{\r\n  \"code\": \"10000\",\r\n  \"msg\": \"Success\",\r\n  \"applyCardUrl\": \"https%3A%2F%2Fmemberprod.alipay.com%2Faccount%2Fopenform%2Factivecard.htm%3Fapp_id%3D2021004103679140%26template_id%3D20230712000000004781104000300717%26__webview_options__%3DcanPullDown%253dNO%2526transparentTitle%253dauto%26callback%3Dhttps%3A%2F%2Fprev2.d8dcloud.com%2Fapi%2F952%2Fservice_NJfZyEhmdW\"\r\n}\r\n */\r\n\r\n\r\nconst bizContent = param.请求内容;\r\n\r\nconst result = await alipaySdk.exec('alipay.marketing.card.activateurl.apply', {\r\n  bizContent: bizContent,\r\n});\r\n\r\nconsole.log(result);\r\n\r\n_funcCb(result);"
+                      inParams:
+                        - 请求内容
+                      inParamsDebug:
+                        请求内容:
+                          callback: https://prev2.d8dcloud.com/api/952/service_NJfZyEhmdW
+                          template_id: '20230712000000004781104000300717'
+                  - id: service_NJfZyEhmdW
+                    type: service
+                    props:
+                      isOpen: true
+                      jsCode: "console.log(param)\r\nconsole.log(req.query)\r\n\r\n_funcCb(5242424)"
+                  - id: service_KRzDmNRpRa
+                    name: 会员开卡3.1
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "//alipay.marketing.card.template.create\r\nconst alipaySdk = await _F('service_KMHmifpsth').call();\r\n\r\n// console.log(alipaySdk);\r\n\r\n// _funcCb(alipaySdk);\r\n\r\n/* \r\n{\r\n  \"code\": \"10000\",\r\n  \"msg\": \"Success\",\r\n  \"templateId\": \"20230712000000004781104000300717\"\r\n}\r\n\r\n{\r\n  \"code\": \"10000\",\r\n  \"msg\": \"Success\"\r\n}\r\n */\r\n\r\nconsole.log(param)\r\n// console.log(req.query)\r\n// console.log(req.body)\r\n\r\n\r\nconst bizContent = param;\r\n\r\n\r\n\r\nconst successResult = {\r\n  \"response\": {\r\n    \"code\": \"10000\",\r\n    \"msg\": \"Success\",\r\n    \"card_info\": {\r\n      \"biz_card_no\": \"000001\",\r\n      \"external_card_no\": \"EXT0001\",\r\n      \"open_date\": \"2014-02-20 21:20:46\",\r\n      \"valid_date\": \"2020-02-20 21:20:46\",\r\n      // \"level\": \"VIP1\",\r\n      // \"point\": \"88\",\r\n      // \"balance\": \"124.89\",\r\n      \"template_id\": _F('variable_nMTTFGBDcW').callMethod('get'),\r\n      // \"custom_assets\": \"100元\",\r\n      // \"mdcode_info\": {\r\n      //     \"code_status\": \"SUCCESS\",\r\n      //     \"code_value\": \"1KFCDY0002\",\r\n      //     \"expire_time\": \"2017-06-09 16:25:53\",\r\n      //     \"time_stamp\": 1496996459\r\n      // },\r\n      // \"front_text_list\": [\r\n      //     {\r\n      //         \"label\": \"专业\",\r\n      //         \"value\": \"金融贸易\"\r\n      //     }\r\n      // ],\r\n      // \"front_image_id\": \"9fxnkgt0QFmqKAl5V2BqxQAAACMAAQED\"\r\n    },\r\n    // \"open_card_ext_info\": {\r\n    //     \"is_new_member\": true,\r\n    //     \"activity_id\": \"12345\"\r\n    // },\r\n    // \"result\": {\r\n    //     \"result_code\": \"SUCCESS\",\r\n    //     \"result_desc\": \"成功\"\r\n    // }\r\n  },\r\n  // \"sign\": \"ERITJKEIJKJHKKKKKKKHJEREEEEEEEEEEE\"\r\n};\r\n\r\nconst failResult = {\r\n  \"response\": {\r\n    \"code\": \"20000\",\r\n    \"msg\": \"Service Currently Unavailable\",\r\n    \"sub_code\": \"isp.unknow-error\",\r\n    \"sub_msg\": \"系统繁忙\"\r\n  }\r\n}\r\n\r\nfunction formatDate(input) {\r\n    const date = new Date(input);\r\n    const localDate = date.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });\r\n    const dateObj = new Date(localDate);\r\n    let yyyy = dateObj.getFullYear();\r\n    let mm = dateObj.getMonth() + 1; // getMonth() is zero-based\r\n    let dd = dateObj.getDate();\r\n    let hh = dateObj.getHours();\r\n    let ii = dateObj.getMinutes();\r\n    let ss = dateObj.getSeconds();\r\n\r\n    // Leading zeros for mm, dd, hh, ii, ss\r\n    if (mm < 10) mm = '0' + mm;\r\n    if (dd < 10) dd = '0' + dd;\r\n    if (hh < 10) hh = '0' + hh;\r\n    if (ii < 10) ii = '0' + ii;\r\n    if (ss < 10) ss = '0' + ss;\r\n\r\n    return `${yyyy}-${mm}-${dd} ${hh}:${ii}:${ss}`;\r\n}\r\n\r\n\r\nfunction convertArrayToObject(array) {\r\n  const result = {};\r\n\r\n  for (let i = 0; i < array.length; i++) {\r\n    const obj = array[i];\r\n    const key = Object.keys(obj)[0];\r\n    const value = obj[key];\r\n    result[key] = value;\r\n  }\r\n\r\n  return result;\r\n}\r\n\r\n\r\ntry {\r\n  const biz_card_no = param.biz_card_no;\r\n  const alipay_user_id = param.user_id;\r\n  const user_info = convertArrayToObject(JSON.parse(param.user_info.replaceAll(\"'\",'\"')));\r\n  const mobile = user_info.OPEN_FORM_FIELD_MOBILE;\r\n\r\n  //注册会员\r\n  const regResult = await _F('service_CbFjeN2pdC').call({ mobile, alipay_user_id });\r\n\r\n  if (regResult.code !== 200) {\r\n    throw regResult;\r\n  }\r\n\r\n  //识分会员\r\n  const identResult = await _F('service_mhz6bCkDXD').call({ mobile });\r\n  if (identResult.code !== 200) {\r\n    throw identResult;\r\n  }\r\n\r\n  const member_id = identResult.data.member_id;\r\n  const registerTime = identResult.data.registerTime;\r\n  const expiredDate = identResult.data.expiredDate;\r\n\r\n  console.log('registerTime',registerTime)\r\n  console.log('expiredDate',expiredDate)\r\n\r\n  successResult.response.card_info.external_card_no = member_id;\r\n  successResult.response.card_info.open_date = formatDate(registerTime);\r\n  successResult.response.card_info.valid_date = formatDate(expiredDate);\r\n  successResult.response.card_info.biz_card_no = biz_card_no;\r\n\r\n  console.log(successResult);\r\n\r\n  _funcCb(successResult);\r\n\r\n} catch (error) {\r\n  console.log(error);\r\n\r\n  console.log(failResult);\r\n\r\n  _funcCb(failResult);\r\n}"
+                      inParams:
+                        - 请求内容
+                      openApiPath: card_open_3_1
+                      inParamsDebug:
+                        请求内容:
+                          user_id: '2088002089895306'
+                          user_info: >-
+                            [{"OPEN_FORM_FIELD_GENDER":"男"},{"OPEN_FORM_FIELD_MOBILE":"13888888888"},{"OPEN_FORM_FIELD_NAME":"李四"}]
+                          biz_card_no: '000001'
+                          template_id: '20230712000000004781104000300717'
+                          out_serial_no: '202307120000003'
+                  - id: service_8Qapx6xBTK
+                    name: 统一收单交易支付接口-付款码支付
+                    type: service
+                    props:
+                      isOpen: true
+                      isSync: true
+                      jsCode: "//alipay.marketing.card.template.create\r\nconst alipaySdk = await _F('service_KMHmifpsth').call();\r\n\r\n// console.log(alipaySdk);\r\n\r\n// _funcCb(alipaySdk);\r\n\r\n/* \r\n{\r\n  \"code\": \"10000\",\r\n  \"msg\": \"Success\",\r\n  \"applyCardUrl\": \"https%3A%2F%2Fmemberprod.alipay.com%2Faccount%2Fopenform%2Factivecard.htm%3Fapp_id%3D2021004103679140%26template_id%3D20230712000000004781104000300717%26__webview_options__%3DcanPullDown%253dNO%2526transparentTitle%253dauto%26callback%3Dhttps%3A%2F%2Fprev2.d8dcloud.com%2Fapi%2F952%2Fservice_NJfZyEhmdW\"\r\n}\r\n */\r\n\r\nfunction generateSerialNumber() {\r\n  const date = new Date();\r\n  const year = date.getFullYear().toString();\r\n  const month = (date.getMonth() + 1).toString().padStart(2, '0');\r\n  const day = date.getDate().toString().padStart(2, '0');\r\n  const hours = date.getHours().toString().padStart(2, '0');\r\n  const minutes = date.getMinutes().toString().padStart(2, '0');\r\n  \r\n  return year + month + day + hours + minutes;\r\n}\r\n\r\n// 示例用法\r\nconst serialNumber = generateSerialNumber();\r\nconsole.log(serialNumber);\r\n\r\n\r\n\r\n// 模拟数据\r\nconst productName = '测试商品';\r\nconst productDesc = '这是一个测试商品';\r\nconst productPrice = 0.01;\r\n// const orderNo = '202301010001';\r\nconst orderNo = serialNumber;\r\nconst timestamp = new Date().toISOString().replace('T', ' ').slice(0, -5);\r\nconsole.log(timestamp);\r\n\r\nconsole.log('param.auth_code',param.auth_code);\r\n\r\n// param.请求内容 = JSON.stringify({\r\n//   out_trade_no: orderNo,\r\n//   total_amount: productPrice.toFixed(2),\r\n//   subject: productName,\r\n//   body: productDesc,\r\n// })\r\n\r\nparam.请求内容 = {\r\n  out_trade_no: orderNo,\r\n  total_amount: productPrice.toFixed(2),\r\n  subject: productName,\r\n  body: productDesc,\r\n  auth_code: param.auth_code,\r\n  scene:'bar_code'\r\n}\r\n\r\n\r\nconst bizContent = param.请求内容;\r\n\r\nconst result = await alipaySdk.exec('alipay.trade.pay', {\r\n  bizContent: bizContent,\r\n});\r\n\r\nconsole.log(result);\r\n\r\n_funcCb(result);"
+                      inParams:
+                        - 请求内容
+                        - auth_code
+                      inParamsDebug:
+                        请求内容:
+                          callback: https://prev2.d8dcloud.com/api/952/service_NJfZyEhmdW
+                          template_id: '20230712000000004781104000300717'
+              
+                    
+                        
+      - type: state
+        children: []
+        id: state_nFzbCiQt8s
+      - type: services
+        children: []
+        id: services_asNChFhBmz
+    id: backend_6rDSPBDtEn
+  - type: modules
+    children: []
+    id: modules_w8tBZmSikk
